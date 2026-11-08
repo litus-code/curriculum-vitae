@@ -34,7 +34,7 @@ const glyphs:Record<string,string[]> = {
  ]
 }
 const palette:Record<string,string>={k:ink,b:'#46bfee',y:'#dcf65a',l:'#b6f74b',w:'#f8e6eb',p:'#ae82fc'}
-const pixels=computed(()=> (glyphs[props.name] || glyphs.folder).flatMap((row,y)=>[...row].flatMap((c,x)=>c==='.'?[]:[{x,y,color:palette[c]??ink}])))
+const pixels=computed(()=> (glyphs[props.name] ?? glyphs['folder'] ?? []).flatMap((row,y)=>[...row].flatMap((c,x)=>c==='.'?[]:[{x,y,color:palette[c]??ink}])))
 </script>
 <template>
   <svg class="pixel-icon" :width="size" :height="size" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" role="img" :aria-label="name" shape-rendering="crispEdges">
