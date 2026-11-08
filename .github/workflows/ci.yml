@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: npm
-          cache-dependency-path: package-lock.json
-      - run: npm ci
-      - run: npm run check
+      - name: Install dependencies (bootstrap phase)
+        run: npm install --no-audit --no-fund
+      - name: Verify typecheck, tests and static generation
+        run: npm run check
