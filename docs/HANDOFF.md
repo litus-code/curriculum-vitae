@@ -9,7 +9,7 @@ Known limitations:
 - Visual fidelity requires real browser screenshots and comparison at 922×616 and mobile.
 - No direct contact delivery, no verified destination address.
 - Project detail screens and public production URL not yet wired.
-- Browser integration, npm install / CI validation remain to be performed.
+- GitHub Actions CI has passed on the existing Nuxt foundation. Browser screenshot comparison, UI integration tests and lockfile remain pending.
 - No production deployment, DNS changes or merge.
 
-Next: install, generate lockfile, run checks, import approved original photograph/processed pixel portrait, visually align screenshot and implement draggable windows and full accessibility before acceptance.
+Next: execute `docs/VISUAL_REFINEMENT_V2.md` in dependency order. This contains the approved Sunset/Night art direction, sprite and portrait requirements, exact screenshot comparison, interaction and responsive acceptance criteria. Generate and commit lockfile, implement visual assets, complete UI acceptance and update this handoff before design approval.
