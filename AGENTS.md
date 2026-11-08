@@ -1,0 +1,3 @@
+# Carles Far OS agent rules
+Before significant work read docs/AGENT_WORKFLOW.md, docs/ARCHITECTURE.md, docs/HANDOFF.md.
+Use Nuxt 4/Vue 3/TypeScript. Preserve the approved retro CRT visual direction and terminal interaction. Separate pure domain from presentation and browser APIs. Use typed state and stable identifiers. Never implement shell execution from terminal text. Do not imply an HTML mockup screenshot is a functioning component. Keep CAT/ES/EN complete for public UI. Prefer assets licensed for public usage. Preserve current live site until explicit authorization. Commit to feature branch and use draft PR; no merge, production deployment or DNS changes without authorization.
