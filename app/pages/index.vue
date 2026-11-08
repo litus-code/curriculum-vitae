@@ -26,6 +26,7 @@ function loadAudio(event:Event) {
   if (audio.value) audio.value.src = audioUrl
 }
 onBeforeUnmount(() => { if (audioUrl) URL.revokeObjectURL(audioUrl) })
+const portraitUrl = useRuntimeConfig().app.baseURL + 'portrait-carles-pixel.png'
 const isNight = computed(() => theme.value === 'dark')
 const toggleTheme = () => { theme.value = isNight.value ? 'light' : 'dark' }
 useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Frontend & Product Creator' }))
@@ -61,7 +62,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
       <OsWindow id="terminal" title="Terminal – carles@far:~"><OsTerminal /></OsWindow>
       <OsWindow id="about" :title="t('about')">
         <div class="about-layout">
-          <img class="portrait" src="/portrait-carles-pixel.png" alt="Carles Far, retrato pixelado con gafas amarillas" width="240" height="240" />
+          <img class="portrait"  :src="portraitUrl" alt="Carles Far, retrato pixelado con gafas amarillas" width="240" height="240" />
           <div class="about-copy">
             <h1>Carles Far</h1>
             <strong>Frontend Engineer /<br> Product Creator</strong>
