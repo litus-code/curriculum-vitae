@@ -26,6 +26,14 @@ function loadAudio(event:Event) {
   if (audio.value) audio.value.src = audioUrl
 }
 onBeforeUnmount(() => { if (audioUrl) URL.revokeObjectURL(audioUrl) })
+onMounted(() => {
+  const savedTheme = localStorage.getItem('carlesfar-os-theme')
+  if (savedTheme === 'dark' || savedTheme === 'light') theme.value = savedTheme
+  const savedLocale = localStorage.getItem('carlesfar-os-locale')
+  if (savedLocale === 'ca' || savedLocale === 'es' || savedLocale === 'en') locale.value = savedLocale
+})
+watch(theme, value => { if (import.meta.client) localStorage.setItem('carlesfar-os-theme', value) })
+watch(locale, value => { if (import.meta.client) localStorage.setItem('carlesfar-os-locale', value) })
 const portraitUrl = useRuntimeConfig().app.baseURL + 'portrait-carles-pixel.png'
 const isNight = computed(() => theme.value === 'dark')
 const toggleTheme = () => { theme.value = isNight.value ? 'light' : 'dark' }
