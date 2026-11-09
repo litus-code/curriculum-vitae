@@ -13,7 +13,8 @@
     "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "test": "vitest run",
-    "check": "npm run typecheck && npm run test && npm run generate"
+    "check": "npm run typecheck && npm run test && npm run generate",
+    "build:cloudflare": "bash scripts/build-cloudflare.sh"
   },
   "dependencies": {
     "nuxt": "4.6.2",
