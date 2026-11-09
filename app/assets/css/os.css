@@ -385,3 +385,16 @@
  .about-os-bio p {font-size:12px;}
  .about-os-tags {margin:6px 0 13px;}
 }
+
+
+/* About: the desktop memo remains behind windows. Keep the profile header and
+   tab navigation visible while the active pane scrolls on short screens. */
+.win-about .window-body { overflow:hidden; }
+.about-os { height:100%; min-height:0; }
+.about-os-hero,.about-os-tabs { flex-shrink:0; }
+.about-os-content { overflow:auto; }
+@media (max-width:800px) {
+  .win-about .window-body { overflow:visible; }
+  .about-os { height:auto; }
+  .about-os-content { overflow:visible; }
+}
