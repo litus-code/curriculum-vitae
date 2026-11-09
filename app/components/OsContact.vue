@@ -5,6 +5,7 @@ const name = ref('')
 const email = ref('')
 const message = ref('')
 const website = ref('')
+const privacyAccepted = ref(false)
 const submitting = ref(false)
 const status = ref<'idle' | 'success' | 'error'>('idle')
 const chosen = computed(() => services.value.map(id => t(id)).join(', '))
@@ -14,35 +15,38 @@ const copy = computed(() => ({
  es: {
   sending:'Enviando...', success:'El servicio ha recibido tu solicitud. La entrega al buzón depende de que el destinatario haya activado el formulario.',
   error:'No se ha podido enviar. Inténtalo de nuevo o escribe directamente por correo.',
-  info:'Los datos se enviarán a FormSubmit para gestionar tu consulta.',
+  info:'El servicio FormSubmit procesará tu nombre, correo y mensaje para enviarme tu consulta.',
+  privacy:'He leído la información sobre el tratamiento de mis datos y acepto que se envíen mediante FormSubmit.',
   direct:'Escribir por correo', invalid:'Revisa los campos antes de enviar.'
  },
  ca: {
   sending:'Enviant...',success:'El servei ha rebut la sol·licitud. El lliurament a la bústia depèn de l’activació del formulari pel destinatari.',
   error:'No s’ha pogut enviar. Torna-ho a provar o escriu directament per correu.',
-  info:'Les dades s’enviaran a FormSubmit per gestionar la consulta.',
+  info:'FormSubmit tractarà el nom, el correu i el missatge per enviar-me la consulta.',
+  privacy:'He llegit la informació sobre el tractament de les meves dades i accepto que s’enviïn mitjançant FormSubmit.',
   direct:'Escriure un correu',invalid:'Revisa els camps abans d’enviar.'
  },
  en: {
   sending:'Sending...',success:'The service accepted your request. Inbox delivery depends on the recipient activating the form.',
   error:'We could not send your message. Try again or contact me by email.',
-  info:'FormSubmit will process your details to forward this enquiry.',
+  info:'FormSubmit processes your name, email and message to forward the enquiry to me.',
+  privacy:'I have read the information about my data and agree to submit it via FormSubmit.',
   direct:'Send an email',invalid:'Please check the form fields.'
  }
 }[locale.value as 'es'|'ca'|'en'] ?? {
  sending:'Enviando...',success:'El servicio ha recibido tu solicitud. La entrega al buzón depende de que el destinatario haya activado el formulario.',
  error:'No se ha podido enviar. Inténtalo de nuevo o escribe directamente por correo.',
- info:'Los datos se enviarán a FormSubmit para gestionar tu consulta.',direct:'Escribir por correo',invalid:'Revisa los campos antes de enviar.'
+ info:'FormSubmit procesará los datos para enviarme tu consulta.',privacy:'He leído la información sobre mis datos y acepto enviarlos mediante FormSubmit.',direct:'Escribir por correo',invalid:'Revisa los campos antes de enviar.'
 }))
 const directLink = computed(() => `mailto:${recipient}?subject=${encodeURIComponent('Carles Far OS · Contacto')}`)
 async function submit() {
- if (submitting.value) return
+ if (submitting.value || !privacyAccepted.value) return
  status.value = 'idle'
  if (website.value.trim()) return
  const cleanName=name.value.trim()
  const cleanEmail=email.value.trim()
  const cleanMessage=message.value.trim()
- if (!cleanName || cleanName.length>100 || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(cleanEmail) || cleanEmail.length>254 || cleanMessage.length<10 || cleanMessage.length>3000) {
+ if (!cleanName || cleanName.length>100 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail) || cleanEmail.length>254 || cleanMessage.length<10 || cleanMessage.length>3000) {
    status.value='error'
    return
  }
@@ -66,6 +70,7 @@ async function submit() {
    name.value=''
    email.value=''
    message.value=''
+   privacyAccepted.value=false
  } catch {
    status.value='error'
  } finally {
@@ -89,7 +94,8 @@ async function submit() {
     <div class="contact-honeypot" aria-hidden="true">
       <label>Website <input v-model="website" type="text" tabindex="-1" autocomplete="off" /></label>
     </div>
-    <button class="retro-btn" type="submit" :disabled="submitting">
+    <label class="contact-privacy-consent"><input v-model="privacyAccepted" type="checkbox" required :disabled="submitting" /> <span>{{ copy.privacy }} <a :href="useRuntimeConfig().app.baseURL + 'privacidad'" target="_blank" rel="noopener noreferrer">{{ locale==='ca' ? 'Privacitat' : locale==='en' ? 'Privacy notice' : 'Información de privacidad' }}</a></span></label>
+    <button class="retro-btn" type="submit" :disabled="submitting || !privacyAccepted">
       {{ submitting ? copy.sending : t('send') }} <span aria-hidden="true">↵</span>
     </button>
     <p v-if="status!=='idle'" class="contact-feedback" :class="'contact-feedback-'+status" role="status" aria-live="polite">
