@@ -18,6 +18,7 @@ const translations = {
     cue: 'Gestión de bookings para DJs y agencias.',
     friends: 'Amigo invisible online.',
     dj: 'Software de mezcla y herramientas DJ.',
+    construction: 'En construcción',
     experience: 'Experiencia profesional',
     current: 'Actualidad', ey: 'Lead Frontend · Proyecto Radisson Hotels',
     bershka: 'Senior Frontend Developer · Bershka, Inditex',
@@ -43,6 +44,7 @@ const translations = {
     cue: 'Gestió de bookings per a DJs i agències.',
     friends: 'Amic invisible en línia.',
     dj: 'Software de mescla i eines DJ.',
+    construction: 'En construcció',
     experience: 'Experiència professional',
     current: 'Actualitat', ey: 'Lead Frontend · Projecte Radisson Hotels',
     bershka: 'Senior Frontend Developer · Bershka, Inditex',
@@ -68,6 +70,7 @@ const translations = {
     cue: 'Booking management for DJs and agencies.',
     friends: 'Online Secret Santa.',
     dj: 'DJ mixing software and tools.',
+    construction: 'Under construction',
     experience: 'Professional experience',
     current: 'Present', ey: 'Lead Frontend · Radisson Hotels project',
     bershka: 'Senior Frontend Developer · Bershka, Inditex',
@@ -134,10 +137,12 @@ const projects = [
             </section>
             <section class="about-os-panel"><h4><span>↗</span> {{ copy.own }}</h4>
               <ul class="about-os-projects"><li v-for="project in projects" :key="project.name">
-                <i aria-hidden="true"></i>
+                <i v-if="project.url" aria-hidden="true"></i>
+                <CareerPixelIcon v-else name="construction" :size="18" />
                 <a v-if="project.url" :href="project.url" target="_blank" rel="noopener noreferrer">{{ project.name }}</a>
                 <strong v-else>{{ project.name }}</strong>
-                <span> · {{ copy[project.desc] }}</span>
+                <span v-if="project.url"> · {{ copy[project.desc] }}</span>
+                <span v-else class="about-os-construction"> · {{ copy.construction }}</span>
               </li></ul>
             </section>
           </div>
