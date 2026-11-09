@@ -110,6 +110,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
       <div class="note"><OsServices /></div>
       <OsWindow id="cv" :title="locale === 'en' ? 'Curriculum Vitae' : 'Currículum Vitae'"><OsCv /></OsWindow>
       <OsWindow id="contact" :title="t('contact')"><OsContact /></OsWindow>
+      <OsWindow id="services" :title="t('services')"><OsServices /></OsWindow>
       <OsWindow id="trash" :title="t('trash')">
         <div class="os-trash">
           <RetroIcon name="trash" :size="57" />
