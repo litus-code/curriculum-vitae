@@ -1,6 +1,6 @@
 import type { ServiceId, Theme, WindowId } from '~/domain/os'
 export function useDesktop() {
-  const opened=useState<WindowId[]>('cf-open',()=>[])
+  const opened=useState<WindowId[]>('cf-open',()=>['terminal'])
   const active=useState<WindowId>('cf-active',()=> 'terminal')
   const recentlyClosed=useState<WindowId[]>('cf-recently-closed',()=>[])
   const services=useState<ServiceId[]>('cf-services',()=>[])
