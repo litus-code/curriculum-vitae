@@ -827,3 +827,13 @@ html,body,#__nuxt {height:100%;min-height:100%; }
  .win-trash .window-body {max-height:none;}
  .os-shell .window-bar>button {width:24px;height:24px;min-width:24px;font-size:22px;}
 }
+
+
+/* Contact: real AJAX form, nonintrusive status and bot trap. */
+.contact-form .retro-btn:disabled {opacity:.7;cursor:progress;}
+.contact-honeypot {position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important;pointer-events:none;}
+.contact-feedback {margin:3px 0;padding:10px 12px;border:2px solid #6079ad;background:#e6edfb;color:#162b53;font:700 11px/1.5 'Courier New',monospace;}
+.contact-feedback-success {border-color:#366ba4;background:#d7ecfa;}
+.contact-feedback-error {border-color:#af5161;background:#fae3e5;color:#742639;}
+.contact-form small {display:block;line-height:1.45;color:#2a3c5a;}
+.contact-form small a {color:#194bb3;text-decoration:underline;font-weight:900;}
