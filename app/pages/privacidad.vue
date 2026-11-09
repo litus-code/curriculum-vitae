@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { locale }=useI18n()
 const base=useRuntimeConfig().app.baseURL
+const wallpaper=base+'wallpapers/night-hd.webp'
 useHead(()=>({title:'Privacidad | Carles Far OS',meta:[{name:'robots',content:'index,follow'}]}))
 const content=computed(()=>({
  es:{
@@ -47,9 +48,9 @@ const content=computed(()=>({
 }))
 </script>
 <template>
- <main class="privacy-page">
+ <main class="privacy-page" :style="{backgroundImage: `url(${wallpaper})`}">
   <div class="privacy-window">
-   <header class="privacy-titlebar"><span aria-hidden="true" class="privacy-lights">● ● ●</span><strong>Carles Far OS · {{ content.title }}</strong><NuxtLink :to="base" aria-label="Cerrar">×</NuxtLink></header>
+   <header class="privacy-titlebar"><span aria-hidden="true" class="privacy-lights">● ● ●</span><strong>Carles Far OS · {{ content.title }}</strong><NuxtLink :to="'/'" aria-label="Cerrar">×</NuxtLink></header>
    <div class="privacy-body">
     <h1>{{ content.title }}</h1>
     <p>{{ content.intro }}</p>
@@ -57,13 +58,13 @@ const content=computed(()=>({
       <h2>{{ content[key] }}</h2><p>{{ content[(key+'Text') as 'controllerText'] }}</p>
     </section>
     <p><a href="https://formsubmit.co/documentation" target="_blank" rel="noopener noreferrer">{{ content.info }} ↗</a></p>
-    <NuxtLink class="privacy-back" :to="base">{{ content.back }}</NuxtLink>
+    <NuxtLink class="privacy-back" :to="'/'">{{ content.back }}</NuxtLink>
    </div>
   </div>
  </main>
 </template>
 <style scoped>
-.privacy-page{min-height:100dvh;background:#111835 url('/curriculum-vitae/wallpapers/night-hd.webp') center/cover fixed;padding:clamp(18px,5vw,55px);font-family:'Courier New',monospace;color:#192643}
+.privacy-page{min-height:100dvh;background-color:#111835;background-position:center;background-size:cover;background-attachment:fixed;padding:clamp(18px,5vw,55px);font-family:'Courier New',monospace;color:#192643}
 .privacy-window{max-width:820px;margin:0 auto;border:3px solid #222e4c;background:#ecf1fa;box-shadow:5px 5px #2a5ded}
 .privacy-titlebar{display:flex;align-items:center;gap:13px;background:repeating-linear-gradient(0deg,#bbc8e5 0 2px,#d2dbef 2px 4px);border-bottom:3px solid #2d3f65;padding:7px 12px}
 .privacy-titlebar strong{flex:1}.privacy-titlebar a{display:grid;place-items:center;border:2px solid #243451;width:26px;height:26px;text-decoration:none;color:#1c2640;background:#f5f7fb;font-size:23px}
