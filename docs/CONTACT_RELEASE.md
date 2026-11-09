@@ -6,7 +6,7 @@ El formulario antes abría `mailto:`. Ahora envía datos mediante POST JSON a Fo
 
 ## Destinatario
 
-Se ha utilizado `contacto@carlesfar.com`, por coherencia con el CV público. El formulario antiguo apuntaba a `hola@carlesfar.com`: **el propietario debe confirmar qué buzón real utilizará** antes de dar por finalizada la puesta en producción. Ambos buzones no se han comprobado. No se ha enviado ninguna solicitud de activación ni ningún correo de prueba desde GitHub.
+**Destinatario confirmado por el propietario: `contacto@carlesfar.com` (9 de noviembre de 2026).** El formulario, los enlaces de respuesta y el aviso de privacidad utilizan esta dirección. La activación de FormSubmit y la recepción real en el buzón todavía deben comprobarse. No se ha enviado ningún mensaje de prueba desde GitHub.
 
 ## Activación obligatoria
 
@@ -19,7 +19,7 @@ FormSubmit requiere activar el destinatario. El propietario debe:
 5. Comprobar que el campo Reply-To corresponde al visitante, que el servicio seleccionado llega y que el formulario muestra mensajes de error ante fallos.
 6. Probar en móvil, con teclado, y con los idiomas ES/CA/EN.
 
-El mensaje de éxito de la web solo significa que el proveedor aceptó la solicitud, no que el correo haya llegado al buzón.
+El mensaje de éxito de la web solo significa que el proveedor aceptó la solicitud, no que el correo haya llegado al buzón. La página de privacidad se encuentra en `/privacidad` y la acción de enviar requiere aceptar ese aviso.
 
 Documentación del servicio: https://formsubmit.co/documentation y https://formsubmit.co/ajax-documentation
 
