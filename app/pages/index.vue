@@ -38,9 +38,16 @@ watch(locale, value => { if (import.meta.client) localStorage.setItem('carlesfar
 const assetsBase = useRuntimeConfig().app.baseURL
 const portraitUrl = assetsBase + 'portrait-carles-pixel.png'
 const isNight = computed(() => theme.value === 'dark')
-const wallpaperUrl = computed(() => assetsBase + (isNight.value ? 'wallpapers/night.webp' : 'wallpapers/sunset.webp'))
+const wallpaperUrl = computed(() => assetsBase + (isNight.value ? 'wallpapers/night-hd.webp' : 'wallpapers/sunset-hd.webp'))
+const wallpaperFallbackUrl = computed(() => assetsBase + (isNight.value ? 'wallpapers/night.webp' : 'wallpapers/sunset.webp'))
 const wallpaperReady = ref(true)
-watch(wallpaperUrl, () => { wallpaperReady.value = true })
+const wallpaperFallback = ref(false)
+const currentWallpaperUrl = computed(() => wallpaperFallback.value ? wallpaperFallbackUrl.value : wallpaperUrl.value)
+watch(isNight, () => { wallpaperReady.value = true; wallpaperFallback.value = false })
+function wallpaperError() {
+  if (!wallpaperFallback.value) wallpaperFallback.value = true
+  else wallpaperReady.value = false
+}
 const toggleTheme = () => { theme.value = isNight.value ? 'light' : 'dark' }
 useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Frontend & Product Creator' }))
 </script>
@@ -64,7 +71,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
         </div>
       </header>
       <div class="wallpaper" :class="{ 'wallpaper-approved': wallpaperReady }" aria-hidden="true">
-        <img v-if="wallpaperReady" class="wallpaper-image" :src="wallpaperUrl" alt="" width="1536" height="1024" decoding="async" fetchpriority="high" @error="wallpaperReady = false" />
+        <img v-if="wallpaperReady" class="wallpaper-image" :src="currentWallpaperUrl" :class="{ 'wallpaper-hd': !wallpaperFallback }" alt="" width="1536" height="1024" decoding="async" fetchpriority="high" @error="wallpaperError" />
         <div class="pixel-stars"></div><div class="pixel-cloud cloud-a"></div><div class="pixel-cloud cloud-b"></div>
         <div class="celestial"></div><div class="ridge ridge-far"></div><div class="ridge ridge-near"></div>
       </div>
