@@ -1281,7 +1281,7 @@ html,body,#__nuxt {height:100%;min-height:100%; }
   appearance:auto;display:block;flex:0 0 17px;
   box-sizing:border-box;width:17px!important;min-width:17px!important;
   height:17px!important;min-height:17px!important;
-  padding:0!important;margin:0!important;accent-color:#245bff;
+  padding:0!important;margin:0!important;accent-color:#171717;
 }
 .os-shell .win-contact .contact-service-option span {
   min-width:0;overflow-wrap:anywhere;
