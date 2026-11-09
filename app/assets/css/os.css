@@ -664,3 +664,69 @@ html,body,#__nuxt {height:100%;min-height:100%; }
  .os-shell,.crt,.desktop {height:auto!important;overflow:visible!important;}
  .os-shell .os-taskbar {display:none!important;}
 }
+
+
+/* Retro Silver · timeline, work iconography and status refinements. */
+.os-taskbar .brand {font-size:clamp(11px,.88vw,14px);letter-spacing:-.3px;gap:7px;}
+.os-taskbar .brand .retro-icon {width:19px;height:19px;}
+.cv-os-timeline {gap:9px;position:relative;}
+.cv-os-timeline article {
+ display:grid;grid-template-columns:15px minmax(75px,96px) minmax(0,1fr);
+ align-items:center;column-gap:10px;position:relative;
+}
+.cv-os-timeline article:before {
+ content:'';position:absolute;z-index:0;
+ left:6px;top:-10px;bottom:-12px;width:3px;
+ background:#245bff;
+}
+.cv-os-timeline article:first-child:before {top:50%;}
+.cv-os-timeline article:last-child:before {bottom:50%;}
+.cv-os-timeline-dot {
+ position:relative;display:block;
+ grid-column:1;grid-row:1;
+ width:13px;height:13px;border:3px solid #133f9e;
+ border-radius:50%;background:#67a1ff;
+ box-shadow:0 0 0 2px #ebf3ff;
+ z-index:2;
+}
+.cv-os-period {grid-column:2;grid-row:1;margin:0;text-align:center;}
+.cv-os-position {
+ grid-column:3;grid-row:1;
+ display:flex;gap:10px;align-items:center;min-width:0;
+}
+.cv-os-position .career-pixel-icon {flex:none;image-rendering:pixelated;}
+.cv-os-role-content {min-width:0;}
+.cv-os-role-content h4 {overflow-wrap:anywhere;}
+.cv-os-hobby-icons {
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:9px;padding:13px 8px 12px;
+}
+.cv-os-hobby-icons>div {
+ display:flex;flex-direction:column;align-items:center;gap:3px;
+ text-align:center;font-size:11px;font-weight:900;
+}
+.career-pixel-icon {display:block;image-rendering:pixelated;flex-shrink:0;}
+.cv-os-construction {
+ display:inline-flex;align-items:center;gap:7px;margin-top:7px;
+ background:#dce7fa;color:#183a75;
+ border:1px solid #6087c0;border-radius:4px;
+ padding:4px 8px;font-weight:900;font-size:11px;
+}
+.about-os-projects li {display:flex;flex-wrap:wrap;align-items:center;gap:2px;}
+.about-os-construction {font-size:11px;color:#2b5399;}
+.project-construction {
+ display:inline-flex!important;align-items:center;justify-content:center;
+ gap:6px;white-space:normal!important;
+}
+@media(max-width:800px) {
+ .os-taskbar .brand {font-size:11px;}
+ .cv-os-timeline article {grid-template-columns:12px 64px minmax(0,1fr);gap:5px;}
+ .cv-os-timeline article:before {left:5px;}
+ .cv-os-timeline-dot {width:11px;height:11px;}
+ .cv-os-period {font-size:9px;padding:4px 2px;}
+ .cv-os-position {gap:5px;padding:7px;}
+ .cv-os-position .career-pixel-icon {width:28px;height:28px;}
+}
+@media print {
+ .cv-os-timeline-dot,.cv-os-timeline article:before {display:none!important;}
+}
