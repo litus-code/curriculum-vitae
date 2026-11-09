@@ -76,7 +76,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
         <div class="celestial"></div><div class="ridge ridge-far"></div><div class="ridge ridge-near"></div>
       </div>
       <aside class="desktop-shortcuts" :aria-label="t('projects')">
-        <button v-for="item in desktopIcons" :key="item.id" type="button" @click="item.id === 'cv' || item.id === 'trash' ? undefined : open(item.id as WindowId)" :title="item.id === 'cv' || item.id === 'trash' ? 'Próximamente' : t(item.id)" :aria-disabled="item.id === 'cv' || item.id === 'trash'">
+        <button v-for="item in desktopIcons" :key="item.id" type="button" @click="item.id === 'trash' ? undefined : open(item.id as WindowId)" :title="item.id === 'trash' ? 'Próximamente' : t(item.id)" :aria-disabled="item.id === 'trash'">
           <RetroIcon :name="item.icon" :size="53" />
           <span>{{ t(item.id) }}</span>
         </button>
@@ -95,6 +95,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
         </div>
       </OsWindow>
       <div class="note"><OsServices /></div>
+      <OsWindow id="cv" :title="locale === 'en' ? 'Curriculum Vitae' : 'Currículum Vitae'"><OsCv /></OsWindow>
       <OsWindow id="contact" :title="t('contact')"><OsContact /></OsWindow>
       <OsWindow id="services" :title="t('services')"><OsServices /></OsWindow>
       <OsWindow id="audio" :title="t('audio')">
