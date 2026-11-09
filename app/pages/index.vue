@@ -82,19 +82,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
         </button>
       </aside>
       <OsWindow id="terminal" title="Terminal – carles@far:~"><OsTerminal /></OsWindow>
-      <OsWindow id="about" :title="t('about')">
-        <div class="about-layout">
-          <img class="portrait" :src="portraitUrl" :alt="t('portraitAlt')" width="240" height="240" />
-          <div class="about-copy">
-            <h1>Carles Far</h1>
-            <strong>Frontend Engineer /<br> Product Creator</strong>
-            <p>{{ t('intro') }}</p>
-            <mark>→ {{ t('skill') }}</mark>
-            <mark>→ Product builder</mark>
-            <mark>→ {{ t('hobby') }}</mark>
-          </div>
-        </div>
-      </OsWindow>
+      <OsWindow id="about" :title="t('about')"><OsAbout :portrait-url="portraitUrl" :portrait-alt="t('portraitAlt')" /></OsWindow>
       <OsWindow id="projects" :title="t('projects')">
         <div class="project-grid">
           <article v-for="p in projects" :key="p.id" class="project" :class="'project-'+p.id">
