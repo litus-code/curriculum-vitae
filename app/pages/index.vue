@@ -36,7 +36,7 @@ onMounted(() => {
 watch(theme, value => { if (import.meta.client) localStorage.setItem('carlesfar-os-theme', value) })
 watch(locale, value => { if (import.meta.client) localStorage.setItem('carlesfar-os-locale', value) })
 const assetsBase = useRuntimeConfig().app.baseURL
-const portraitUrl = assetsBase + 'portrait-carles-pixel.png'
+const portraitUrl = assetsBase + 'portrait-carles-retro-silver.webp'
 const isNight = computed(() => theme.value === 'dark')
 const wallpaperUrl = computed(() => assetsBase + (isNight.value ? 'wallpapers/night-hd.webp' : 'wallpapers/sunset-hd.webp'))
 const wallpaperFallbackUrl = computed(() => assetsBase + (isNight.value ? 'wallpapers/night.webp' : 'wallpapers/sunset.webp'))
