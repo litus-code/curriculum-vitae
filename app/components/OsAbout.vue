@@ -186,9 +186,9 @@ const projects = [
       <template v-else>
         <h3>{{ copy.hobbies }}</h3>
         <div class="about-os-hobbygrid">
-          <article><span>♫</span><p>{{ copy.hobby1 }}</p></article>
-          <article><span>✧</span><p>{{ copy.hobby2 }}</p></article>
-          <article><span>⌘</span><p>{{ copy.hobby3 }}</p></article>
+          <article><CareerPixelIcon name="music" :size="48" /><p>{{ copy.hobby1 }}</p></article>
+          <article><CareerPixelIcon name="paint" :size="48" /><p>{{ copy.hobby2 }}</p></article>
+          <article><CareerPixelIcon name="code" :size="48" /><p>{{ copy.hobby3 }}</p></article>
         </div>
       </template>
     </div>
