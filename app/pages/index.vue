@@ -49,15 +49,28 @@ function wallpaperError() {
   else wallpaperReady.value = false
 }
 const toggleTheme = () => { theme.value = isNight.value ? 'light' : 'dark' }
+const systemClock = ref('')
+let systemClockTimer: ReturnType<typeof setInterval> | undefined
+function updateSystemClock() {
+  if (!import.meta.client) return
+  const language = locale.value === 'ca' ? 'ca-ES' : locale.value === 'en' ? 'en-GB' : 'es-ES'
+  systemClock.value = new Intl.DateTimeFormat(language, {
+    weekday:'short', day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit',
+    hour12:false
+  }).format(new Date())
+}
+onMounted(() => { updateSystemClock(); systemClockTimer = setInterval(updateSystemClock, 30000) })
+watch(locale, updateSystemClock)
+onBeforeUnmount(() => { if (systemClockTimer) clearInterval(systemClockTimer) })
 useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Frontend & Product Creator' }))
 </script>
 
 <template>
   <main class="os-shell" :class="isNight ? 'theme-night' : 'theme-sunset'">
     <div class="crt"><div class="desktop">
-      <header class="menu">
+      <footer class="menu os-taskbar">
         <button class="brand" type="button" @click="open('terminal')"><RetroIcon name="computer" :size="23" /> <span>Carles Far OS</span></button>
-        <nav aria-label="System menu">
+        <nav class="os-taskbar-nav" aria-label="System menu">
           <button type="button" @click="open('projects')">{{ t('fileMenu') }}</button>
           <button type="button" @click="open('services')">{{ t('editMenu') }}</button>
           <button type="button" @click="open('about')">{{ t('viewMenu') }}</button>
@@ -68,8 +81,9 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
           <button type="button" :aria-label="t('audio')" @click="open('audio')"><RetroIcon name="record" :size="22" /></button>
           <button class="theme-switch" type="button" :aria-label="isNight ? t('sunsetMode') : t('nightMode')" :title="isNight ? t('sunsetMode') : t('nightMode')" @click="toggleTheme"><RetroIcon :name="isNight ? 'sun' : 'moon'" :size="22" /></button>
           <select v-model="locale" :aria-label="t('language')"><option value="ca">CAT</option><option value="es">ES</option><option value="en">EN</option></select>
+          <time class="os-taskbar-clock" aria-label="Hora local">{{ systemClock }}</time>
         </div>
-      </header>
+      </footer>
       <div class="wallpaper" :class="{ 'wallpaper-approved': wallpaperReady }" aria-hidden="true">
         <img v-if="wallpaperReady" class="wallpaper-image" :src="currentWallpaperUrl" :class="{ 'wallpaper-hd': !wallpaperFallback }" alt="" width="1536" height="1024" decoding="async" fetchpriority="high" @error="wallpaperError" />
         <div class="pixel-stars"></div><div class="pixel-cloud cloud-a"></div><div class="pixel-cloud cloud-b"></div>
