@@ -3,6 +3,12 @@ import type { WindowId } from '~/domain/os'
 const props=defineProps<{id:WindowId;title:string}>()
 const {opened,active,open,close}=useDesktop()
 const shown=computed(()=>opened.value.includes(props.id))
+const { locale } = useI18n()
+watch(shown, async value => {
+  if (!value || !import.meta.client || window.innerWidth>800) return
+  await nextTick()
+  frame.value?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',block:'start'})
+}, {flush:'post'})
 const frame=ref<HTMLElement>()
 const offset=reactive({x:0,y:0})
 const drag=reactive({active:false,pointer:-1,startX:0,startY:0,x:0,y:0})
@@ -41,7 +47,7 @@ function stopDrag(event:PointerEvent){
     <header class="window-bar" @pointerdown="startDrag" @pointermove="moveDrag" @pointerup="stopDrag" @pointercancel="stopDrag">
       <span class="lights" aria-hidden="true"><i/><i/><i/></span>
       <strong>{{title}}</strong>
-      <button type="button" :aria-label="'Close '+title" @pointerdown.stop @click.stop="close(id)">×</button>
+      <button type="button"  :aria-label="locale==='ca' ? 'Tanca '+title : locale==='es' ? 'Cerrar '+title : 'Close '+title" @pointerdown.stop @click.stop="close(id)">×</button>
     </header>
     <div class="window-body"><slot/></div>
   </section>
