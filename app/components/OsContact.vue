@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { serviceIds } from '~/domain/os'
-const { services, toggleService } = useDesktop()
+const { services, setService } = useDesktop()
 const { t, locale } = useI18n()
 const name = ref('')
 const email = ref('')
@@ -110,10 +110,10 @@ async function submit() {
       <input v-model.trim="email" name="email" required type="email" maxlength="254" autocomplete="email" :disabled="submitting" @input="status='idle'" />
     </label>
     <fieldset class="contact-services">
-      <legend>{{ t('select') }}</legend>
+      <legend>{{ t('services') }}</legend>
       <p class="contact-services-hint">{{ copy.servicesHint }}</p>
       <label v-for="id in serviceIds" :key="id" class="contact-service-option">
-        <input type="checkbox" :name="'service-'+id" :checked="services.includes(id)" :disabled="submitting" @change="toggleService(id)" />
+        <input type="checkbox" :name="'service-'+id" :checked="services.includes(id)" :disabled="submitting" @change="setService(id, !services.includes(id))" />
         <span>{{ t(id) }}</span>
       </label>
     </fieldset>
@@ -128,7 +128,7 @@ async function submit() {
       <span>{{ copy.privacy }} <a :href="useRuntimeConfig().app.baseURL + 'privacidad'" target="_blank" rel="noopener noreferrer">{{ locale==='ca' ? 'Privacitat' : locale==='en' ? 'Privacy notice' : 'Información de privacidad' }}</a></span>
     </label>
     <button class="retro-btn" type="submit" :disabled="submitting || !privacyAccepted">
-      {{ submitting ? copy.sending : t('send') }} <span aria-hidden="true">↵</span>
+      {{ submitting ? copy.sending : t('send') }}
     </button>
     <p v-if="submitting && sendingSlow" class="contact-slow" role="status" aria-live="polite">{{ copy.slow }}</p>
     <p v-if="status!=='idle'" class="contact-feedback" :class="'contact-feedback-'+status" role="status" aria-live="polite">
