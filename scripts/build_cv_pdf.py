@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import shutil
 from pathlib import Path
 
 from PIL import Image
@@ -253,7 +254,7 @@ def page_two(c: Canvas) -> None:
 
 def main() -> None:
     parser=argparse.ArgumentParser()
-    parser.add_argument("--output",default="public/carles-far-cv.pdf")
+    parser.add_argument("--output",default="public/carles-far-cv-v2-1.pdf")
     parser.add_argument("--portrait",default="public/portrait-carles-retro-silver.webp")
     args=parser.parse_args()
     dest=Path(args.output)
@@ -265,6 +266,11 @@ def main() -> None:
     page_one(c,Path(args.portrait))
     page_two(c)
     c.save()
+    # Preserve the old direct URL for existing bookmarks while the on-site
+    # download uses an explicitly versioned name to avoid browser/CDN caching.
+    legacy = dest.with_name("carles-far-cv.pdf")
+    if legacy != dest:
+        shutil.copyfile(dest, legacy)
     print(f"Generated: {dest} ({dest.stat().st_size} bytes)")
 
 
