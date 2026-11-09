@@ -491,3 +491,104 @@ html,body,#__nuxt{background:white!important;height:auto!important;min-height:0!
 .cv-os-actions button { background:#f9e5ef; }
 @media(max-width:800px){.cv-os-actions{flex-wrap:wrap;}.cv-os-actions a,.cv-os-actions button{font-size:10px;}}
 @media print{.cv-os-actions{display:none!important;}}
+
+
+/* RETRO SILVER V3 · Visual reference approved on 9 Nov 2026.
+   Scope the palette to the desktop chrome and personal/CV windows.
+   Preserve the existing Sunset and Night artwork untouched. */
+.os-shell {
+ --rs-ink:#11162c; --rs-blue:#245bff; --rs-blue-light:#83afff;
+ --rs-silver:#e5e9f2; --rs-surface:#f0f3f9; --rs-shadow:#62708c;
+}
+.os-shell .menu {
+ color:#12172b;background:linear-gradient(#f3f4fb,#d7def0);
+ border-bottom:3px solid #243655;
+}
+.os-shell .menu button:hover {background:#b9c9f1}
+.os-shell .menu .system select {color:#12172b;background:#ecf0fa;border:2px solid #26334a}
+.os-shell .window-bar {
+ background:repeating-linear-gradient(0deg,#bfc8e5 0 2px,#d5ddf0 2px 4px);
+ color:#11152b; border-bottom-color:#22314d;
+}
+.os-shell.theme-night .window-bar {background:repeating-linear-gradient(0deg,#b7c2e6 0 2px,#cad4eb 2px 4px)}
+.os-shell.theme-night .menu {background:linear-gradient(#e9edf9,#c9d5ec)}
+.os-shell .win-about,.os-shell .win-cv {
+ border-color:#182238;
+ background:#e5eaf4;
+ box-shadow:3px 3px 0 #98a6c8,6px 6px 0 #14182d;
+ color:var(--rs-ink);
+}
+.os-shell .win-about.focused,.os-shell .win-cv.focused {
+ box-shadow:3px 3px 0 #245bff,6px 6px 0 #101629;
+}
+.win-about .window-body,.win-cv>.window-body {background:#e9edf6}
+.about-os,.cv-os {color:var(--rs-ink);background:#e9edf6}
+.about-os-hero,.cv-os-head {
+ background:linear-gradient(135deg,#f2f5fb 0%,#e3e8f4 55%,#dbe3f3 100%);
+}
+.about-os-portrait-frame,.cv-os-avatar {border-color:#243550;box-shadow:inset 0 0 0 2px #9db4e1}
+.about-os-years,.cv-os-title mark {
+ background:#a3beff;color:#0e235f;border:1px solid #5b86f1;
+}
+.about-os-tabs button,.cv-os-tabs button {
+ color:#15213c;background:#e1e6f2;border-color:#293752;
+ border-radius:9px 9px 0 0;
+}
+.about-os-tabs button.selected,.cv-os-tabs button.selected {
+ background:#245bff;color:#fff;border-color:#162b66;
+}
+.about-os-tabs button:not(.selected):hover,.cv-os-tabs button:not(.selected):hover {
+ background:#b8cffc;
+}
+.about-os-tab-icon,.cv-os-tab-symbol {display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.cv-os-tab-symbol {font-size:17px;margin-right:8px}
+.about-os-content,.cv-os-panel {
+ background:#f0f3fa;border-color:#263750;color:#151d30;
+}
+.about-os-underline,.cv-os-panel h3,.cv-os-print-only h2 {
+ border-bottom-color:#245bff;background:#245bff;
+}
+.cv-os-panel h3,.cv-os-print-only h2 {background:none}
+.about-os-panel,.cv-os-box,.cv-os-school article,.cv-os-position {
+ background:#f4f6fb;border-color:#60759f;color:#172138;
+}
+.about-os-panel h4,.cv-os-box h3 {
+ background:linear-gradient(#bdcbea,#96b2ed);border-color:#536b99;color:#142342;
+}
+.about-os-tech span,.cv-os-chips span,.cv-os-stack span {
+ display:inline-flex;align-items:center;gap:7px;
+ border:1px solid #8095bd;color:#122343;
+ background:#f6f8fd;border-radius:7px;
+}
+.tech-pixel-icon {display:block;flex:none;image-rendering:pixelated}
+.about-os-projects i {background:#245bff;border-color:#0e295e}
+.about-os-timeline article,.about-os-schoolgrid article,.about-os-hobbygrid article {
+ background:#f5f7fc;border-color:#65769b;box-shadow:3px 3px 0 #b2c2e5;
+}
+.about-os-timeline article>span,.about-os-schoolgrid article>span {
+ background:#b1c7ff;color:#122960
+}
+.cv-os-foot {background:#d5deee;border-top-color:#2d4269}
+.cv-os-actions a,.cv-os-foot button,.cv-os-actions button {
+ background:#245bff;color:#fff;border-color:#143a9e;
+ box-shadow:2px 2px 0 #132a63;
+}
+.cv-os-actions button {background:#e6edfb;color:#173268;border-color:#607eb8}
+.cv-os-print-note {background:#e3eaf7;color:#394b6a}
+.cv-os-timeline article:before {background:#245bff}
+.cv-os-period {background:#c4d7ff;border-color:#587dbd;color:#112f69}
+.cv-os-position strong,.cv-os-school article>span {
+ background:#b4cbff;color:#112d6c
+}
+.cv-os-side .cv-os-box p {color:#182743}
+.cv-os-side .cv-os-box a {color:#1743a0}
+.cv-os-tabs button {display:flex;align-items:center;justify-content:center;gap:2px}
+@media(max-width:800px) {
+ .about-os-tabs button {min-height:43px}
+ .cv-os-tab-symbol {display:none}
+}
+@media print {
+ .cv-os,.cv-os-head,.cv-os-title,.cv-os-print-only {color:#11162c!important;background:#fff!important}
+ .cv-os-title mark {background:#ccdafe!important;color:#14295c!important}
+ .cv-os-print-only h2 {border-bottom:2px solid #245bff!important}
+}
