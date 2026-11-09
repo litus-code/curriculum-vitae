@@ -10,11 +10,18 @@ watch(shown, async value => {
   frame.value?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',block:'start'})
 }, {flush:'post'})
 const frame=ref<HTMLElement>()
+const maximized=ref(false)
+function toggleMaximize(){
+  maximized.value=!maximized.value
+  offset.x=0
+  offset.y=0
+  open(props.id)
+}
 const offset=reactive({x:0,y:0})
 const drag=reactive({active:false,pointer:-1,startX:0,startY:0,x:0,y:0})
-const style=computed(()=>({zIndex:30 + opened.value.indexOf(props.id),transform:`translate(${offset.x}px, ${offset.y}px)`}))
+const style=computed(()=>({zIndex:30 + opened.value.indexOf(props.id),transform:maximized.value ? 'none' : `translate(${offset.x}px, ${offset.y}px)`}))
 function startDrag(event:PointerEvent){
-  if (!import.meta.client || window.innerWidth<=800 || event.button!==0 || (event.target as HTMLElement).closest('button')) return
+  if (!import.meta.client || window.innerWidth<=800 || maximized.value || event.button!==0 || (event.target as HTMLElement).closest('button')) return
   const el=frame.value
   if (!el) return
   open(props.id)
@@ -34,7 +41,7 @@ function moveDrag(event:PointerEvent){
   const dx=drag.x+event.clientX-drag.startX-offset.x
   const dy=drag.y+event.clientY-drag.startY-offset.y
   offset.x += Math.max(parent.left+4-rect.left,Math.min(parent.right-4-rect.right,dx))
-  offset.y += Math.max(parent.top+4-rect.top,Math.min(parent.bottom-51-rect.bottom,dy))
+  offset.y += Math.max(parent.top+112-rect.top,Math.min(parent.bottom-55-rect.bottom,dy))
 }
 function stopDrag(event:PointerEvent){
   if (drag.pointer!==event.pointerId) return
@@ -43,11 +50,12 @@ function stopDrag(event:PointerEvent){
 }
 </script>
 <template>
-  <section v-if="shown" ref="frame" class="os-window" :class="['win-'+id,{focused:active===id}]" :style="style" :aria-label="title" @pointerdown="open(id)">
+  <section v-if="shown" ref="frame" class="os-window" :class="['win-'+id,{focused:active===id,maximized}]" :style="style" :aria-label="title" @pointerdown="open(id)">
     <header class="window-bar" @pointerdown="startDrag" @pointermove="moveDrag" @pointerup="stopDrag" @pointercancel="stopDrag">
       <span class="lights" aria-hidden="true"><i/><i/><i/></span>
       <strong>{{title}}</strong>
-      <button type="button"  :aria-label="locale==='ca' ? 'Tanca '+title : locale==='es' ? 'Cerrar '+title : 'Close '+title" @pointerdown.stop @click.stop="close(id)">×</button>
+      <button class="window-maximize" type="button" :aria-label="maximized ? (locale==='ca' ? 'Restaura '+title : locale==='es' ? 'Restaurar '+title : 'Restore '+title) : (locale==='ca' ? 'Maximitza '+title : locale==='es' ? 'Maximizar '+title : 'Maximize '+title)" :title="maximized ? (locale==='es' ? 'Restaurar' : locale==='ca' ? 'Restaura' : 'Restore') : (locale==='es' ? 'Maximizar' : locale==='ca' ? 'Maximitza' : 'Maximize')" @pointerdown.stop @click.stop="toggleMaximize">{{ maximized ? '❐' : '□' }}</button>
+      <button class="window-close" type="button" :aria-label="locale==='ca' ? 'Tanca '+title : locale==='es' ? 'Cerrar '+title : 'Close '+title" @pointerdown.stop @click.stop="close(id)">×</button>
     </header>
     <div class="window-body"><slot/></div>
   </section>
