@@ -1,5 +1,6 @@
+import { serviceIds } from '~/domain/os'
 <script setup lang="ts">
-const { services } = useDesktop()
+const { services, toggleService } = useDesktop()
 const { t, locale } = useI18n()
 const name = ref('')
 const email = ref('')
@@ -23,7 +24,7 @@ const copy = computed(() => ({
   technical:'Respuesta del proveedor:',
   info:'El servicio FormSubmit procesará tu nombre, correo y mensaje para enviarme tu consulta.',
   privacy:'Acepto que FormSubmit gestione estos datos para responder a mi consulta.', messageLabel:'Mensaje',
-  direct:'Escribir por correo', invalid:'Revisa los campos antes de enviar.'
+  direct:'Escribir por correo', invalid:'Revisa los campos antes de enviar.', servicesHint:'Puedes marcar o desmarcar los servicios que necesitas.'
  },
  ca: {
   sending:'Enviant missatge...',slow:'L’enviament està trigant una mica més del que és habitual.',success:'Missatge enviat correctament. Em posaré en contacte amb tu tan aviat com pugui.',
@@ -32,7 +33,7 @@ const copy = computed(() => ({
   technical:'Resposta del proveïdor:',
   info:'FormSubmit tractarà el nom, el correu i el missatge per enviar-me la consulta.',
   privacy:'Accepto que FormSubmit gestioni aquestes dades per respondre la consulta.', messageLabel:'Missatge',
-  direct:'Escriure un correu',invalid:'Revisa els camps abans d’enviar.'
+  direct:'Escriure un correu',invalid:'Revisa els camps abans d’enviar.',servicesHint:'Pots marcar o desmarcar els serveis que necessites.'
  },
  en: {
   sending:'Sending message...',slow:'Sending is taking a little longer than usual.',success:'Message sent successfully. I’ll get back to you as soon as possible.',
@@ -41,12 +42,12 @@ const copy = computed(() => ({
   technical:'Provider response:',
   info:'FormSubmit processes your name, email and message to forward the enquiry to me.',
   privacy:'I agree to FormSubmit processing these details to handle my request.', messageLabel:'Message',
-  direct:'Send an email',invalid:'Please check the form fields.'
+  direct:'Send an email',invalid:'Please check the form fields.',servicesHint:'Select or deselect the services you need.'
  }
 }[locale.value as 'es'|'ca'|'en'] ?? {
  sending:'Enviando mensaje...',slow:'El envío está tardando un poco más de lo habitual.',success:'Mensaje enviado correctamente. Me pondré en contacto contigo lo antes posible.',
  error:'El proveedor ha rechazado la solicitud.',activation:'Hay que activar FormSubmit desde contacto@carlesfar.com.',technical:'Respuesta del proveedor:',
- info:'FormSubmit procesará los datos para enviarme tu consulta.',privacy:'Acepto el envío de mis datos mediante FormSubmit para responder a mi consulta.',messageLabel:'Mensaje',direct:'Escribir por correo',invalid:'Revisa los campos antes de enviar.'
+ info:'FormSubmit procesará los datos para enviarme tu consulta.',privacy:'Acepto el envío de mis datos mediante FormSubmit para responder a mi consulta.',messageLabel:'Mensaje',direct:'Escribir por correo',invalid:'Revisa los campos antes de enviar.',servicesHint:'Puedes cambiar los servicios aquí.'
 }))
 const directLink = computed(() => `mailto:${recipient}?subject=${encodeURIComponent('Carles Far OS · Contacto')}`)
 async function submit() {
@@ -108,7 +109,14 @@ async function submit() {
     <label>{{ t('email') }} *
       <input v-model.trim="email" name="email" required type="email" maxlength="254" autocomplete="email" :disabled="submitting" @input="status='idle'" />
     </label>
-    <label>{{ t('select') }}<output>{{ chosen || '—' }}</output></label>
+    <fieldset class="contact-services">
+      <legend>{{ t('select') }}</legend>
+      <p class="contact-services-hint">{{ copy.servicesHint }}</p>
+      <label v-for="id in serviceIds" :key="id" class="contact-service-option">
+        <input type="checkbox" :name="'service-'+id" :checked="services.includes(id)" :disabled="submitting" @change="toggleService(id)" />
+        <span>{{ t(id) }}</span>
+      </label>
+    </fieldset>
     <label>{{ copy.messageLabel }} *
       <textarea v-model.trim="message" name="message" required minlength="10" maxlength="3000" :disabled="submitting" @input="status='idle'" />
     </label>
