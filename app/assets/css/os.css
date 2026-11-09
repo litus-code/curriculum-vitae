@@ -261,8 +261,8 @@
 
 /* Approved "Sobre mí" artwork, implemented as live Vue content. */
 .win-about {
-  left: 50%; top: 50%; width: min(90%, 1160px); height: min(84%, 760px);
-  transform: translate(-50%,-50%);
+  left: 10%; top: 8%; width: 80%; height: 84%;
+  /* OsWindow handles drag translation inline; center via position, not transform. */
   min-height: 0;
 }
 .win-about .window-body {
