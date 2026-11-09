@@ -161,3 +161,31 @@
  .project .retro-icon{height:48px;width:48px}
  .project-grid .project{align-items:start}
 }
+
+/* Approved landscape art occupies the desktop canvas, underneath real Vue windows.
+   Keep the procedural landscape as a fallback until both image assets are available. */
+.wallpaper-approved { background: #1d0e49; }
+.wallpaper-approved::before { display: none; }
+.wallpaper-approved > .wallpaper-image {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  object-position: center bottom;
+  image-rendering: auto;
+  pointer-events: none;
+}
+.wallpaper-approved:has(.wallpaper-image:not([src])) > .pixel-stars,
+.wallpaper-approved:has(.wallpaper-image:not([src])) > .pixel-cloud,
+.wallpaper-approved:has(.wallpaper-image:not([src])) > .celestial,
+.wallpaper-approved:has(.wallpaper-image:not([src])) > .ridge { display: block; }
+.wallpaper-approved > .pixel-stars,
+.wallpaper-approved > .pixel-cloud,
+.wallpaper-approved > .celestial,
+.wallpaper-approved > .ridge { display: none; }
+@media (max-width: 800px) {
+  .wallpaper-approved > .wallpaper-image { object-position: center bottom; }
+}
