@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import type { WindowId } from '~/domain/os'
 const { locale, t } = useI18n()
-const { theme, open, recentlyClosed, restore, emptyTrash } = useDesktop()
+const { theme, opened, open, recentlyClosed, restore, emptyTrash } = useDesktop()
+const desktopInitialized = ref(false)
+onMounted(() => {
+  // Keep the original desktop welcome terminal, but leave mobile unobstructed.
+  if (window.innerWidth <= 800 && opened.value.length === 1 && opened.value[0] === 'terminal') {
+    opened.value = []
+  }
+  desktopInitialized.value = true
+})
 const projects = [
   { id:'cue', name:'Cuebooker', icon:'wave', url:'https://cuebooker.com' },
   { id:'friends', name:'Friends Invisible', icon:'gift', url:'' },
@@ -65,7 +73,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
 </script>
 
 <template>
-  <main class="os-shell" :class="isNight ? 'theme-night' : 'theme-sunset'">
+  <main class="os-shell" :class="[isNight ? 'theme-night' : 'theme-sunset', { 'os-initialized': desktopInitialized }]">
     <div class="crt"><div class="desktop">
       <footer class="menu os-taskbar">
         <button class="brand" type="button" @click="open('terminal')"><RetroIcon name="computer" :size="23" /> <span>Carles Far OS</span></button>
