@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges" role="img" aria-label="Carles Far OS, monograma CF">
+  <rect x="5" y="7" width="54" height="52" fill="#090f2b"/>
+  <rect x="8" y="5" width="48" height="52" fill="#090f2b"/>
+  <rect x="10" y="8" width="44" height="46" fill="#dce5f5"/>
+  <rect x="10" y="8" width="44" height="12" fill="#78afff"/>
+  <rect x="10" y="19" width="44" height="3" fill="#1d3b81"/>
+  <rect x="13" y="11" width="5" height="5" fill="#ff564f"/>
+  <rect x="23" y="11" width="5" height="5" fill="#ffe75a"/>
+  <rect x="33" y="11" width="5" height="5" fill="#8ef86d"/>
+  <rect x="12" y="24" width="40" height="28" fill="#ecf0fb"/>
+  <path d="M17 28H31V33H22V43H31V48H17V44H14V32H17Z" fill="#111a42"/>
+  <path d="M18 29H30V32H21V44H30V47H18V43H15V33H18Z" fill="#2877fb"/>
+  <path d="M35 28H50V33H40V36H47V41H40V48H35Z" fill="#101a43"/>
+  <path d="M36 29H49V32H39V37H46V40H39V47H36Z" fill="#2877fb"/>
+  <rect x="11" y="53" width="42" height="3" fill="#7186b2"/>
+  <rect x="13" y="56" width="38" height="2" fill="#090f2b"/>
+</svg>
