@@ -3,9 +3,9 @@ const { locale } = useI18n()
 const active = ref<'experience'|'education'|'stack'|'projects'>('experience')
 const tabs = ['experience','education','stack','projects'] as const
 const labels = {
-  es: { experience:'Experiencia',education:'Formación',stack:'Tecnologías',projects:'Proyectos',contact:'Contacto',skills:'Competencias',download:'Descargar CV (PDF)',intro:'Frontend Lead, desarrollador web y creador de productos digitales.',summary:'10 años de experiencia frontend',history:'Trayectoria profesional',training:'Formación',detail:'Responsabilidades',schools:'Centros y estudios',built:'Productos propios',construction:'En construcción',note:'Las titulaciones de Campus MVP y UB están pendientes de precisar. El PDF se genera desde el navegador mediante Imprimir > Guardar como PDF.' },
-  ca: { experience:'Experiència',education:'Formació',stack:'Tecnologies',projects:'Projectes',contact:'Contacte',skills:'Competències',download:'Descarregar CV (PDF)',intro:'Frontend Lead, desenvolupador web i creador de productes digitals.',summary:'10 anys d’experiència frontend',history:'Trajectòria professional',training:'Formació',detail:'Responsabilitats',schools:'Centres i estudis',built:'Productes propis',construction:'En construcció',note:'Els títols de Campus MVP i UB estan pendents de concretar. El PDF es genera des del navegador amb Imprimir > Desar com a PDF.' },
-  en: { experience:'Experience',education:'Education',stack:'Technologies',projects:'Projects',contact:'Contact',skills:'Skills',download:'Download CV (PDF)',intro:'Frontend Lead, web developer and independent product builder.',summary:'10 years of frontend experience',history:'Professional experience',training:'Education',detail:'Responsibilities',schools:'Schools and studies',built:'My products',construction:'Under construction',note:'Campus MVP and UB qualifications need confirmation. Generate a PDF with Print > Save as PDF.' }
+  es: { experience:'Experiencia',education:'Formación',stack:'Tecnologías',projects:'Proyectos',contact:'Contacto',skills:'Competencias',download:'Descargar CV (PDF)',intro:'Frontend Lead, desarrollador web y creador de productos digitales.',summary:'10 años de experiencia frontend',history:'Trayectoria profesional',training:'Formación',detail:'Responsabilidades',schools:'Centros y estudios',built:'Productos propios',construction:'En construcción' },
+  ca: { experience:'Experiència',education:'Formació',stack:'Tecnologies',projects:'Projectes',contact:'Contacte',skills:'Competències',download:'Descarregar CV (PDF)',intro:'Frontend Lead, desenvolupador web i creador de productes digitals.',summary:'10 anys d’experiència frontend',history:'Trajectòria professional',training:'Formació',detail:'Responsabilitats',schools:'Centres i estudis',built:'Productes propis',construction:'En construcció' },
+  en: { experience:'Experience',education:'Education',stack:'Technologies',projects:'Projects',contact:'Contact',skills:'Skills',download:'Download CV (PDF)',intro:'Frontend Lead, web developer and independent product builder.',summary:'10 years of frontend experience',history:'Professional experience',training:'Education',detail:'Responsibilities',schools:'Schools and studies',built:'My products',construction:'Under construction' }
 }
 const t = computed(() => labels[locale.value as keyof typeof labels] ?? labels.es)
 const roles = [
@@ -16,12 +16,35 @@ const roles = [
  {icon:'coneptum',years:'2020',company:'Coneptum AI',title:'Frontend Developer',details:'Desarrollo de aplicación para el sector del ocio con Vue 2 y Vuetify.'},
  {icon:'casals',years:'2017–2019',company:'Casals Online',title:'Junior Frontend Developer',details:'Maquetación de landing pages y desarrollo JavaScript para marketing digital.'}
 ]
-const schools = [
- {years:'2019–2020',name:'Campus MVP',note:''},
- {years:'2016–2017',name:'ISDI Coders',note:'Bootcamp intensivo de JavaScript full stack.'},
- {years:'2013–2017',name:'STUCOM',note:'Técnico Superior en Desarrollo de Aplicaciones Web (DAW).'},
- {years:'2012–2013',name:'Universitat de Barcelona',note:''}
-]
+const schools = computed(() => {
+ const descriptions = {
+  es: [
+   'Certificado de Programación avanzada con JavaScript y ECMAScript 6.',
+   'Bootcamp de desarrollo web full stack con JavaScript.',
+   'Grado superior como Técnico Superior en Diseño y Desarrollo Web (DAW).',
+   'Prueba de acceso para mayores de 25 años a la universidad y/o formación de grado superior.'
+  ],
+  ca: [
+   'Certificat de Programació avançada amb JavaScript i ECMAScript 6.',
+   'Bootcamp de desenvolupament web full stack amb JavaScript.',
+   'Cicle formatiu de grau superior com a Tècnic Superior en Disseny i Desenvolupament Web (DAW).',
+   'Prova d’accés per a majors de 25 anys a la universitat i/o formació de grau superior.'
+  ],
+  en: [
+   'Advanced JavaScript and ECMAScript 6 Programming Certificate.',
+   'Full-stack JavaScript web development bootcamp.',
+   'Higher vocational qualification in Web Design and Development (DAW).',
+   'University entrance examination for students aged 25+ and/or higher vocational training.'
+  ]
+ } as const
+ const detail = descriptions[locale.value as keyof typeof descriptions] ?? descriptions.es
+ return [
+  {years:'2019–2020',name:'Campus MVP',note:detail[0]},
+  {years:'2016–2017',name:'ISDI Coders',note:detail[1]},
+  {years:'2013–2017',name:'STUCOM',note:detail[2]},
+  {years:'2012–2013',name:'Universitat de Barcelona',note:detail[3]}
+ ]
+})
 const stack = ['Vue 2 / 3','Nuxt 2 / 3 / 4','TypeScript','JavaScript','Pinia / Vuex','SSR','Tailwind','SCSS','HTML / CSS','Jest','Storybook','Git','CI/CD']
 const projects = [
  {name:'Cuebooker',text:'Plataforma de gestión de bookings de DJs y agencias.',url:'https://cuebooker.com'},
@@ -91,7 +114,6 @@ function printCv(){ if(import.meta.client) window.print() }
       </div>
     </div>
     <footer class="cv-os-foot"><span>▣ Carles Far OS · CV v2.0</span><div class="cv-os-actions"><button type="button" @click="printCv">⎙ {{ locale === 'en' ? 'Print' : 'Imprimir' }}</button><a :href="useRuntimeConfig().app.baseURL + 'carles-far-cv.pdf'" download="Carles_Far_CV_2.0.pdf">↓ {{ t.download }}</a></div></footer>
-    <p class="cv-os-print-note">{{ t.note }}</p>
     <div class="cv-os-print-only">
       <h2>{{ t.history }}</h2>
       <article v-for="role in roles" :key="role.company"><strong>{{ role.years }} · {{ role.company }} · {{ role.title }}</strong><p>{{ role.details }}</p></article>
