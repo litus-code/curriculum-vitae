@@ -1,5 +1,11 @@
 export const serviceIds = ['custom','frontend','performance','consulting'] as const
 export type ServiceId = typeof serviceIds[number]
+export function setSelectedService(current: readonly ServiceId[], id: ServiceId, checked: boolean): ServiceId[] {
+  const selected = new Set(current)
+  if (checked) selected.add(id)
+  else selected.delete(id)
+  return serviceIds.filter(service => selected.has(service))
+}
 export const windowIds = ['terminal','about','projects','contact','services','audio','cv','trash'] as const
 export type WindowId = typeof windowIds[number]
 export type Theme = 'dark' | 'light'
