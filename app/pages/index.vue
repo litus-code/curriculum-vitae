@@ -12,7 +12,8 @@ const desktopIcons = [
   { id:'services', icon:'folder' },
   { id:'about', icon:'paper' },
   { id:'contact', icon:'mail' },
-  { id:'audio', icon:'record' }
+  { id:'cv', icon:'floppy' },
+  { id:'trash', icon:'trash' }
 ] as const
 const audio = ref<HTMLAudioElement>()
 const track = ref('')
@@ -44,17 +45,18 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
   <main class="os-shell" :class="isNight ? 'theme-night' : 'theme-sunset'">
     <div class="crt"><div class="desktop">
       <header class="menu">
-        <button class="brand" type="button" @click="open('terminal')"><PixelIcon name="computer" :size="23" /> <span>Carles Far OS</span></button>
-        <nav :aria-label="t('projects')">
-          <button type="button" @click="open('projects')">{{ t('projects') }}</button>
-          <button type="button" @click="open('services')">{{ t('services') }}</button>
-          <button type="button" @click="open('about')">{{ t('about') }}</button>
-          <button type="button" @click="open('contact')">{{ t('contact') }}</button>
+        <button class="brand" type="button" @click="open('terminal')"><RetroIcon name="computer" :size="23" /> <span>Carles Far OS</span></button>
+        <nav aria-label="System menu">
+          <button type="button" @click="open('projects')">{{ t('fileMenu') }}</button>
+          <button type="button" @click="open('services')">{{ t('editMenu') }}</button>
+          <button type="button" @click="open('about')">{{ t('viewMenu') }}</button>
+          <button type="button" @click="open('contact')">{{ t('goMenu') }}</button>
+          <button type="button" @click="open('terminal')">{{ t('helpMenu') }}</button>
         </nav>
         <div class="system">
-          <button type="button" :aria-label="t('audio')" @click="open('audio')"><PixelIcon name="record" :size="22" /></button>
-          <button class="theme-switch" type="button" :aria-label="isNight ? 'Sunset' : 'Night'" :title="isNight ? 'Sunset' : 'Night'" @click="toggleTheme"><PixelIcon :name="isNight ? 'sun' : 'moon'" :size="22" /></button>
-          <select v-model="locale" aria-label="Language"><option value="ca">CAT</option><option value="es">ES</option><option value="en">EN</option></select>
+          <button type="button" :aria-label="t('audio')" @click="open('audio')"><RetroIcon name="record" :size="22" /></button>
+          <button class="theme-switch" type="button" :aria-label="isNight ? t('sunsetMode') : t('nightMode')" :title="isNight ? t('sunsetMode') : t('nightMode')" @click="toggleTheme"><RetroIcon :name="isNight ? 'sun' : 'moon'" :size="22" /></button>
+          <select v-model="locale" :aria-label="t('language')"><option value="ca">CAT</option><option value="es">ES</option><option value="en">EN</option></select>
         </div>
       </header>
       <div class="wallpaper" aria-hidden="true">
@@ -62,15 +64,15 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
         <div class="celestial"></div><div class="ridge ridge-far"></div><div class="ridge ridge-near"></div>
       </div>
       <aside class="desktop-shortcuts" :aria-label="t('projects')">
-        <button v-for="item in desktopIcons" :key="item.id" type="button" @click="open(item.id as WindowId)">
-          <PixelIcon :name="item.icon" :size="53" />
+        <button v-for="item in desktopIcons" :key="item.id" type="button" @click="item.id === 'cv' || item.id === 'trash' ? undefined : open(item.id as WindowId)" :title="item.id === 'cv' || item.id === 'trash' ? 'Próximamente' : t(item.id)" :aria-disabled="item.id === 'cv' || item.id === 'trash'">
+          <RetroIcon :name="item.icon" :size="53" />
           <span>{{ t(item.id) }}</span>
         </button>
       </aside>
       <OsWindow id="terminal" title="Terminal – carles@far:~"><OsTerminal /></OsWindow>
       <OsWindow id="about" :title="t('about')">
         <div class="about-layout">
-          <img class="portrait"  :src="portraitUrl" alt="Carles Far, retrato pixelado con gafas amarillas" width="240" height="240" />
+          <img class="portrait" :src="portraitUrl" :alt="t('portraitAlt')" width="240" height="240" />
           <div class="about-copy">
             <h1>Carles Far</h1>
             <strong>Frontend Engineer /<br> Product Creator</strong>
@@ -84,7 +86,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
       <OsWindow id="projects" :title="t('projects')">
         <div class="project-grid">
           <article v-for="p in projects" :key="p.id" class="project" :class="'project-'+p.id">
-            <PixelIcon :name="p.icon" :size="66" />
+            <RetroIcon :name="p.icon" :size="66" />
             <h2>{{ p.name }}</h2>
             <p>{{ t(p.id) }}</p>
             <a v-if="p.url" :href="p.url" target="_blank" rel="noopener noreferrer">{{ t('projects') }} ↗</a>
@@ -96,7 +98,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
       <OsWindow id="contact" :title="t('contact')"><OsContact /></OsWindow>
       <OsWindow id="services" :title="t('services')"><OsServices /></OsWindow>
       <OsWindow id="audio" :title="t('audio')">
-        <div class="music"><PixelIcon name="turntable" :size="84" />
+        <div class="music"><RetroIcon name="turntable" :size="84" />
           <label>{{ t('load') }}<input type="file" accept="audio/*" @change="loadAudio" /></label>
           <p>{{ track }}</p><audio ref="audio" controls preload="none" />
         </div>
