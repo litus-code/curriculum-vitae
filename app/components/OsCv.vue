@@ -3,15 +3,15 @@ const { locale } = useI18n()
 const active = ref<'experience'|'education'|'stack'|'projects'>('experience')
 const tabs = ['experience','education','stack','projects'] as const
 const labels = {
-  es: { experience:'Experiencia',education:'Formación',stack:'Tecnologías',projects:'Proyectos',contact:'Contacto',skills:'Competencias',download:'Guardar como PDF',intro:'Frontend Lead, desarrollador web y creador de productos digitales.',summary:'10 años de experiencia frontend',history:'Trayectoria profesional',training:'Formación',detail:'Responsabilidades',schools:'Centros y estudios',built:'Productos propios',note:'La titulaciones de Campus MVP y UB están pendientes de precisar. El PDF se genera desde el navegador mediante Imprimir > Guardar como PDF.' },
-  ca: { experience:'Experiència',education:'Formació',stack:'Tecnologies',projects:'Projectes',contact:'Contacte',skills:'Competències',download:'Desar com a PDF',intro:'Frontend Lead, desenvolupador web i creador de productes digitals.',summary:'10 anys d’experiència frontend',history:'Trajectòria professional',training:'Formació',detail:'Responsabilitats',schools:'Centres i estudis',built:'Productes propis',note:'Els títols de Campus MVP i UB estan pendents de concretar. El PDF es genera des del navegador amb Imprimir > Desar com a PDF.' },
-  en: { experience:'Experience',education:'Education',stack:'Technologies',projects:'Projects',contact:'Contact',skills:'Skills',download:'Save as PDF',intro:'Frontend Lead, web developer and independent product builder.',summary:'10 years of frontend experience',history:'Professional experience',training:'Education',detail:'Responsibilities',schools:'Schools and studies',built:'My products',note:'Campus MVP and UB qualifications need confirmation. Generate a PDF with Print > Save as PDF.' }
+  es: { experience:'Experiencia',education:'Formación',stack:'Tecnologías',projects:'Proyectos',contact:'Contacto',skills:'Competencias',download:'Descargar CV (PDF)',intro:'Frontend Lead, desarrollador web y creador de productos digitales.',summary:'10 años de experiencia frontend',history:'Trayectoria profesional',training:'Formación',detail:'Responsabilidades',schools:'Centros y estudios',built:'Productos propios',note:'La titulaciones de Campus MVP y UB están pendientes de precisar. El PDF se genera desde el navegador mediante Imprimir > Guardar como PDF.' },
+  ca: { experience:'Experiència',education:'Formació',stack:'Tecnologies',projects:'Projectes',contact:'Contacte',skills:'Competències',download:'Descarregar CV (PDF)',intro:'Frontend Lead, desenvolupador web i creador de productes digitals.',summary:'10 anys d’experiència frontend',history:'Trajectòria professional',training:'Formació',detail:'Responsabilitats',schools:'Centres i estudis',built:'Productes propis',note:'Els títols de Campus MVP i UB estan pendents de concretar. El PDF es genera des del navegador amb Imprimir > Desar com a PDF.' },
+  en: { experience:'Experience',education:'Education',stack:'Technologies',projects:'Projects',contact:'Contact',skills:'Skills',download:'Download CV (PDF)',intro:'Frontend Lead, web developer and independent product builder.',summary:'10 years of frontend experience',history:'Professional experience',training:'Education',detail:'Responsibilities',schools:'Schools and studies',built:'My products',note:'Campus MVP and UB qualifications need confirmation. Generate a PDF with Print > Save as PDF.' }
 }
 const t = computed(() => labels[locale.value as keyof typeof labels] ?? labels.es)
 const roles = [
  {years:'2026 –',company:'EY / Radisson Hotels',title:'Lead Frontend',details:'Frontend lead en el proyecto Radisson Hotels, desarrollo con Nuxt, Vue, TypeScript y SSR.'},
  {years:'2025–2026',company:'Inditex / Bershka',title:'Senior Frontend Developer',details:'Mantenimiento y nuevas funcionalidades, migración a Nuxt 3 y Pinia, trabajo entre squads.'},
- {years:'2021–2025',company:'Azertium IT',title:'Senior Frontend · Referente técnico',details:'Referente frontend del equipo AM, evolución y mantenimiento de un portal del sector turístico con Vue 2 y Nuxt.'},
+ {years:'2021–2025',company:'EY Barcelona',title:'Senior Frontend · Referente técnico',details:'Referente frontend del equipo AM, evolución y mantenimiento de un portal del sector turístico con Vue 2 y Nuxt.'},
  {years:'2020–2021',company:'T2CLIENT',title:'Frontend Developer · Referente de equipo',details:'Arquitectura de aplicaciones Vue 2/3 para logística, Storybook y gestión de datos JSON.'},
  {years:'2020',company:'Coneptum AI',title:'Frontend Developer',details:'Desarrollo de aplicación para el sector del ocio con Vue 2 y Vuetify.'},
  {years:'2017–2019',company:'Casals Online',title:'Junior Frontend Developer',details:'Maquetación de landing pages y desarrollo JavaScript para marketing digital.'}
@@ -77,7 +77,7 @@ function printCv(){ if(import.meta.client) window.print() }
         </div>
       </div>
     </div>
-    <footer class="cv-os-foot"><span>▣ Carles Far OS · CV v2.0</span><button type="button" @click="printCv">↓ {{ t.download }}</button></footer>
+    <footer class="cv-os-foot"><span>▣ Carles Far OS · CV v2.0</span><div class="cv-os-actions"><button type="button" @click="printCv">⎙ {{ locale === 'en' ? 'Print' : 'Imprimir' }}</button><a :href="useRuntimeConfig().app.baseURL + 'carles-far-cv.pdf'" download="Carles_Far_CV_2.0.pdf">↓ {{ t.download }}</a></div></footer>
     <p class="cv-os-print-note">{{ t.note }}</p>
     <div class="cv-os-print-only">
       <h2>{{ t.history }}</h2>
