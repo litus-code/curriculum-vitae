@@ -117,7 +117,7 @@ const projects = [
         :class="{ selected: tab === id }" @click="tab = id"
         @keydown.left.prevent="tab = tabIds[(i+3)%4]!"
         @keydown.right.prevent="tab = tabIds[(i+1)%4]!">
-        <span class="about-os-tab-icon" aria-hidden="true">{{ ['♙','▣','◇','✣'][i] }}</span>{{ copy.tabs[i] }}
+        <span class="about-os-tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="23" height="23" shape-rendering="crispEdges"><g fill="none" stroke="currentColor" stroke-width="2"><template v-if="id==='intro'"><circle cx="12" cy="6" r="4"/><path d="M4 21v-4c0-6 16-6 16 0v4z"/></template><template v-else-if="id==='experience'"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M8 7V3h8v4M2 13h20M10 12h4v3h-4z"/></template><template v-else-if="id==='education'"><path d="M1 9l11-6 11 6-11 6zM5 13v6l7 3 7-3v-6M23 9v11"/></template><template v-else><path d="M7 9h10l5 4v6l-4 2-4-5H10l-4 5-4-2v-6zM6 11v6M3 14h6M16 13h2M19 16h2"/></template></g></svg></span>{{ copy.tabs[i] }}
       </button>
     </div>
     <div class="about-os-content" role="tabpanel">
@@ -130,7 +130,7 @@ const projects = [
           </div>
           <div class="about-os-side">
             <section class="about-os-panel"><h4><span>&lt;/&gt;</span> {{ copy.tech }}</h4>
-              <div class="about-os-tech"><span v-for="item in tech" :key="item">{{ item }}</span></div>
+              <div class="about-os-tech"><span v-for="item in tech" :key="item"><TechPixelIcon :name="item" :size="19" />{{ item }}</span></div>
             </section>
             <section class="about-os-panel"><h4><span>↗</span> {{ copy.own }}</h4>
               <ul class="about-os-projects"><li v-for="project in projects" :key="project.name">
