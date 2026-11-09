@@ -730,3 +730,60 @@ html,body,#__nuxt {height:100%;min-height:100%; }
 @media print {
  .cv-os-timeline-dot,.cv-os-timeline article:before {display:none!important;}
 }
+
+
+/* CV sidebar: cards must keep natural height, never be compressed by CSS Grid.
+   When the CV viewport is short, scroll the entire sidebar instead of
+   cutting the chips or the second row of hobby illustrations. */
+.win-cv .cv-os-main {min-height:0;overflow:hidden;}
+.win-cv .cv-os-side {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-start;
+  gap:10px;
+  min-height:0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  scrollbar-width:thin;
+  scrollbar-color:#7089b8 #e5ebf6;
+  padding:8px 5px 12px 0;
+  overscroll-behavior:contain;
+}
+.win-cv .cv-os-side>.cv-os-box {
+  flex:0 0 auto;
+  min-height:max-content;
+  overflow:visible;
+  border-radius:7px;
+}
+.win-cv .cv-os-chips {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  gap:6px;
+  padding:9px;
+}
+.win-cv .cv-os-chips span {
+  display:inline-flex;
+  max-width:100%;
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  font-size:10px;
+  padding:4px 6px;
+}
+.win-cv .cv-os-chips .tech-pixel-icon {width:16px;height:16px;}
+.win-cv .cv-os-hobby-icons {
+  padding:10px 8px 12px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  row-gap:10px;
+}
+.win-cv .cv-os-hobby-icons>div {min-width:0;}
+@media(max-width:800px) {
+  .win-cv .cv-os-main {overflow:visible;}
+  .win-cv .cv-os-side {display:flex;overflow:visible;padding:8px 0;}
+}
+@media print {
+  .win-cv .cv-os-side {display:none!important;}
+  .win-cv .cv-os-main {overflow:visible!important;}
+}
