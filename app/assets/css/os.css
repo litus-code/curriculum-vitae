@@ -257,3 +257,131 @@
   image-rendering: pixelated;
   filter: none;
 }
+
+
+/* Approved "Sobre mí" artwork, implemented as live Vue content. */
+.win-about {
+  left: 50%; top: 50%; width: min(90%, 1160px); height: min(84%, 760px);
+  transform: translate(-50%,-50%);
+  min-height: 0;
+}
+.win-about .window-body {
+  height: calc(100% - 31px); padding: 0; overflow: auto;
+  background: #f6dfe9;
+}
+.about-os {
+  color: #22152c; background: #f6dfe9;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  min-height: 100%;
+  display: flex; flex-direction: column;
+  padding: clamp(12px, 2vw, 28px);
+}
+.about-os-hero {
+  display: grid;
+  grid-template-columns: clamp(115px, 19%, 205px) minmax(0,1fr) clamp(72px,10%,122px);
+  gap: clamp(12px, 2.1vw, 32px);
+  align-items: center;
+  padding: 0 0 clamp(12px, 2vw, 22px);
+}
+.about-os-portrait-frame {
+  width:100%; aspect-ratio: .95; max-height: 200px;
+  padding: 5px; background:#090710; border: 3px solid #160c24; box-shadow: inset 0 0 0 2px #efcce0;
+}
+.about-os-portrait {
+  width:100%; height:100%; display:block;
+  object-fit: cover; object-position: center 28%; image-rendering: pixelated;
+}
+.about-os-identity { min-width: 0; }
+.about-os-identity h1 {
+  font: 900 clamp(26px,4vw,60px)/1 'Courier New',monospace;
+  letter-spacing: -.025em; margin: 0 0 8px;
+}
+.about-os-identity h2 {
+  font: 800 clamp(12px,1.55vw,21px)/1.24 'Courier New',monospace;
+  margin: 0 0 10px;
+}
+.about-os-identity p { font-size: clamp(11px,1.3vw,17px); line-height:1.38; margin:0 0 12px; }
+.about-os-years {
+  display: inline-block; background: #d8fb5b;
+  padding: 6px 10px; font-size: clamp(10px,1.25vw,17px);
+  line-height: 1.2;
+}
+.about-os-mac { display:flex; flex-direction:column; align-items:center; justify-content:center; align-self:center; }
+.about-os-mac .retro-icon { width:min(100%,112px);height:auto;filter:drop-shadow(3px 3px 0 #1c112d); }
+.about-os-mac-rays { align-self:center;color:#23172f;font-size:22px;line-height:1; }
+.about-os-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); position:relative; z-index:1; }
+.about-os-tabs button {
+  min-width:0; min-height:52px; border:3px solid #22132e;
+  border-bottom:0; background:#f7deea; border-radius:12px 12px 0 0;
+  padding:9px 5px; font: 900 clamp(11px,1.3vw,18px)/1.1 'Courier New',monospace;
+  display:flex;align-items:center;justify-content:center;gap:10px;color:#1c1028;
+}
+.about-os-tabs button+button { border-left-width:1px; }
+.about-os-tabs button.selected { background:#d8fa5a; }
+.about-os-tabs button:not(.selected):hover { background:#e9c7df; }
+.about-os-tab-icon { font-size: clamp(18px,2vw,27px);line-height:1; }
+.about-os-content {
+  flex:1; min-height:0; border:3px solid #22132e; border-radius:12px 12px 0 0;
+  padding:clamp(14px,2vw,25px); background:#f9e7ef;
+}
+.about-os-content h3 {
+  font:900 clamp(21px,2.6vw,36px)/1.15 'Courier New',monospace;
+  margin: 0 0 12px;
+}
+.about-os-intro { display:grid;grid-template-columns:1.06fr 1fr;gap:clamp(15px,3vw,42px);height:100%; }
+.about-os-bio { display:flex;flex-direction:column;min-width:0; }
+.about-os-underline { width:145px;height:6px;background:#d7f85b;margin-bottom:13px; }
+.about-os-bio p { font-size:clamp(12px,1.25vw,17px);line-height:1.4;margin:5px 0 14px; }
+.about-os-tags { display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:auto;padding-top:18px;font-size:clamp(10px,1vw,14px); }
+.about-os-side { display:grid;align-content:start;gap:14px; min-width:0; }
+.about-os-panel { border:2px solid #1a1125;border-radius:9px;overflow:hidden;background:#fae8f0; }
+.about-os-panel h4 {
+  background:#d5b1eb;border-bottom:2px solid #1a1125;
+  font:900 clamp(13px,1.38vw,19px)/1.2 'Courier New',monospace;
+  padding:10px 13px;margin:0;
+}
+.about-os-panel h4 span { font-size:1.4em;vertical-align:middle; }
+.about-os-tech { display:flex;flex-wrap:wrap;gap:8px;padding:12px;justify-content:center; }
+.about-os-tech span { border:1.5px solid #1a1125;border-radius:10px;padding:5px 12px;white-space:nowrap;font-size:clamp(10px,1vw,14px); }
+.about-os-projects { list-style:none; padding:12px 14px; margin:0; display:grid; gap:9px; }
+.about-os-projects li { font-size:clamp(11px,1vw,14px);line-height:1.3; }
+.about-os-projects i { display:inline-block;width:10px;height:10px;background:#d8f85b;border:2px solid #26152b;margin-right:8px; }
+.about-os-projects a { color:inherit;text-decoration:underline; }
+.about-os-timeline { display:grid;grid-template-columns:1fr 1fr;gap:17px; }
+.about-os-timeline article,.about-os-schoolgrid article,.about-os-hobbygrid article {
+  background:#f6dfe9;border:2px solid #26152b;border-radius:8px;padding:16px;
+  box-shadow:3px 3px 0 #d9b2ea;
+}
+.about-os-timeline article>span,.about-os-schoolgrid article>span { display:inline-block;background:#d8fb5b;padding:5px 8px;font-size:13px; }
+.about-os-timeline h4,.about-os-schoolgrid h4 { font-size:clamp(15px,1.7vw,23px);line-height:1.2;margin:14px 0 9px; }
+.about-os-timeline p,.about-os-timeline small,.about-os-hobbygrid p { font:700 clamp(12px,1.1vw,16px)/1.4 'Courier New',monospace; }
+.about-os-schoolgrid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px; }
+.about-os-education-note { margin:18px 0 0;font-size:12px; }
+.about-os-hobbygrid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px; }
+.about-os-hobbygrid article>span { font-size:45px; }
+@media(max-width:950px) and (min-width:801px) {
+ .win-about { width:92%;height:86%; }
+ .about-os-hero { grid-template-columns:140px 1fr 80px; }
+ .about-os-mac .retro-icon { width:75px; }
+ .about-os-identity h1 { font-size:32px; }
+ .about-os-identity h2 { font-size:13px; }
+}
+@media(max-width:800px) {
+ .win-about { width:calc(100% - 78px)!important;max-height:none;transform:none!important; }
+ .win-about .window-body { height:auto;overflow:visible; }
+ .about-os {padding:12px;gap:0; }
+ .about-os-hero {grid-template-columns:87px minmax(0,1fr);gap:10px; }
+ .about-os-portrait-frame {align-self:start;max-height:125px; }
+ .about-os-mac {display:none;}
+ .about-os-identity h1 {font-size:clamp(21px,5.4vw,33px);margin-bottom:6px;}
+ .about-os-identity h2 {font-size:11px;}
+ .about-os-identity p {font-size:10px;margin-bottom:8px;}
+ .about-os-years {font-size:10px;padding:5px;}
+ .about-os-tabs button {min-height:43px;font-size:9px;gap:3px;padding:5px 2px;}
+ .about-os-tab-icon {display:none;}
+ .about-os-content {padding:12px;min-height:250px;}
+ .about-os-intro,.about-os-timeline,.about-os-schoolgrid,.about-os-hobbygrid {grid-template-columns:1fr;}
+ .about-os-bio p {font-size:12px;}
+ .about-os-tags {margin:6px 0 13px;}
+}
