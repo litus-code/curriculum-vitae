@@ -948,3 +948,161 @@ html,body,#__nuxt {height:100%;min-height:100%; }
 .os-shell .win-contact .contact-form .retro-btn:disabled:has(+ .contact-slow) {
   cursor:progress;
 }
+
+
+/* Desktop navigation V5. The desktop icons form a persistent top shelf.
+   Windows use the remaining canvas, with the System 7 taskbar at the bottom. */
+.os-shell .desktop-shortcuts {
+  position:absolute;inset:0 0 auto 0;
+  display:flex;flex-direction:row;align-items:center;justify-content:center;
+  flex-wrap:nowrap;gap:clamp(12px,2.7vw,42px);
+  width:100%;min-width:0;height:102px;
+  padding:9px clamp(14px,2.5vw,42px);
+  z-index:70;
+  background:linear-gradient(180deg,rgba(10,15,42,.9),rgba(10,15,42,.62));
+  border-bottom:2px solid rgba(233,240,255,.34);
+  box-shadow:0 3px 0 rgba(12,16,39,.3);
+}
+.os-shell .desktop-shortcuts button {
+  width:auto;min-width:80px;max-width:130px;flex:0 1 110px;
+  min-height:0;padding:2px 3px;gap:5px;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;
+}
+.os-shell .desktop-shortcuts .retro-icon {
+  width:clamp(36px,3.6vw,52px);height:clamp(36px,3.6vw,52px);
+}
+.os-shell .desktop-shortcuts button>span:last-child {
+  min-width:0;max-width:100%;padding:3px 8px;
+  font-size:clamp(10px,.93vw,13px);line-height:1.12;
+  white-space:normal;
+}
+.os-shell .os-window {
+  max-width:calc(100% - 38px);
+  max-height:calc(100% - 168px);
+}
+.os-shell .win-terminal {
+  top:116px;left:2%;width:84%;height:calc(100% - 184px);
+}
+.os-shell .win-about {
+  top:120px;left:4%;width:88%;height:calc(100% - 185px);
+}
+.os-shell .win-cv {
+  top:112px;left:3%;width:94%;height:calc(100% - 176px);
+}
+.os-shell .win-projects {
+  top:125px;left:6%;width:88%;height:calc(100% - 192px);
+}
+.os-shell .win-contact {
+  top:120px;left:8%;right:auto;
+  width:min(740px,84%);height:auto;
+  max-width:calc(100% - 38px);max-height:calc(100% - 176px);
+}
+.os-shell .win-contact .window-body {max-height:calc(100dvh - 240px);}
+.os-shell .win-services,.os-shell .win-audio,.os-shell .win-trash {
+  top:124px;left:12%;width:min(650px,76%);
+  max-width:calc(100% - 38px);
+  max-height:calc(100% - 187px);
+}
+.os-shell .win-services,.os-shell .win-audio {height:auto;}
+.os-shell .win-trash .window-body {max-height:calc(100dvh - 230px);}
+.os-shell .os-window.maximized {
+  top:112px!important;left:16px!important;right:16px!important;
+  bottom:61px!important;width:calc(100% - 32px)!important;
+  height:auto!important;max-width:none!important;max-height:none!important;
+  margin:0!important;
+}
+.os-shell .os-window.maximized>.window-body {
+  height:calc(100% - 31px)!important;
+  max-height:none!important;overflow:auto;
+}
+.os-shell .os-window.maximized.win-cv>.window-body {
+  overflow:hidden;
+}
+.os-shell .os-window.maximized.win-contact>.window-body {
+  overflow:auto!important;
+}
+.os-shell .window-bar>button.window-maximize {
+  margin-left:auto;font-size:19px;padding:0 0 2px;
+}
+.os-shell .window-bar>button.window-close {
+  margin-left:0;
+}
+.os-shell .window-bar>button.window-maximize + .window-close {margin-left:0;}
+.os-shell .window-bar {gap:7px;}
+.os-shell .window-bar strong {min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.os-shell .note {bottom:62px;left:auto;right:20px;width:min(215px,18%);}
+@media(min-width:801px) and (max-height:620px) {
+  .os-shell .desktop-shortcuts {height:82px;padding:4px 12px;}
+  .os-shell .desktop-shortcuts .retro-icon{width:34px;height:34px;}
+  .os-shell .win-terminal,.os-shell .win-about,.os-shell .win-cv,
+  .os-shell .win-projects,.os-shell .win-contact,.os-shell .win-services,
+  .os-shell .win-audio,.os-shell .win-trash {top:91px;max-height:calc(100% - 145px);}
+  .os-shell .os-window.maximized{top:89px!important;}
+}
+@media(max-width:800px) {
+  .os-shell .desktop {
+    overflow-x:hidden;overflow-y:auto;
+    padding:0 0 76px;
+    overscroll-behavior-y:contain;
+    scroll-padding-top:96px;
+  }
+  .os-shell .desktop-shortcuts {
+    position:sticky;top:0;right:auto;left:auto;bottom:auto;
+    height:87px;min-height:87px;width:100%;
+    overflow-x:auto;overflow-y:hidden;
+    justify-content:flex-start;gap:10px;
+    padding:5px 12px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    z-index:70;
+  }
+  .os-shell .desktop-shortcuts button {
+    flex:0 0 64px;width:64px;min-width:64px;max-width:70px;
+    padding:2px 0;gap:2px;
+  }
+  .os-shell .desktop-shortcuts .retro-icon {width:34px;height:34px;}
+  .os-shell .desktop-shortcuts button>span:last-child {
+    font-size:9px;min-width:0;max-width:70px;padding:3px;
+    line-height:1.1;
+  }
+  .os-shell .os-window,
+  .os-shell .win-about,.os-shell .win-cv,.os-shell .win-terminal,
+  .os-shell .win-projects,.os-shell .win-contact,.os-shell .win-services,
+  .os-shell .win-audio,.os-shell .win-trash {
+    position:relative!important;top:auto!important;left:auto!important;
+    right:auto!important;bottom:auto!important;
+    width:calc(100% - 24px)!important;max-width:none!important;
+    min-height:0;margin:12px 12px 16px!important;
+    height:auto!important;max-height:none!important;
+    transform:none!important;
+    scroll-margin-top:100px;
+  }
+  .os-shell .win-terminal {min-height:330px;}
+  .os-shell .win-about {min-height:270px;}
+  .os-shell .win-projects {min-height:320px;}
+  .os-shell .win-contact .window-body,
+  .os-shell .win-trash .window-body {
+    max-height:none!important;overflow:visible!important;
+  }
+  .os-shell .os-window.maximized {
+    top:auto!important;left:auto!important;right:auto!important;
+    bottom:auto!important;width:calc(100% - 24px)!important;
+    height:auto!important;margin:12px!important;
+  }
+  .os-shell .os-window.maximized>.window-body,
+  .os-shell .os-window.maximized.win-cv>.window-body {
+    height:auto!important;overflow:visible!important;
+  }
+  .os-shell .window-bar>button.window-maximize {display:none;}
+  .os-shell .note {
+    position:relative;left:auto;right:auto;bottom:auto;
+    width:min(265px,calc(100% - 42px));margin:22px 22px 28px;
+  }
+  .os-shell .project-grid {grid-template-columns:1fr;}
+  .os-shell .os-taskbar {z-index:100;}
+}
+@media print {
+  .os-shell .desktop-shortcuts {display:none!important;}
+  .os-shell .os-window.maximized {position:static!important;inset:auto!important;width:100%!important;}
+}
