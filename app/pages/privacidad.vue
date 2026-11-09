@@ -45,7 +45,7 @@ const content=computed(()=>({
  processor:'Proveedor',processorText:'FormSubmit (formsubmit.co).',
  basis:'Motivo',basisText:'Atender tu solicitud.',retention:'Conservación',retentionText:'FormSubmit mantiene un archivo de 30 días.',
  rights:'Tus datos',rightsText:'Contacto: contacto@carlesfar.com.',info:'Proveedor',back:'Volver'
-}))
+})
 </script>
 <template>
  <main class="privacy-page" :style="{backgroundImage: `url(${wallpaper})`}">
