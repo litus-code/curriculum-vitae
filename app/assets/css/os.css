@@ -1,0 +1,950 @@
+*{box-sizing:border-box}html,body,#__nuxt{margin:0;min-height:100%;font-family:Verdana,Geneva,sans-serif}body{background:#10091d}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #dcfa53;outline-offset:2px}
+.os-shell{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:14px;background:#130e25;color:#17101d}
+.crt{position:relative;width:min(1540px,100%);height:min(930px,calc(100dvh - 28px));min-height:650px;border:12px solid #160b23;border-radius:43px;padding:14px;background:#0b0819;box-shadow:inset 0 0 0 4px #4a385e,0 20px 90px #000c;overflow:hidden}
+.crt:after{content:'';position:absolute;inset:0;z-index:20;pointer-events:none;border-radius:36px;background:repeating-linear-gradient(to bottom,#fff1 0 1px,transparent 1px 4px);opacity:.3}
+.desktop{position:relative;width:100%;height:100%;overflow:hidden;background:#352058;border:2px solid #090811}
+.menu{position:relative;z-index:12;height:45px;background:#edcad9;border-bottom:3px solid #1b1023;display:flex;align-items:center;gap:24px;padding:0 22px;font-size:15px;font-weight:800}
+.menu button{border:0;background:transparent;font-weight:inherit}.menu nav{display:flex;gap:16px}.brand{white-space:nowrap}.system{margin-left:auto;display:flex;align-items:center;gap:12px}.system select{background:#f6e3f0;border:2px solid #30203f;padding:3px}
+.wallpaper{position:absolute;inset:45px 0 0;overflow:hidden;background:linear-gradient(#241347 2%,#4d2880 52%,#bd6fa0 82%,#2c1a53 100%)}
+.wallpaper:before{content:'';position:absolute;inset:0;background-image:radial-gradient(#f7b3da 1px,transparent 1px);background-size:5px 5px;opacity:.25}
+.sun{position:absolute;bottom:11%;left:51%;width:17%;aspect-ratio:1;border-radius:50%;background:repeating-linear-gradient(to bottom,#e6fe4b 0 11px,#d982a5 11px 16px);box-shadow:0 0 0 8px #e4bbf01a}
+.mountains{position:absolute;bottom:-8%;left:-10%;width:120%;height:39%;clip-path:polygon(0% 100%,0 80%,17% 59%,24% 74%,43% 13%,55% 62%,68% 24%,78% 58%,91% 31%,100% 70%,100% 100%)}
+.mountains.far{bottom:0;background:#b77db3;transform:scaleX(-1)}.mountains.near{background:linear-gradient(160deg,#e5a1bf 0 14%,#38205d 15% 50%,#110b35 51%)}
+.desktop-shortcuts{position:absolute;z-index:11;right:13px;top:72px;display:grid;gap:12px;width:91px}
+.desktop-shortcuts button{background:none;border:0;display:grid;justify-items:center;gap:5px;font-size:12px;font-weight:800}.shortcut-pixel{display:grid;place-items:center;background:#b7fe43;width:48px;height:51px;border:4px solid #110b2e;box-shadow:4px 4px 0 #5b3874;font-size:30px}.desktop-shortcuts button>span:last-child{background:#f1d6e4;padding:3px 6px;border:1px solid #341b50}
+.os-window{position:absolute;z-index:2;background:#f3dfea;border:3px solid #1b102a;box-shadow:5px 6px 0 #080613,8px 8px 0 #a885df;min-height:150px}
+.os-window.focused{box-shadow:6px 7px 0 #090713,10px 10px 0 #d6fd52}
+.window-bar{height:32px;border-bottom:3px solid #24102b;background:repeating-linear-gradient(0deg,#d7a9f5,#d7a9f5 2px,#c09aed 2px,#c09aed 4px);display:flex;align-items:center;gap:12px;padding:0 8px;font:800 13px monospace}
+.window-bar .lights{display:flex;gap:6px}.lights i{width:13px;height:13px;border:2px solid #160c20;border-radius:50%;background:#ff6b48}.lights i:nth-child(2){background:#f9e44b}.lights i:nth-child(3){background:#a0eb63}.window-bar button{margin-left:auto;background:#f9e5ef;border:2px solid #21102a;font-weight:900;line-height:15px;width:20px;height:20px}
+.window-body{padding:14px;height:calc(100% - 32px);overflow:auto}
+.win-terminal{top:9%;left:3%;width:43%;height:46%;z-index:2}.win-terminal .window-body{padding:0}.terminal{height:100%;background:#08120e;color:#b5ff79;display:flex;flex-direction:column;font:700 clamp(10px,1vw,15px)/1.55 monospace;padding:15px}.terminal-output{overflow:auto;flex:1;white-space:pre-wrap}.help{opacity:.75}.terminal-entry{display:flex;align-items:center;gap:8px}.terminal-entry input{min-width:0;flex:1;outline:none;border:0;background:transparent;color:inherit}.blink{animation:blink 1s steps(2,end) infinite}@keyframes blink{50%{opacity:0}}
+.win-about{top:8%;left:49%;width:39%;height:27%}.about-layout{display:grid;grid-template-columns:39% 1fr;gap:14px}.portrait{height:100%;min-height:125px;background:#161026;color:#d8ff5b;font:900 60px monospace;display:grid;place-items:center;filter:contrast(1.3);border:3px solid #251137}.about-layout h1{font:900 clamp(20px,2.8vw,42px)/1 monospace;margin:0 0 5px}.about-layout strong{font-size:clamp(11px,1.2vw,17px)}.about-layout p{font-size:clamp(10px,1vw,14px)}.about-layout mark{display:block;width:fit-content;background:#dbff55;font-weight:800;margin-top:5px;padding:2px}
+.win-projects{top:42%;left:24%;width:40%;height:38%;z-index:5}.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;height:100%}.project{padding:14px 10px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;background:#d5f843}.project-friends{background:#a88afa}.project-dj{background:#29183e;color:#fff}.glyph{align-self:center;font-size:clamp(27px,4vw,60px);font-weight:900}.project h2{font:900 clamp(13px,1.6vw,23px)/1.1 monospace;margin:8px 0}.project p{font:600 clamp(10px,1vw,14px)/1.35 monospace}.project a,.project span{margin-top:auto;color:inherit;font-size:12px;font-weight:800}
+.win-contact{top:46%;left:67%;width:24%;height:41%}.contact-form{display:grid;gap:7px}.contact-form h2{margin:0;font:900 clamp(15px,2vw,23px) monospace}.contact-form label{display:grid;gap:2px;font-size:12px;font-weight:800}.contact-form input,.contact-form textarea{width:100%;border:2px solid #281630;background:#f7e8f1;padding:6px}.contact-form textarea{height:74px;resize:vertical}.contact-form output{background:#f9e8f3;min-height:27px;padding:5px;display:block;border:2px solid #25152d}.contact-form small{font-size:9px}.retro-btn{padding:10px;background:#deff59;border:3px solid #180b29;font-weight:900}
+.note{position:absolute;left:3%;bottom:5%;z-index:8;transform:rotate(-6deg);width:240px}.sticky-note{position:relative;display:grid;gap:9px;background:#ffe087;padding:22px 18px 13px;box-shadow:5px 7px 0 #0d0a23;border:2px solid #160d25}.tape{position:absolute;top:-9px;left:30%;width:70px;height:18px;transform:rotate(4deg);background:#fff0b2b0;border:2px solid #292039}.sticky-note h3{font:900 21px monospace;margin:0 0 3px;border-bottom:2px solid #30213b;padding-bottom:8px}.sticky-note label{display:flex;align-items:center;gap:6px;font:700 12px monospace}.sticky-note input{accent-color:#423365}.sticky-note button{justify-self:end;border:0;background:none;font:900 12px monospace}
+.win-services,.win-audio{top:18%;left:24%;width:420px;min-height:190px}.win-audio{left:35%;top:20%}.music{display:grid;justify-items:center;gap:12px}.record{font-size:72px}.music audio{max-width:100%}
+.theme-light .desktop{filter:saturate(.74) brightness(1.2)}.theme-light .terminal{background:#eee6cf;color:#1e4f25}.theme-light .terminal-entry input{color:#1e4f25}
+@media(max-width:800px){.os-shell{padding:0}.crt{border-radius:0;padding:3px;width:100%;height:100dvh;min-height:0;border-width:3px}.desktop{overflow:auto}.menu{gap:5px;padding:0 5px;font-size:12px}.menu nav{display:none}.system{gap:4px}.desktop-shortcuts{top:50px;right:6px;width:60px}.shortcut-pixel{width:36px;height:38px;font-size:19px}.desktop-shortcuts button{font-size:9px}.os-window{position:relative!important;top:auto!important;left:auto!important;width:calc(100% - 76px)!important;height:auto!important;min-height:180px;margin:14px 70px 15px 6px}.win-terminal{min-height:275px}.win-projects{min-height:320px}.win-contact{min-height:380px}.window-body{height:auto}.terminal{min-height:220px}.about-layout{grid-template-columns:35% 1fr}.note{position:relative;left:16px;bottom:auto;width:min(240px,70%);margin:24px 0}.project-grid{grid-template-columns:1fr}.project{min-height:110px}.project h2{font-size:16px}.project p{font-size:12px}.glyph{font-size:24px}}
+
+
+/* V2 faithful CRT composition: responsive rebuilt DOM, Sunset / Night */
+.os-shell{--sky-top:#25134b;--sky-mid:#57318c;--sky-bottom:#d47bb4;--mountain-back:#ab69ae;--mountain-front:#1b143c;--mountain-highlight:#fa8ac9;--celestial:#dfff51;--cloud:#d572bb;--star-opacity:.32;--title:#c5a0df;--surface:#f4dce8;--text:#21152a;--terminal-bg:#071411;--terminal-fg:#adff72;padding:0;background:#171026;color:var(--text)}
+.os-shell.theme-night{--sky-top:#090e30;--sky-mid:#231a5c;--sky-bottom:#4c3a88;--mountain-back:#413075;--mountain-front:#090b2b;--mountain-highlight:#7562b0;--celestial:#fbf6cc;--cloud:#382c73;--star-opacity:1;--title:#9b8dcf;--surface:#dfd8ef;--text:#1e1832;--terminal-bg:#06140e;--terminal-fg:#b6ff8c;background:#06071c}
+.crt{width:min(1480px,100%);height:min(990px,100dvh);min-height:620px;border:9px solid #110b23;border-radius:32px;padding:8px;box-shadow:inset 0 0 0 3px #6a4977,0 12px 60px #0009}
+.crt:after{opacity:.19}
+.desktop{background:var(--sky-top)}
+.menu{height:43px;padding:0 17px;gap:20px;background:#f0cfdd;border-color:#1b112b;font:700 clamp(12px,1.15vw,18px)/1 'Courier New',monospace}
+.menu .brand{display:flex;align-items:center;gap:9px;font-size:clamp(13px,1.4vw,21px)}
+.menu nav{gap:10px}
+.menu nav button{padding:6px 5px}
+.menu button:hover{background:#d7b1dd}
+.menu .system{gap:8px}
+.menu .system button{display:flex;align-items:center;justify-content:center;padding:3px}
+.menu .system select{font-size:12px;border-radius:0;background:#f7e9ef}
+.wallpaper{inset:43px 0 0;background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 50%,var(--sky-bottom) 100%)}
+.wallpaper:before{background-image:radial-gradient(#efb7df 1px,transparent 1.7px),radial-gradient(#131037 1px,transparent 1px);background-size:7px 7px,11px 11px;opacity:.23}
+.pixel-stars{position:absolute;inset:0;opacity:var(--star-opacity);background-image:radial-gradient(#fef7be 1px,transparent 1.5px),radial-gradient(#fff 1px,transparent 1.5px);background-size:93px 69px,157px 111px;background-position:11px 20px,64px 47px}
+.pixel-cloud{position:absolute;background:var(--cloud);width:86px;height:16px;box-shadow:12px -10px 0 -3px var(--cloud),31px -15px 0 -3px var(--cloud),46px -6px 0 -2px var(--cloud),-17px 4px 0 -5px var(--cloud);opacity:.9;image-rendering:pixelated}
+.cloud-a{left:4%;bottom:27%}.cloud-b{right:21%;bottom:25%;transform:scale(.72)}
+.celestial{position:absolute;bottom:4%;left:48%;width:20%;aspect-ratio:1;border-radius:0;clip-path:polygon(30% 0,70% 0,70% 6%,83% 6%,83% 13%,90% 13%,90% 22%,96% 22%,96% 35%,100% 35%,100% 68%,96% 68%,96% 80%,88% 80%,88% 89%,76% 89%,76% 96%,30% 96%,30% 89%,16% 89%,16% 80%,7% 80%,7% 68%,0 68%,0 35%,7% 35%,7% 22%,13% 22%,13% 13%,30% 13%);background:repeating-linear-gradient(to bottom,var(--celestial) 0 13px,#dd7baf 13px 19px);filter:drop-shadow(0 0 10px #e2fb7277)}
+.theme-night .celestial{clip-path:polygon(23% 1%,51% 0,37% 7%,26% 18%,20% 32%,20% 48%,25% 61%,37% 73%,54% 79%,73% 77%,92% 68%,84% 81%,69% 94%,50% 100%,32% 97%,16% 87%,6% 71%,0 51%,4% 31%,11% 15%);background:var(--celestial);filter:drop-shadow(0 0 12px #fffab88c)}
+.ridge{position:absolute;width:110%;left:-5%;bottom:-1%;height:27%;clip-path:polygon(0% 95%,10% 60%,17% 78%,33% 15%,39% 49%,46% 63%,57% 27%,65% 63%,78% 43%,87% 67%,97% 35%,100% 82%,100% 100%,0 100%)}
+.ridge-far{background:var(--mountain-back);transform:scaleX(-1);bottom:1%;height:25%;opacity:.9}
+.ridge-near{background:linear-gradient(150deg,var(--mountain-highlight) 0 8%,var(--mountain-front) 9% 100%);height:28%}
+.desktop-shortcuts{right:10px;top:66px;width:88px;gap:12px}
+.desktop-shortcuts button{gap:2px;min-height:80px;font:800 12px/1 'Courier New',monospace}
+.desktop-shortcuts .pixel-icon{filter:drop-shadow(3px 3px 0 #151025);image-rendering:pixelated}
+.desktop-shortcuts button>span:last-child{background:#f4dbe5;border:2px solid #24122d;padding:4px 6px;white-space:nowrap;max-width:100%}
+.os-window{background:var(--surface);border:3px solid #1c1128;box-shadow:3px 3px 0 #d09cda,6px 6px 0 #130b26;border-radius:2px}
+.os-window.focused{box-shadow:3px 3px 0 #c8ff56,6px 6px 0 #130b26}
+.window-bar{height:31px;background:repeating-linear-gradient(0deg,var(--title) 0 2px,#caa8e3 2px 4px);font:800 clamp(12px,1vw,15px)/1 monospace}
+.window-body{height:calc(100% - 31px);padding:12px}
+.win-terminal{top:9%;left:2.5%;width:43.5%;height:48%}
+.win-about{top:8%;left:48%;width:39.6%;height:31%}
+.win-projects{top:42%;left:21%;width:42.6%;height:39%}
+.win-contact{top:46%;left:66.5%;width:23.4%;height:44%}
+.terminal{background:var(--terminal-bg);color:var(--terminal-fg);padding:15px;font-size:clamp(11px,1.13vw,16px);border-top:2px solid #a5f969}
+.terminal-entry input{color:var(--terminal-fg)}
+.about-layout{grid-template-columns:43% minmax(0,1fr);gap:13px;height:100%}
+.portrait{display:block;object-fit:cover;object-position:center;width:100%;height:100%;min-height:0;background:#0e0b16;border:3px solid #1c1129;image-rendering:pixelated;filter:none}
+.about-copy{min-width:0}
+.about-copy h1{font:900 clamp(19px,2.7vw,38px)/1.05 'Courier New',monospace;letter-spacing:1px;margin:0 0 5px}
+.about-copy strong{font:700 clamp(11px,1.24vw,18px)/1.22 'Courier New',monospace}
+.about-copy p{font:600 clamp(10px,.96vw,14px)/1.3 'Courier New',monospace}
+.about-copy mark{display:block;width:max-content;max-width:100%;padding:2px 5px;margin-top:4px;font:700 clamp(9px,.96vw,14px)/1.15 'Courier New',monospace;background:#d6ff5b}
+.project-grid{gap:9px;height:100%}
+.project{border-radius:4px;align-items:center;text-align:left;padding:10px;min-width:0}
+.project .pixel-icon{flex-shrink:0;image-rendering:pixelated;margin:0 auto}
+.project h2{align-self:stretch;font:900 clamp(14px,1.55vw,24px)/1.04 'Courier New',monospace;text-align:center}
+.project p{font:600 clamp(10px,1vw,15px)/1.22 'Courier New',monospace;align-self:stretch}
+.project a,.project span{display:block;align-self:center;text-align:center;background:#1d1127;color:#fff;padding:7px 6px;border:2px solid #a78bb4;text-decoration:none;white-space:nowrap;font:700 clamp(9px,.87vw,12px)/1 monospace;max-width:100%}
+.note{left:2.8%;bottom:4%;width:clamp(175px,18%,250px);transform:rotate(-7deg)}
+.sticky-note{background:#ffe17d}
+@media(min-width:1050px){.crt{height:min(970px,calc(100dvh - 24px));min-height:620px}}
+@media(max-width:800px){
+ .crt{height:100dvh;min-height:0;padding:3px;border-width:3px;border-radius:0}
+ .desktop{overflow:auto}
+ .menu{height:45px;padding:0 7px}
+ .menu .brand{font-size:13px}
+ .menu nav{display:none}
+ .desktop-shortcuts{top:57px;right:4px;width:62px;gap:6px}
+ .desktop-shortcuts button{min-height:61px;font-size:9px}
+ .desktop-shortcuts .pixel-icon{width:35px;height:35px}
+ .desktop-shortcuts button>span:last-child{font-size:8px;padding:3px}
+ .os-window{position:relative!important;top:auto!important;left:auto!important;width:calc(100% - 78px)!important;height:auto!important;margin:12px 73px 12px 5px}
+ .win-terminal{min-height:280px}
+ .win-about{min-height:240px}
+ .win-projects{min-height:380px}
+ .win-contact{min-height:420px}
+ .window-body{height:auto}
+ .about-layout{grid-template-columns:38% 1fr}
+ .portrait{min-height:150px;height:100%}
+ .project-grid{grid-template-columns:1fr}
+ .project{min-height:102px;display:grid;grid-template-columns:54px 1fr;grid-template-rows:auto auto auto;column-gap:8px}
+ .project .pixel-icon{grid-row:1/4;width:48px;height:48px}
+ .project h2{margin:0;text-align:left}
+ .project a,.project span{justify-self:start}
+ .note{position:relative;left:15px;bottom:auto;width:min(225px,65%);margin:20px 0}
+ .wallpaper{position:fixed;inset:43px 0 0;pointer-events:none}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+
+/* Visual lockup against the approved 922x616 screenshot. */
+.menu{box-shadow:0 2px 0 #110d22;letter-spacing:-.25px}
+.menu nav{gap:14px}
+.menu nav button{font:700 clamp(12px,1.1vw,17px)/1 'Courier New',monospace;white-space:nowrap}
+.menu .brand{gap:7px}
+.retro-icon{display:block;overflow:visible;flex:none;image-rendering:pixelated;filter:drop-shadow(2px 2px 0 #110c20aa)}
+.desktop-shortcuts{top:6.9%;right:1%;width:8.5%;min-width:63px;gap:4px;display:flex;flex-direction:column}
+.desktop-shortcuts button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;width:100%;min-height:0;padding:2px 0 5px;cursor:pointer}
+.desktop-shortcuts button:hover .retro-icon,.desktop-shortcuts button:focus-visible .retro-icon{filter:drop-shadow(2px 3px 0 #b1fd59)}
+.desktop-shortcuts button[aria-disabled="true"]{opacity:1}
+.desktop-shortcuts button[aria-disabled="true"]>span{opacity:.9}
+.desktop-shortcuts button>span:last-child{display:block;background:#f0d6e3;color:#1d1029;border:1px solid #9d7caa;box-shadow:2px 2px 0 #1c112b;padding:4px 6px;font:700 clamp(10px,1.03vw,14px)/1 'Courier New',monospace;min-width:68px;text-align:center}
+.desktop-shortcuts .retro-icon{width:clamp(36px,4vw,58px);height:clamp(36px,4vw,58px)}
+.project .retro-icon{height:clamp(45px,5vw,70px);width:clamp(45px,5vw,70px);align-self:center;filter:none}
+.project-cue .retro-icon{filter:none}
+.project-friends .retro-icon{filter:drop-shadow(2px 2px 0 #412454)}
+.project-dj .retro-icon{filter:drop-shadow(2px 2px 0 #120a28)}
+.project-grid .project{border:2px solid #bba5cc;box-shadow:2px 2px 0 #201029;display:flex;flex-direction:column;justify-content:space-between}
+.project-grid .project h2{min-height:2.1em}
+.project-grid .project a{border-radius:3px}
+.portrait{object-position:center 26%;height:100%;max-height:100%;image-rendering:pixelated}
+.about-copy{overflow:hidden}
+.about-copy mark{white-space:normal}
+.window-bar{touch-action:none;user-select:none}
+.window-bar button{touch-action:auto}
+.os-shell.theme-night .window-bar{background:repeating-linear-gradient(0deg,#c4b1e9 0 2px,#a58dd1 2px 4px)}
+.os-shell.theme-night .menu{background:#e1d0ed}
+.os-shell.theme-night .desktop-shortcuts button>span:last-child{background:#e8d8ed}
+.os-shell.theme-night .project-dj{background:#22143d}
+.os-shell.theme-night .terminal{box-shadow:inset 0 0 20px #78ff5720}
+@media (max-height:700px) and (min-width:801px){
+ .crt{min-height:0;height:100dvh}
+ .desktop-shortcuts{top:7%;gap:0}
+ .desktop-shortcuts .retro-icon{width:clamp(32px,3.6vw,48px);height:clamp(32px,3.6vw,48px)}
+ .desktop-shortcuts button{padding-bottom:2px}
+ .desktop-shortcuts button>span:last-child{padding:2px 5px;font-size:11px}
+ .about-copy p{margin:5px 0}
+ .about-copy mark{margin-top:2px}
+ .window-body{padding:8px}
+ .project{padding:7px}
+ .project .retro-icon{width:45px;height:45px}
+}
+@media(max-width:800px){
+ .menu{gap:4px}
+ .menu .system{gap:2px}
+ .desktop-shortcuts{top:52px;right:5px;width:63px;min-width:0;gap:5px}
+ .desktop-shortcuts .retro-icon{width:38px;height:38px}
+ .desktop-shortcuts button>span:last-child{font-size:9px;min-width:55px;max-width:65px;padding:2px}
+ .project .retro-icon{height:48px;width:48px}
+ .project-grid .project{align-items:start}
+}
+
+/* Approved landscape art occupies the desktop canvas, underneath real Vue windows.
+   Keep the procedural landscape as a fallback until both image assets are available. */
+.wallpaper-approved { background: #1d0e49; }
+.wallpaper-approved::before { display: none; }
+.wallpaper-approved > .wallpaper-image {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  object-position: center bottom;
+  image-rendering: auto;
+  pointer-events: none;
+}
+.wallpaper-approved:has(.wallpaper-image:not([src])) > .pixel-stars,
+.wallpaper-approved:has(.wallpaper-image:not([src])) > .pixel-cloud,
+.wallpaper-approved:has(.wallpaper-image:not([src])) > .celestial,
+.wallpaper-approved:has(.wallpaper-image:not([src])) > .ridge { display: block; }
+.wallpaper-approved > .pixel-stars,
+.wallpaper-approved > .pixel-cloud,
+.wallpaper-approved > .celestial,
+.wallpaper-approved > .ridge { display: none; }
+@media (max-width: 800px) {
+  .wallpaper-approved > .wallpaper-image { object-position: center bottom; }
+}
+
+
+/* VISUAL CORRECTION: reviewed against the supplied 1602x928 browser screenshot.
+   Original V2 windows were too short and clipped the content; the wallpaper
+   looked blurry because a low-resolution image was bilinearly scaled. */
+.wallpaper-approved>.wallpaper-image {
+  image-rendering: pixelated;
+  object-fit: cover;
+  object-position: center bottom;
+}
+.win-about { top:7%; left:47.5%; width:40.5%; height:36%; }
+.win-projects { top:41%; left:20.5%; width:43%; height:40%; }
+.win-contact { top:46%; left:65.6%; width:25%; height:51%; }
+.win-terminal { top:8%; left:2.5%; width:44%; height:48%; }
+.window-body { min-height:0; }
+.win-about .window-body,.win-contact .window-body,.win-projects .window-body { overflow:auto; }
+.about-layout { min-height:100%; grid-template-columns:43% minmax(0,1fr); }
+.about-copy h1 { font-size:clamp(20px,2.4vw,38px); }
+.about-copy p { font-size:clamp(11px,1vw,15px);line-height:1.25; margin:9px 0; }
+.about-copy mark { font-size:clamp(10px,.91vw,14px); margin:4px 0; }
+.win-contact .window-body { padding:10px 12px; }
+.win-contact .contact-form { gap:5px; }
+.win-contact .contact-form h2 { font-size:clamp(15px,1.5vw,22px); }
+.win-contact .contact-form label { gap:2px;font-size:12px; }
+.win-contact .contact-form input { min-height:29px;padding:5px 7px; }
+.win-contact .contact-form textarea { min-height:70px;height:75px;padding:5px 7px; }
+.win-contact .contact-form output { min-height:25px; }
+.win-contact .contact-form button { min-height:36px; }
+.win-contact .contact-form small { font-size:10px;line-height:1.3; }
+.project-grid .project { min-width:0; padding:10px 8px; }
+.project-grid .project h2 { min-height:auto; font-size:clamp(14px,1.45vw,22px); }
+.project-grid .project p { font-size:clamp(11px,.99vw,15px); }
+.project-grid .project a,.project-grid .project span { white-space:normal;max-width:100%; }
+.window-bar { cursor:grab; }
+.window-bar:active { cursor:grabbing; }
+@media(max-width:800px){
+  .os-window { height:auto!important; }
+  .win-about,.win-contact,.win-projects,.win-terminal { top:auto!important;left:auto!important;min-height:0; }
+  .win-contact .window-body { overflow:visible; }
+  .win-contact .contact-form textarea { min-height:100px; }
+}
+
+
+/* Pixel-art rendering: prevent bilinear interpolation and CRT softening.
+   Note: rendering crispness cannot recover detail discarded in a 384px source. */
+.wallpaper-approved > .wallpaper-image {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  filter: contrast(1.09) saturate(1.05);
+  transform: none;
+  backface-visibility: visible;
+}
+.crt::after { opacity: .075; }
+.wallpaper-approved { filter: none; }
+
+
+/* The approved native-resolution artwork is authored at 1536×1024.
+   Preserve its fine dither texture: only the legacy low-res fallback uses nearest-neighbor upscaling. */
+.wallpaper-approved > .wallpaper-image.wallpaper-hd {
+  image-rendering: auto;
+  filter: none;
+}
+.wallpaper-approved > .wallpaper-image:not(.wallpaper-hd) {
+  image-rendering: pixelated;
+  filter: none;
+}
+
+
+/* Approved "Sobre mí" artwork, implemented as live Vue content. */
+.win-about {
+  left: 10%; top: 8%; width: 80%; height: 84%;
+  /* OsWindow handles drag translation inline; center via position, not transform. */
+  min-height: 0;
+}
+.win-about .window-body {
+  height: calc(100% - 31px); padding: 0; overflow: auto;
+  background: #f6dfe9;
+}
+.about-os {
+  color: #22152c; background: #f6dfe9;
+  font-family: 'Courier New', monospace;
+  font-weight: 700;
+  min-height: 100%;
+  display: flex; flex-direction: column;
+  padding: clamp(12px, 2vw, 28px);
+}
+.about-os-hero {
+  display: grid;
+  grid-template-columns: clamp(115px, 19%, 205px) minmax(0,1fr) clamp(72px,10%,122px);
+  gap: clamp(12px, 2.1vw, 32px);
+  align-items: center;
+  padding: 0 0 clamp(12px, 2vw, 22px);
+}
+.about-os-portrait-frame {
+  width:100%; aspect-ratio: .95; max-height: 200px;
+  padding: 5px; background:#090710; border: 3px solid #160c24; box-shadow: inset 0 0 0 2px #efcce0;
+}
+.about-os-portrait {
+  width:100%; height:100%; display:block;
+  object-fit: cover; object-position: center 28%; image-rendering: pixelated;
+}
+.about-os-identity { min-width: 0; }
+.about-os-identity h1 {
+  font: 900 clamp(26px,4vw,60px)/1 'Courier New',monospace;
+  letter-spacing: -.025em; margin: 0 0 8px;
+}
+.about-os-identity h2 {
+  font: 800 clamp(12px,1.55vw,21px)/1.24 'Courier New',monospace;
+  margin: 0 0 10px;
+}
+.about-os-identity p { font-size: clamp(11px,1.3vw,17px); line-height:1.38; margin:0 0 12px; }
+.about-os-years {
+  display: inline-block; background: #d8fb5b;
+  padding: 6px 10px; font-size: clamp(10px,1.25vw,17px);
+  line-height: 1.2;
+}
+.about-os-mac { display:flex; flex-direction:column; align-items:center; justify-content:center; align-self:center; }
+.about-os-mac .retro-icon { width:min(100%,112px);height:auto;filter:drop-shadow(3px 3px 0 #1c112d); }
+.about-os-mac-rays { align-self:center;color:#23172f;font-size:22px;line-height:1; }
+.about-os-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); position:relative; z-index:1; }
+.about-os-tabs button {
+  min-width:0; min-height:52px; border:3px solid #22132e;
+  border-bottom:0; background:#f7deea; border-radius:12px 12px 0 0;
+  padding:9px 5px; font: 900 clamp(11px,1.3vw,18px)/1.1 'Courier New',monospace;
+  display:flex;align-items:center;justify-content:center;gap:10px;color:#1c1028;
+}
+.about-os-tabs button+button { border-left-width:1px; }
+.about-os-tabs button.selected { background:#d8fa5a; }
+.about-os-tabs button:not(.selected):hover { background:#e9c7df; }
+.about-os-tab-icon { font-size: clamp(18px,2vw,27px);line-height:1; }
+.about-os-content {
+  flex:1; min-height:0; border:3px solid #22132e; border-radius:12px 12px 0 0;
+  padding:clamp(14px,2vw,25px); background:#f9e7ef;
+}
+.about-os-content h3 {
+  font:900 clamp(21px,2.6vw,36px)/1.15 'Courier New',monospace;
+  margin: 0 0 12px;
+}
+.about-os-intro { display:grid;grid-template-columns:1.06fr 1fr;gap:clamp(15px,3vw,42px);height:100%; }
+.about-os-bio { display:flex;flex-direction:column;min-width:0; }
+.about-os-underline { width:145px;height:6px;background:#d7f85b;margin-bottom:13px; }
+.about-os-bio p { font-size:clamp(12px,1.25vw,17px);line-height:1.4;margin:5px 0 14px; }
+.about-os-tags { display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:auto;padding-top:18px;font-size:clamp(10px,1vw,14px); }
+.about-os-side { display:grid;align-content:start;gap:14px; min-width:0; }
+.about-os-panel { border:2px solid #1a1125;border-radius:9px;overflow:hidden;background:#fae8f0; }
+.about-os-panel h4 {
+  background:#d5b1eb;border-bottom:2px solid #1a1125;
+  font:900 clamp(13px,1.38vw,19px)/1.2 'Courier New',monospace;
+  padding:10px 13px;margin:0;
+}
+.about-os-panel h4 span { font-size:1.4em;vertical-align:middle; }
+.about-os-tech { display:flex;flex-wrap:wrap;gap:8px;padding:12px;justify-content:center; }
+.about-os-tech span { border:1.5px solid #1a1125;border-radius:10px;padding:5px 12px;white-space:nowrap;font-size:clamp(10px,1vw,14px); }
+.about-os-projects { list-style:none; padding:12px 14px; margin:0; display:grid; gap:9px; }
+.about-os-projects li { font-size:clamp(11px,1vw,14px);line-height:1.3; }
+.about-os-projects i { display:inline-block;width:10px;height:10px;background:#d8f85b;border:2px solid #26152b;margin-right:8px; }
+.about-os-projects a { color:inherit;text-decoration:underline; }
+.about-os-timeline { display:grid;grid-template-columns:1fr 1fr;gap:17px; }
+.about-os-timeline article,.about-os-schoolgrid article,.about-os-hobbygrid article {
+  background:#f6dfe9;border:2px solid #26152b;border-radius:8px;padding:16px;
+  box-shadow:3px 3px 0 #d9b2ea;
+}
+.about-os-timeline article>span,.about-os-schoolgrid article>span { display:inline-block;background:#d8fb5b;padding:5px 8px;font-size:13px; }
+.about-os-timeline h4,.about-os-schoolgrid h4 { font-size:clamp(15px,1.7vw,23px);line-height:1.2;margin:14px 0 9px; }
+.about-os-timeline p,.about-os-timeline small,.about-os-hobbygrid p { font:700 clamp(12px,1.1vw,16px)/1.4 'Courier New',monospace; }
+.about-os-schoolgrid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px; }
+.about-os-education-note { margin:18px 0 0;font-size:12px; }
+.about-os-hobbygrid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px; }
+.about-os-hobbygrid article>span { font-size:45px; }
+@media(max-width:950px) and (min-width:801px) {
+ .win-about { width:92%;height:86%; }
+ .about-os-hero { grid-template-columns:140px 1fr 80px; }
+ .about-os-mac .retro-icon { width:75px; }
+ .about-os-identity h1 { font-size:32px; }
+ .about-os-identity h2 { font-size:13px; }
+}
+@media(max-width:800px) {
+ .win-about { width:calc(100% - 78px)!important;max-height:none;transform:none!important; }
+ .win-about .window-body { height:auto;overflow:visible; }
+ .about-os {padding:12px;gap:0; }
+ .about-os-hero {grid-template-columns:87px minmax(0,1fr);gap:10px; }
+ .about-os-portrait-frame {align-self:start;max-height:125px; }
+ .about-os-mac {display:none;}
+ .about-os-identity h1 {font-size:clamp(21px,5.4vw,33px);margin-bottom:6px;}
+ .about-os-identity h2 {font-size:11px;}
+ .about-os-identity p {font-size:10px;margin-bottom:8px;}
+ .about-os-years {font-size:10px;padding:5px;}
+ .about-os-tabs button {min-height:43px;font-size:9px;gap:3px;padding:5px 2px;}
+ .about-os-tab-icon {display:none;}
+ .about-os-content {padding:12px;min-height:250px;}
+ .about-os-intro,.about-os-timeline,.about-os-schoolgrid,.about-os-hobbygrid {grid-template-columns:1fr;}
+ .about-os-bio p {font-size:12px;}
+ .about-os-tags {margin:6px 0 13px;}
+}
+
+
+/* About: the desktop memo remains behind windows. Keep the profile header and
+   tab navigation visible while the active pane scrolls on short screens. */
+.win-about .window-body { overflow:hidden; }
+.about-os { height:100%; min-height:0; }
+.about-os-hero,.about-os-tabs { flex-shrink:0; }
+.about-os-content { overflow:auto; }
+@media (max-width:800px) {
+  .win-about .window-body { overflow:visible; }
+  .about-os { height:auto; }
+  .about-os-content { overflow:visible; }
+}
+
+
+/* CV 2.0: interactive Macintosh-inspired document */
+.win-cv {top:6%;left:9%;width:82%;height:88%;min-height:0;}
+.win-cv>.window-body{padding:0;overflow:hidden;background:#f9e4ed;}
+.cv-os{height:100%;display:flex;flex-direction:column;min-height:0;color:#1c1128;background:#f8e2ed;font:700 13px/1.35 'Courier New',monospace;}
+.cv-os-head{display:grid;grid-template-columns:150px minmax(0,1fr) 80px;align-items:center;gap:20px;padding:16px 22px 13px;background:linear-gradient(115deg,#f6dbe8,#f9ebf0);}
+.cv-os-avatar{width:132px;height:130px;padding:4px;border:3px solid #160b25;background:#0d0815;}
+.cv-os-avatar img{height:100%;width:100%;object-fit:cover;image-rendering:pixelated;}
+.cv-os-title h1{font:900 clamp(28px,3.3vw,46px)/1 'Courier New',monospace;margin:0 0 3px;}
+.cv-os-title h2{font:900 clamp(12px,1.45vw,19px)/1.2 'Courier New',monospace;margin:0;}
+.cv-os-title p{margin:9px 0;font-size:clamp(10px,1.03vw,14px);}
+.cv-os-title mark{display:inline-block;background:#d9fa55;padding:5px 8px;font-size:clamp(10px,.95vw,13px);font-weight:900;}
+.cv-os-main{display:grid;grid-template-columns:235px minmax(0,1fr);gap:12px;padding:0 15px 10px;min-height:0;flex:1;}
+.cv-os-side{min-height:0;overflow:auto;display:grid;gap:10px;align-content:start;padding-top:9px;}
+.cv-os-box{border:2px solid #25172d;border-radius:7px;overflow:hidden;background:#faebf0;}
+.cv-os-box h3{background:#d4b1ec;border-bottom:2px solid #25172d;font:900 15px 'Courier New',monospace;margin:0;padding:8px;}
+.cv-os-box p{padding:0 10px;overflow-wrap:anywhere;font-size:12px;}
+.cv-os-box a{color:inherit;}
+.cv-os-chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px;}
+.cv-os-chips span{background:#dbfa66;border:1px solid #24142d;padding:4px 6px;font-size:10px;}
+.cv-os-content{min-height:0;display:flex;flex-direction:column;overflow:hidden;}
+.cv-os-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
+.cv-os-tabs button{background:#f5dce9;color:#24142d;border:2px solid #211429;border-bottom:0;border-radius:10px 10px 0 0;min-height:40px;font:900 clamp(10px,.95vw,14px) 'Courier New',monospace;padding:6px 4px;}
+.cv-os-tabs button.selected{background:#dafa55;}
+.cv-os-panel{border:2px solid #24142d;border-radius:0 8px 8px 8px;padding:16px;overflow:auto;min-height:0;flex:1;background:#fbeaf1;}
+.cv-os-panel h3{font:900 clamp(19px,2vw,28px)/1.1 'Courier New',monospace;margin:0 0 17px;padding-bottom:7px;border-bottom:5px solid #d5fa58;width:max-content;max-width:100%;}
+.cv-os-timeline{display:grid;gap:11px;}
+.cv-os-timeline article{display:grid;grid-template-columns:100px minmax(0,1fr);gap:11px;align-items:start;position:relative;}
+.cv-os-timeline article:before{content:'';position:absolute;left:6px;top:0;bottom:-14px;width:2px;background:#22172b;}
+.cv-os-period{position:relative;z-index:1;border:2px solid #1d1128;border-radius:7px;background:#e3c1ee;padding:7px;font-size:11px;margin-left:14px;}
+.cv-os-position{background:#fff6fa;border:1.5px solid #5a4367;border-radius:6px;padding:9px 11px;}
+.cv-os-position h4{margin:0 0 4px;font:900 clamp(13px,1.25vw,18px)/1.2 'Courier New',monospace;}
+.cv-os-position strong{background:#dafa57;display:inline-block;padding:2px 5px;font-size:11px;}
+.cv-os-position p{font-size:11px;line-height:1.35;margin:5px 0 0;}
+.cv-os-school{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.cv-os-school article{border:2px solid #2a1732;border-radius:7px;padding:12px;background:#fff7fa;}
+.cv-os-school h4{font:900 17px 'Courier New',monospace;margin:8px 0;}
+.cv-os-school p{font-size:12px;line-height:1.4;}
+.cv-os-school article>span{display:inline-block;background:#dafa57;padding:3px 7px;}
+.cv-os-stack{display:flex;flex-wrap:wrap;gap:10px;}
+.cv-os-stack span{border:2px solid #25172d;border-radius:8px;background:#e8c8ee;padding:9px 12px;}
+.cv-os-foot{border-top:2px solid #27162b;background:#e7c7e6;padding:7px 15px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:900;}
+.cv-os-foot button{background:#dafa5b;color:#170e1e;border:2px solid #26122e;box-shadow:2px 2px #21172d;border-radius:4px;padding:8px 12px;font:900 13px 'Courier New',monospace;}
+.cv-os-print-note{margin:0;padding:4px 15px;font-size:9px;background:#f6e7ee;}
+.cv-os-print-only{display:none;}
+@media (max-width:800px){
+.win-cv{width:calc(100% - 78px)!important;height:auto!important;top:auto!important;left:auto!important;transform:none!important;}
+.win-cv>.window-body{overflow:visible;height:auto;}
+.cv-os{height:auto;}
+.cv-os-head{grid-template-columns:72px minmax(0,1fr);padding:11px;gap:8px;}
+.cv-os-avatar{width:72px;height:76px;}
+.cv-os-title h1{font-size:22px}.cv-os-title h2{font-size:10px}.cv-os-title p{font-size:10px}
+.cv-os-mac{display:none}
+.cv-os-main{display:flex;flex-direction:column;padding:0 8px 8px}
+.cv-os-side{display:none}
+.cv-os-tabs button{font-size:9px}
+.cv-os-panel{min-height:300px;max-height:70vh}
+.cv-os-timeline article{grid-template-columns:75px minmax(0,1fr);gap:5px}
+.cv-os-school{grid-template-columns:1fr}
+.cv-os-foot{font-size:9px}.cv-os-foot button{font-size:10px}
+}
+@media print{
+@page{size:A4;margin:14mm}
+html,body,#__nuxt{background:white!important;height:auto!important;min-height:0!important;}
+.os-shell,.crt,.desktop{all:unset!important;display:block!important;background:white!important;}
+.menu,.wallpaper,.desktop-shortcuts,.note,.os-window:not(.win-cv),.win-cv>.window-bar,.cv-os-tabs,.cv-os-foot,.cv-os-print-note,.cv-os-mac{display:none!important;}
+.win-cv{position:static!important;transform:none!important;display:block!important;border:0!important;box-shadow:none!important;width:100%!important;height:auto!important;min-height:0!important;background:white!important;}
+.win-cv>.window-body{overflow:visible!important;height:auto!important;}
+.cv-os{display:block!important;height:auto!important;background:white!important;color:#21152a!important;}
+.cv-os-head{grid-template-columns:100px 1fr!important;padding:0 0 12px!important;}
+.cv-os-avatar{width:95px;height:100px}
+.cv-os-main{display:block!important;padding:0!important;}
+.cv-os-side{display:none!important;}
+.cv-os-content{display:block!important;overflow:visible!important;}
+.cv-os-panel{display:none!important;}
+.cv-os-print-only{display:block!important;font:10px/1.35 Arial,sans-serif;}
+.cv-os-print-only h2{font:900 15px Arial,sans-serif;border-bottom:2px solid #dafa57;margin:15px 0 7px;}
+.cv-os-print-only article{break-inside:avoid;margin:0 0 6px;}
+.cv-os-print-only p{margin:3px 0 8px}
+.cv-os-title h1{font-size:35px}.cv-os-title h2{font-size:15px}.cv-os-title p{font-size:11px}
+}
+
+
+.cv-os-actions { display:flex; align-items:center; justify-content:flex-end; gap:9px; }
+.cv-os-actions a,.cv-os-actions button {
+  display:inline-block;background:#dafa5b;color:#170e1e;border:2px solid #26122e;
+  box-shadow:2px 2px #21172d;border-radius:4px;padding:8px 11px;
+  font:900 12px 'Courier New',monospace;text-decoration:none;white-space:nowrap;
+}
+.cv-os-actions button { background:#f9e5ef; }
+@media(max-width:800px){.cv-os-actions{flex-wrap:wrap;}.cv-os-actions a,.cv-os-actions button{font-size:10px;}}
+@media print{.cv-os-actions{display:none!important;}}
+
+
+/* RETRO SILVER V3 · Visual reference approved on 9 Nov 2026.
+   Scope the palette to the desktop chrome and personal/CV windows.
+   Preserve the existing Sunset and Night artwork untouched. */
+.os-shell {
+ --rs-ink:#11162c; --rs-blue:#245bff; --rs-blue-light:#83afff;
+ --rs-silver:#e5e9f2; --rs-surface:#f0f3f9; --rs-shadow:#62708c;
+}
+.os-shell .menu {
+ color:#12172b;background:linear-gradient(#f3f4fb,#d7def0);
+ border-bottom:3px solid #243655;
+}
+.os-shell .menu button:hover {background:#b9c9f1}
+.os-shell .menu .system select {color:#12172b;background:#ecf0fa;border:2px solid #26334a}
+.os-shell .window-bar {
+ background:repeating-linear-gradient(0deg,#bfc8e5 0 2px,#d5ddf0 2px 4px);
+ color:#11152b; border-bottom-color:#22314d;
+}
+.os-shell.theme-night .window-bar {background:repeating-linear-gradient(0deg,#b7c2e6 0 2px,#cad4eb 2px 4px)}
+.os-shell.theme-night .menu {background:linear-gradient(#e9edf9,#c9d5ec)}
+.os-shell .win-about,.os-shell .win-cv {
+ border-color:#182238;
+ background:#e5eaf4;
+ box-shadow:3px 3px 0 #98a6c8,6px 6px 0 #14182d;
+ color:var(--rs-ink);
+}
+.os-shell .win-about.focused,.os-shell .win-cv.focused {
+ box-shadow:3px 3px 0 #245bff,6px 6px 0 #101629;
+}
+.win-about .window-body,.win-cv>.window-body {background:#e9edf6}
+.about-os,.cv-os {color:var(--rs-ink);background:#e9edf6}
+.about-os-hero,.cv-os-head {
+ background:linear-gradient(135deg,#f2f5fb 0%,#e3e8f4 55%,#dbe3f3 100%);
+}
+.about-os-portrait-frame,.cv-os-avatar {border-color:#243550;box-shadow:inset 0 0 0 2px #9db4e1}
+.about-os-years,.cv-os-title mark {
+ background:#a3beff;color:#0e235f;border:1px solid #5b86f1;
+}
+.about-os-tabs button,.cv-os-tabs button {
+ color:#15213c;background:#e1e6f2;border-color:#293752;
+ border-radius:9px 9px 0 0;
+}
+.about-os-tabs button.selected,.cv-os-tabs button.selected {
+ background:#245bff;color:#fff;border-color:#162b66;
+}
+.about-os-tabs button:not(.selected):hover,.cv-os-tabs button:not(.selected):hover {
+ background:#b8cffc;
+}
+.about-os-tab-icon,.cv-os-tab-symbol {display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.cv-os-tab-symbol {font-size:17px;margin-right:8px}
+.about-os-content,.cv-os-panel {
+ background:#f0f3fa;border-color:#263750;color:#151d30;
+}
+.about-os-underline,.cv-os-panel h3,.cv-os-print-only h2 {
+ border-bottom-color:#245bff;background:#245bff;
+}
+.cv-os-panel h3,.cv-os-print-only h2 {background:none}
+.about-os-panel,.cv-os-box,.cv-os-school article,.cv-os-position {
+ background:#f4f6fb;border-color:#60759f;color:#172138;
+}
+.about-os-panel h4,.cv-os-box h3 {
+ background:linear-gradient(#bdcbea,#96b2ed);border-color:#536b99;color:#142342;
+}
+.about-os-tech span,.cv-os-chips span,.cv-os-stack span {
+ display:inline-flex;align-items:center;gap:7px;
+ border:1px solid #8095bd;color:#122343;
+ background:#f6f8fd;border-radius:7px;
+}
+.tech-pixel-icon {display:block;flex:none;image-rendering:pixelated}
+.about-os-projects i {background:#245bff;border-color:#0e295e}
+.about-os-timeline article,.about-os-schoolgrid article,.about-os-hobbygrid article {
+ background:#f5f7fc;border-color:#65769b;box-shadow:3px 3px 0 #b2c2e5;
+}
+.about-os-timeline article>span,.about-os-schoolgrid article>span {
+ background:#b1c7ff;color:#122960
+}
+.cv-os-foot {background:#d5deee;border-top-color:#2d4269}
+.cv-os-actions a,.cv-os-foot button,.cv-os-actions button {
+ background:#245bff;color:#fff;border-color:#143a9e;
+ box-shadow:2px 2px 0 #132a63;
+}
+.cv-os-actions button {background:#e6edfb;color:#173268;border-color:#607eb8}
+.cv-os-print-note {background:#e3eaf7;color:#394b6a}
+.cv-os-timeline article:before {background:#245bff}
+.cv-os-period {background:#c4d7ff;border-color:#587dbd;color:#112f69}
+.cv-os-position strong,.cv-os-school article>span {
+ background:#b4cbff;color:#112d6c
+}
+.cv-os-side .cv-os-box p {color:#182743}
+.cv-os-side .cv-os-box a {color:#1743a0}
+.cv-os-tabs button {display:flex;align-items:center;justify-content:center;gap:2px}
+@media(max-width:800px) {
+ .about-os-tabs button {min-height:43px}
+ .cv-os-tab-symbol {display:none}
+}
+@media print {
+ .cv-os,.cv-os-head,.cv-os-title,.cv-os-print-only {color:#11162c!important;background:#fff!important}
+ .cv-os-title mark {background:#ccdafe!important;color:#14295c!important}
+ .cv-os-print-only h2 {border-bottom:2px solid #245bff!important}
+}
+
+
+/* OS DESKTOP V4: borderless browser canvas and bottom System 7 taskbar.
+   The approved Sunset/Night art retains its original image and positioning. */
+html,body,#__nuxt {height:100%;min-height:100%; }
+.os-shell {
+  width:100%;height:100dvh;min-height:0;padding:0;overflow:hidden;
+  display:block;background:#0b1030;
+}
+.crt {
+  position:relative;width:100%;height:100%;min-height:0;
+  border:0;border-radius:0;padding:0;
+  box-shadow:none;overflow:hidden;background:#0b1030;
+}
+.crt::after {border-radius:0;opacity:.08;}
+.desktop {width:100%;height:100%;border:0;overflow:hidden;}
+.os-shell .os-taskbar {
+  position:absolute;left:0;right:0;bottom:0;top:auto;
+  height:47px;min-height:47px;z-index:80;
+  display:flex;align-items:center;gap:14px;padding:0 22px;
+  border:0;border-top:2px solid #43527c;
+  background:linear-gradient(to bottom,#eef1fa,#bfcbe3);
+  box-shadow:0 -3px 0 #141d37;
+  font:800 clamp(12px,1vw,15px)/1 'Courier New',monospace;
+}
+.os-shell.theme-night .os-taskbar {background:linear-gradient(#e6eaf5,#b6c5e1);}
+.os-taskbar .brand {gap:8px;display:flex;align-items:center;flex-shrink:0;}
+.os-taskbar .os-taskbar-nav {display:none;}
+.os-taskbar .system {display:flex;align-items:center;gap:12px;margin-left:auto;}
+.os-taskbar-clock {
+  font:800 12px/1 'Courier New',monospace;
+  color:#192541;white-space:nowrap;min-width:125px;text-align:right;
+}
+.os-taskbar .system select {font-size:11px;padding:3px;}
+.wallpaper,.wallpaper-approved {
+  inset:0 0 47px!important;background-position:center bottom;
+}
+.desktop-shortcuts {
+  top:2.6%;right:1.1%;bottom:auto;
+}
+.note {bottom:calc(47px + 4%);}
+.win-terminal {top:5%;height:47%;}
+.win-about {top:5%;height:85%;}
+.win-cv {top:4%;height:88%;}
+.win-projects {top:38%;}
+.win-contact {top:43%;}
+@media(max-width:800px) {
+  .os-shell,.crt,.desktop {height:100dvh;min-height:0;}
+  .crt {width:100%;border:0;border-radius:0;padding:0;}
+  .desktop {overflow:auto;padding-bottom:55px;}
+  .wallpaper,.wallpaper-approved {
+    position:fixed!important;inset:0 0 47px!important;
+  }
+  .os-shell .os-taskbar {
+    position:fixed;bottom:0;left:0;right:0;height:47px;
+    padding:0 8px;gap:6px;z-index:100;
+  }
+  .os-taskbar .brand {font-size:12px;}
+  .os-taskbar .system {gap:4px;}
+  .os-taskbar .system button {padding:2px;}
+  .os-taskbar .system select {padding:2px;font-size:10px;}
+  .os-taskbar-clock {min-width:0;font-size:9px;}
+  .desktop-shortcuts {top:10px;}
+  .note {bottom:auto;}
+}
+@media(max-width:410px){
+ .os-taskbar-clock {display:none;}
+}
+@media print {
+ .os-shell,.crt,.desktop {height:auto!important;overflow:visible!important;}
+ .os-shell .os-taskbar {display:none!important;}
+}
+
+
+/* Retro Silver · timeline, work iconography and status refinements. */
+.os-taskbar .brand {font-size:clamp(11px,.88vw,14px);letter-spacing:-.3px;gap:7px;}
+.os-taskbar .brand .retro-icon {width:19px;height:19px;}
+.cv-os-timeline {gap:9px;position:relative;}
+.cv-os-timeline article {
+ display:grid;grid-template-columns:15px minmax(75px,96px) minmax(0,1fr);
+ align-items:center;column-gap:10px;position:relative;
+}
+.cv-os-timeline article:before {
+ content:'';position:absolute;z-index:0;
+ left:6px;top:-10px;bottom:-12px;width:3px;
+ background:#245bff;
+}
+.cv-os-timeline article:first-child:before {top:50%;}
+.cv-os-timeline article:last-child:before {bottom:50%;}
+.cv-os-timeline-dot {
+ position:relative;display:block;
+ grid-column:1;grid-row:1;
+ width:13px;height:13px;border:3px solid #133f9e;
+ border-radius:50%;background:#67a1ff;
+ box-shadow:0 0 0 2px #ebf3ff;
+ z-index:2;
+}
+.cv-os-period {grid-column:2;grid-row:1;margin:0;text-align:center;}
+.cv-os-position {
+ grid-column:3;grid-row:1;
+ display:flex;gap:10px;align-items:center;min-width:0;
+}
+.cv-os-position .career-pixel-icon {flex:none;image-rendering:pixelated;}
+.cv-os-role-content {min-width:0;}
+.cv-os-role-content h4 {overflow-wrap:anywhere;}
+.cv-os-hobby-icons {
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:9px;padding:13px 8px 12px;
+}
+.cv-os-hobby-icons>div {
+ display:flex;flex-direction:column;align-items:center;gap:3px;
+ text-align:center;font-size:11px;font-weight:900;
+}
+.career-pixel-icon {display:block;image-rendering:pixelated;flex-shrink:0;}
+.cv-os-construction {
+ display:inline-flex;align-items:center;gap:7px;margin-top:7px;
+ background:#dce7fa;color:#183a75;
+ border:1px solid #6087c0;border-radius:4px;
+ padding:4px 8px;font-weight:900;font-size:11px;
+}
+.about-os-projects li {display:flex;flex-wrap:wrap;align-items:center;gap:2px;}
+.about-os-construction {font-size:11px;color:#2b5399;}
+.project-construction {
+ display:inline-flex!important;align-items:center;justify-content:center;
+ gap:6px;white-space:normal!important;
+}
+@media(max-width:800px) {
+ .os-taskbar .brand {font-size:11px;}
+ .cv-os-timeline article {grid-template-columns:12px 64px minmax(0,1fr);gap:5px;}
+ .cv-os-timeline article:before {left:5px;}
+ .cv-os-timeline-dot {width:11px;height:11px;}
+ .cv-os-period {font-size:9px;padding:4px 2px;}
+ .cv-os-position {gap:5px;padding:7px;}
+ .cv-os-position .career-pixel-icon {width:28px;height:28px;}
+}
+@media print {
+ .cv-os-timeline-dot,.cv-os-timeline article:before {display:none!important;}
+}
+
+
+/* CV sidebar: cards must keep natural height, never be compressed by CSS Grid.
+   When the CV viewport is short, scroll the entire sidebar instead of
+   cutting the chips or the second row of hobby illustrations. */
+.win-cv .cv-os-main {min-height:0;overflow:hidden;}
+.win-cv .cv-os-side {
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-start;
+  gap:10px;
+  min-height:0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  scrollbar-width:thin;
+  scrollbar-color:#7089b8 #e5ebf6;
+  padding:8px 5px 12px 0;
+  overscroll-behavior:contain;
+}
+.win-cv .cv-os-side>.cv-os-box {
+  flex:0 0 auto;
+  min-height:max-content;
+  overflow:visible;
+  border-radius:7px;
+}
+.win-cv .cv-os-chips {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+  gap:6px;
+  padding:9px;
+}
+.win-cv .cv-os-chips span {
+  display:inline-flex;
+  max-width:100%;
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  font-size:10px;
+  padding:4px 6px;
+}
+.win-cv .cv-os-chips .tech-pixel-icon {width:16px;height:16px;}
+.win-cv .cv-os-hobby-icons {
+  padding:10px 8px 12px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  row-gap:10px;
+}
+.win-cv .cv-os-hobby-icons>div {min-width:0;}
+@media(max-width:800px) {
+  .win-cv .cv-os-main {overflow:visible;}
+  .win-cv .cv-os-side {display:flex;overflow:visible;padding:8px 0;}
+}
+@media print {
+  .win-cv .cv-os-side {display:none!important;}
+  .win-cv .cv-os-main {overflow:visible!important;}
+}
+
+
+/* Window controls: optical and geometric centering shared by all OS windows. */
+.os-shell .window-bar {display:flex;align-items:center;}
+.os-shell .window-bar>button {
+  box-sizing:border-box;
+  display:flex;align-items:center;justify-content:center;
+  flex:0 0 21px;width:21px;height:21px;min-width:21px;
+  margin-left:auto;padding:0 0 2px;
+  border:2px solid #182238;
+  background:#eef1f9;color:#17172b;
+  font:900 21px/1 Arial,sans-serif;
+  text-align:center;
+  border-radius:0;cursor:pointer;
+}
+.os-shell .window-bar>button:hover {background:#c9dafa;color:#14389c;}
+/* The memo remains accessible; a duplicate desktop Services shortcut is unnecessary. */
+.win-trash {left:34%;top:19%;width:min(440px,48%);height:auto;min-height:265px;}
+.win-trash .window-body {height:auto;max-height:min(60dvh,540px);overflow:auto;}
+.os-trash {display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:9px;color:#17243e;font:700 12px/1.5 'Courier New',monospace;}
+.os-trash h2 {font:900 20px/1.2 'Courier New',monospace;margin:0;}
+.os-trash p {margin:0;}
+.os-trash small {font-size:10px;color:#465979;}
+.os-trash-list {display:grid;width:100%;gap:7px;}
+.os-trash-list button {
+  display:flex;align-items:center;gap:10px;
+  padding:8px;border:2px solid #6179ac;border-radius:4px;
+  background:#f2f6ff;color:#162747;text-align:left;font-weight:900;
+}
+.os-trash-list button:hover {border-color:#245bff;background:#dce8ff;}
+.os-trash-list button span:last-child {margin-left:auto;}
+.os-trash-clear {align-self:flex-end;background:#d6e3ff;border:2px solid #245bff;padding:7px 12px;font-weight:900;color:#14264c;}
+.os-trash-empty {padding:16px;background:#e5ebf6;border:1px solid #98aad0;width:100%;}
+/* When a mobile shortcut opens a window, its heading is kept clear of the dock. */
+@media(max-width:800px) {
+ .os-window {scroll-margin-top:12px;scroll-margin-bottom:62px;}
+ .win-trash {width:calc(100% - 78px)!important;min-height:0;}
+ .win-trash .window-body {max-height:none;}
+ .os-shell .window-bar>button {width:24px;height:24px;min-width:24px;font-size:22px;}
+}
+
+
+/* Contact: real AJAX form, nonintrusive status and bot trap. */
+.contact-form .retro-btn:disabled {opacity:.7;cursor:progress;}
+.contact-honeypot {position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important;pointer-events:none;}
+.contact-feedback {margin:3px 0;padding:10px 12px;border:2px solid #6079ad;background:#e6edfb;color:#162b53;font:700 11px/1.5 'Courier New',monospace;}
+.contact-feedback-success {border-color:#366ba4;background:#d7ecfa;}
+.contact-feedback-error {border-color:#af5161;background:#fae3e5;color:#742639;}
+.contact-form small {display:block;line-height:1.45;color:#2a3c5a;}
+.contact-form small a {color:#194bb3;text-decoration:underline;font-weight:900;}
+
+
+/* Contact V2: compact consent and usable window without a nested scrollbar. */
+.os-shell .win-contact {
+  top:clamp(18px,6dvh,60px);
+  right:7%;
+  left:auto;
+  width:clamp(345px,32vw,485px);
+  max-width:calc(100% - 110px);
+  height:auto;
+  min-height:0;
+  max-height:calc(100dvh - 105px);
+}
+.os-shell .win-contact .window-body {
+  height:auto;
+  min-height:0;
+  max-height:calc(100dvh - 145px);
+  overflow-y:auto;
+  padding:12px 15px;
+}
+.os-shell .win-contact .contact-form {display:flex;flex-direction:column;gap:9px;}
+.os-shell .win-contact .contact-form h2 {font-size:clamp(18px,1.7vw,25px);line-height:1.1;margin:0 0 2px;}
+.os-shell .win-contact .contact-form > label:not(.contact-privacy-consent) {
+  display:flex;flex-direction:column;gap:3px;
+  font-size:12px;line-height:1.2;
+}
+.os-shell .win-contact .contact-form > label > input:not([type="checkbox"]) {
+  height:37px;min-height:37px;box-sizing:border-box;
+}
+.os-shell .win-contact .contact-form textarea {
+  display:block;min-height:91px;height:91px;max-height:160px;
+  box-sizing:border-box;
+}
+.os-shell .win-contact .contact-form output {min-height:30px;padding:5px 8px;}
+.os-shell .win-contact .contact-privacy-consent {
+  display:grid!important;
+  grid-template-columns:18px minmax(0,1fr)!important;
+  align-items:start!important;
+  column-gap:10px!important;
+  row-gap:0!important;
+  width:100%;
+  font-size:11px!important;
+  line-height:1.45;
+  cursor:pointer;
+}
+.os-shell .win-contact .contact-privacy-consent input[type="checkbox"] {
+  box-sizing:border-box!important;
+  display:block!important;
+  width:17px!important;min-width:17px!important;
+  height:17px!important;min-height:17px!important;
+  margin:2px 0 0!important;
+  padding:0!important;
+  appearance:auto;
+  accent-color:#245bff;
+}
+.os-shell .win-contact .contact-privacy-consent span {
+  display:block;min-width:0;overflow-wrap:anywhere;
+}
+.os-shell .win-contact .contact-privacy-consent a {
+  color:#1749bc;text-decoration:underline;
+}
+.os-shell .win-contact .retro-btn {
+  width:100%;min-height:39px;flex-shrink:0;
+  background:#245bff;color:white;border:2px solid #172d64;
+  padding:8px 12px;
+}
+.os-shell .win-contact .retro-btn:disabled {background:#b7c8e5;color:#52617e;border-color:#7184ae;}
+.os-shell .win-contact .contact-form small {font-size:10px;line-height:1.4;}
+@media(max-width:800px) {
+  .os-shell .win-contact {
+    position:relative!important;
+    left:auto!important;right:auto!important;top:auto!important;
+    width:calc(100% - 78px)!important;max-width:none!important;
+    height:auto!important;max-height:none!important;min-height:0!important;
+  }
+  .os-shell .win-contact .window-body {
+    height:auto!important;max-height:none!important;overflow:visible!important;
+  }
+  .os-shell .win-contact .contact-form textarea {height:105px;}
+}
+
+
+/* Confirmation is a short, positive receipt instead of provider diagnostics. */
+.os-shell .win-contact .contact-feedback-success {
+  display:flex;align-items:center;gap:10px;
+  border:2px solid #277446;
+  background:#d8f2e2;
+  color:#185432;
+  font-size:12px;line-height:1.45;
+  padding:11px 12px;
+  overflow-wrap:anywhere;
+}
+.os-shell .win-contact .contact-success-mark {
+  display:grid;place-items:center;
+  width:27px;height:27px;min-width:27px;
+  border-radius:50%;
+  background:#23854b;color:#fff;
+  font:bold 18px/1 Arial,sans-serif;
+}
+.os-shell .win-contact .contact-slow {
+  margin:0;padding:7px 10px;
+  border-left:3px solid #315baf;
+  background:#e3eafa;color:#173766;
+  font:700 11px/1.4 'Courier New',monospace;
+}
+.os-shell .win-contact .contact-form .retro-btn:disabled {
+  cursor:default;
+}
+.os-shell .win-contact .contact-form .retro-btn:disabled:has(+ .contact-slow) {
+  cursor:progress;
+}
