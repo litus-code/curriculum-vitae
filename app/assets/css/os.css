@@ -480,3 +480,14 @@ html,body,#__nuxt{background:white!important;height:auto!important;min-height:0!
 .cv-os-print-only p{margin:3px 0 8px}
 .cv-os-title h1{font-size:35px}.cv-os-title h2{font-size:15px}.cv-os-title p{font-size:11px}
 }
+
+
+.cv-os-actions { display:flex; align-items:center; justify-content:flex-end; gap:9px; }
+.cv-os-actions a,.cv-os-actions button {
+  display:inline-block;background:#dafa5b;color:#170e1e;border:2px solid #26122e;
+  box-shadow:2px 2px #21172d;border-radius:4px;padding:8px 11px;
+  font:900 12px 'Courier New',monospace;text-decoration:none;white-space:nowrap;
+}
+.cv-os-actions button { background:#f9e5ef; }
+@media(max-width:800px){.cv-os-actions{flex-wrap:wrap;}.cv-os-actions a,.cv-os-actions button{font-size:10px;}}
+@media print{.cv-os-actions{display:none!important;}}
