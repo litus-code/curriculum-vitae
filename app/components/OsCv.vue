@@ -113,7 +113,7 @@ function printCv(){ if(import.meta.client) window.print() }
         </div>
       </div>
     </div>
-    <footer class="cv-os-foot"><span>▣ Carles Far OS · CV v2.0</span><div class="cv-os-actions"><button type="button" @click="printCv">⎙ {{ locale === 'en' ? 'Print' : 'Imprimir' }}</button><a :href="useRuntimeConfig().app.baseURL + 'carles-far-cv.pdf'" download="Carles_Far_CV_2.0.pdf">↓ {{ t.download }}</a></div></footer>
+    <footer class="cv-os-foot"><span>▣ Carles Far OS · CV v2.0</span><div class="cv-os-actions"><button type="button" @click="printCv">⎙ {{ locale === 'en' ? 'Print' : 'Imprimir' }}</button><a :href="useRuntimeConfig().app.baseURL + 'carles-far-cv-v2-1.pdf'" download="Carles_Far_CV_2.1.pdf">↓ {{ t.download }}</a></div></footer>
     <div class="cv-os-print-only">
       <h2>{{ t.history }}</h2>
       <article v-for="role in roles" :key="role.company"><strong>{{ role.years }} · {{ role.company }} · {{ role.title }}</strong><p>{{ role.details }}</p></article>
