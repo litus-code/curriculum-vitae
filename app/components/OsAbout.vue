@@ -25,7 +25,6 @@ const translations = {
     experienceDetail: 'Vue, Nuxt, TypeScript, SSR y desarrollo de interfaces para productos digitales.',
     previousEy: 'Senior Frontend Developer · EY Barcelona',
     education: 'Formación académica y técnica',
-    educationNote: 'Centros y periodos documentados. Titulaciones pendientes de confirmar.',
     hobbies: 'Más allá del código',
     hobby1: 'Música electrónica, cultura DJ y experimentación con software musical.',
     hobby2: 'Cine de terror, arte, diseño retro y proyectos creativos.',
@@ -51,7 +50,6 @@ const translations = {
     experienceDetail: 'Vue, Nuxt, TypeScript, SSR i desenvolupament d’interfícies per a productes digitals.',
     previousEy: 'Senior Frontend Developer · EY Barcelona',
     education: 'Formació acadèmica i tècnica',
-    educationNote: 'Centres i períodes documentats. Titulacions pendents de confirmar.',
     hobbies: 'Més enllà del codi',
     hobby1: 'Música electrònica, cultura DJ i experimentació amb software musical.',
     hobby2: 'Cinema de terror, art, disseny retro i projectes creatius.',
@@ -77,7 +75,6 @@ const translations = {
     experienceDetail: 'Vue, Nuxt, TypeScript, SSR and interface development for digital products.',
     previousEy: 'Senior Frontend Developer · EY Barcelona',
     education: 'Education and training',
-    educationNote: 'Schools and dates confirmed. Qualifications to be verified.',
     hobbies: 'Outside of coding',
     hobby1: 'Electronic music, DJ culture and experiments with music software.',
     hobby2: 'Horror cinema, art, retro design and creative projects.',
@@ -85,12 +82,35 @@ const translations = {
   }
 } as const
 const copy = computed(() => translations[locale.value as keyof typeof translations] ?? translations.es)
-const schools = [
-  { dates: '2019–2020', name: 'Campus MVP' },
-  { dates: '2016–2017', name: 'ISDI Coders' },
-  { dates: '2013–2017', name: 'STUCOM' },
-  { dates: '2012–2013', name: 'Universitat de Barcelona' }
-]
+const schools = computed(() => {
+ const descriptions = {
+  es: [
+   'Certificado de Programación avanzada con JavaScript y ECMAScript 6.',
+   'Bootcamp de desarrollo web full stack con JavaScript.',
+   'Grado superior como Técnico Superior en Diseño y Desarrollo Web (DAW).',
+   'Prueba de acceso para mayores de 25 años a la universidad y/o formación de grado superior.'
+  ],
+  ca: [
+   'Certificat de Programació avançada amb JavaScript i ECMAScript 6.',
+   'Bootcamp de desenvolupament web full stack amb JavaScript.',
+   'Cicle formatiu de grau superior com a Tècnic Superior en Disseny i Desenvolupament Web (DAW).',
+   'Prova d’accés per a majors de 25 anys a la universitat i/o formació de grau superior.'
+  ],
+  en: [
+   'Advanced JavaScript and ECMAScript 6 Programming Certificate.',
+   'Full-stack JavaScript web development bootcamp.',
+   'Higher vocational qualification in Web Design and Development (DAW).',
+   'University entrance examination for students aged 25+ and/or higher vocational training.'
+  ]
+ } as const
+ const detail = descriptions[locale.value as keyof typeof descriptions] ?? descriptions.es
+ return [
+  {dates:'2019–2020',name:'Campus MVP',detail:detail[0]},
+  {dates:'2016–2017',name:'ISDI Coders',detail:detail[1]},
+  {dates:'2013–2017',name:'STUCOM',detail:detail[2]},
+  {dates:'2012–2013',name:'Universitat de Barcelona',detail:detail[3]}
+ ]
+})
 const tech = ['Vue 3','Nuxt 4','TypeScript','Pinia','Tailwind','Jest','SSR','Git','CI/CD']
 const projects = [
   {name:'Cuebooker',desc:'cue',url:'https://cuebooker.com'},
@@ -161,8 +181,7 @@ const projects = [
       </template>
       <template v-else-if="tab === 'education'">
         <h3>{{ copy.education }}</h3>
-        <div class="about-os-schoolgrid"><article v-for="school in schools" :key="school.name"><span>{{ school.dates }}</span><h4>{{ school.name }}</h4></article></div>
-        <p class="about-os-education-note">{{ copy.educationNote }}</p>
+        <div class="about-os-schoolgrid"><article v-for="school in schools" :key="school.name"><span>{{ school.dates }}</span><h4>{{ school.name }}</h4><p>{{ school.detail }}</p></article></div>
       </template>
       <template v-else>
         <h3>{{ copy.hobbies }}</h3>
