@@ -1113,3 +1113,19 @@ html,body,#__nuxt {height:100%;min-height:100%; }
 @media(max-width:800px) {
   .os-shell:not(.os-initialized) .win-terminal {display:none!important;}
 }
+
+
+/* Mobile first visit: keep navigation accessible and make the services memo
+   the single focal element. Desktop presentation remains unchanged. */
+@media(max-width:800px) {
+  .os-shell.os-mobile-welcome .note {
+    position:relative!important;
+    left:auto!important;right:auto!important;bottom:auto!important;
+    width:min(300px,calc(100% - 62px))!important;
+    margin:clamp(32px,9dvh,90px) auto 95px!important;
+    transform:rotate(-3deg);
+    z-index:8;
+  }
+  .os-shell.os-mobile-welcome .sticky-note {padding:24px 19px 18px;}
+  .os-shell.os-mobile-welcome .desktop-shortcuts {z-index:70;}
+}
