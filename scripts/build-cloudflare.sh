@@ -12,6 +12,18 @@ python3 -m venv /tmp/carlesfar-cv-build-venv
 
 npm run generate
 
+# Nuxt/Nitro may choose Cloudflare's static preset automatically and generate dist/
+# rather than .output/public/. Keep the Pages configured output path stable.
+if [ -s dist/index.html ]; then
+  mkdir -p .output/public
+  cp -a dist/. .output/public/
+fi
+
+if [ ! -s .output/public/index.html ]; then
+  echo 'ERROR: Static Nuxt output missing (checked dist/ and .output/public/).' >&2
+  exit 1
+fi
+
 test -s .output/public/index.html
 test -s .output/public/carles-far-cv-v2-1.pdf
 test -s .output/public/carles-far-cv.pdf
