@@ -8,7 +8,7 @@ const translations = {
   es: {
     heading: 'Frontend Developer & Independent Product Builder',
     summary: 'Desarrollo productos digitales, interfaces complejas y experiencias que funcionan.',
-    years: '8 años de experiencia en desarrollo frontend',
+    years: '10 años de experiencia en desarrollo frontend',
     tabs: ['Quién soy','Experiencia','Formación','Hobbies'],
     hello: 'Hola, soy Carles.',
     bio1: 'Desarrollador frontend de Barcelona, curioso, creativo y apasionado por la tecnología, la música y los productos digitales.',
@@ -19,9 +19,10 @@ const translations = {
     friends: 'Amigo invisible online.',
     dj: 'Software de mezcla y herramientas DJ.',
     experience: 'Experiencia profesional',
-    current: 'Actualidad', ey: 'Frontend Engineer · Proyecto Radisson Hotels',
-    bershka: 'Desarrollo frontend · Bershka, Inditex',
+    current: 'Actualidad', ey: 'Lead Frontend · Proyecto Radisson Hotels',
+    bershka: 'Senior Frontend Developer · Bershka, Inditex',
     experienceDetail: 'Vue, Nuxt, TypeScript, SSR y desarrollo de interfaces para productos digitales.',
+    previousEy: 'Senior Frontend Developer · EY Barcelona',
     education: 'Formación académica y técnica',
     educationNote: 'Centros y periodos documentados. Titulaciones pendientes de confirmar.',
     hobbies: 'Más allá del código',
@@ -32,7 +33,7 @@ const translations = {
   ca: {
     heading: 'Frontend Developer & Independent Product Builder',
     summary: 'Desenvolupo productes digitals, interfícies complexes i experiències que funcionen.',
-    years: '8 anys d’experiència en desenvolupament frontend',
+    years: '10 anys d’experiència en desenvolupament frontend',
     tabs: ['Qui soc','Experiència','Formació','Aficions'],
     hello: 'Hola, soc en Carles.',
     bio1: 'Desenvolupador frontend de Barcelona, curiós, creatiu i apassionat per la tecnologia, la música i els productes digitals.',
@@ -43,9 +44,10 @@ const translations = {
     friends: 'Amic invisible en línia.',
     dj: 'Software de mescla i eines DJ.',
     experience: 'Experiència professional',
-    current: 'Actualitat', ey: 'Frontend Engineer · Projecte Radisson Hotels',
-    bershka: 'Desenvolupament frontend · Bershka, Inditex',
+    current: 'Actualitat', ey: 'Lead Frontend · Projecte Radisson Hotels',
+    bershka: 'Senior Frontend Developer · Bershka, Inditex',
     experienceDetail: 'Vue, Nuxt, TypeScript, SSR i desenvolupament d’interfícies per a productes digitals.',
+    previousEy: 'Senior Frontend Developer · EY Barcelona',
     education: 'Formació acadèmica i tècnica',
     educationNote: 'Centres i períodes documentats. Titulacions pendents de confirmar.',
     hobbies: 'Més enllà del codi',
@@ -56,7 +58,7 @@ const translations = {
   en: {
     heading: 'Frontend Developer & Independent Product Builder',
     summary: 'I build digital products, complex interfaces and experiences that work.',
-    years: '8 years of frontend development experience',
+    years: '10 years of frontend development experience',
     tabs: ['About me','Experience','Education','Hobbies'],
     hello: 'Hi, I’m Carles.',
     bio1: 'Barcelona-based frontend developer, curious and creative, with a passion for technology, music and digital products.',
@@ -67,9 +69,10 @@ const translations = {
     friends: 'Online Secret Santa.',
     dj: 'DJ mixing software and tools.',
     experience: 'Professional experience',
-    current: 'Present', ey: 'Frontend Engineer · Radisson Hotels project',
-    bershka: 'Frontend development · Bershka, Inditex',
+    current: 'Present', ey: 'Lead Frontend · Radisson Hotels project',
+    bershka: 'Senior Frontend Developer · Bershka, Inditex',
     experienceDetail: 'Vue, Nuxt, TypeScript, SSR and interface development for digital products.',
+    previousEy: 'Senior Frontend Developer · EY Barcelona',
     education: 'Education and training',
     educationNote: 'Schools and dates confirmed. Qualifications to be verified.',
     hobbies: 'Outside of coding',
@@ -141,9 +144,14 @@ const projects = [
         </div>
       </template>
       <template v-else-if="tab === 'experience'">
-        <h3>{{ copy.experience }}</h3><div class="about-os-timeline">
+        <h3>{{ copy.experience }}</h3>
+        <div class="about-os-timeline">
           <article><span>2026 → {{ copy.current }}</span><h4>EY · Radisson Hotels</h4><p>{{ copy.ey }}</p><small>{{ copy.experienceDetail }}</small></article>
           <article><span>2026</span><h4>Inditex · Bershka</h4><p>{{ copy.bershka }}</p></article>
+          <article><span>2021–2025</span><h4>EY Barcelona</h4><p>{{ copy.previousEy }}</p></article>
+          <article><span>2020–2021</span><h4>T2CLIENT</h4></article>
+          <article><span>2020</span><h4>CONEPTUM AI</h4></article>
+          <article><span>2017–2019</span><h4>CASALS ONLINE</h4></article>
         </div>
       </template>
       <template v-else-if="tab === 'education'">
