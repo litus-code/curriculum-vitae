@@ -1,6 +1,6 @@
 <script setup lang="ts">
-defineProps<{name:string;size?:number}>()
-const normalized = computed(() => name.toLowerCase())
+const props=defineProps<{name:string;size?:number}>()
+const normalized = computed(() => props.name.toLowerCase())
 const kind = computed(() => {
  const n=normalized.value
  if(n.includes('nuxt'))return 'nuxt'
@@ -19,7 +19,7 @@ const kind = computed(() => {
 })
 </script>
 <template>
- <svg class="tech-pixel-icon" :width="size ?? 18" :height="size ?? 18" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+ <svg class="tech-pixel-icon" :width="props.size ?? 18" :height="props.size ?? 18" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
   <g v-if="kind==='vue'"><path d="M1 3h6l5 8 5-8h6L12 22z" fill="#41b883"/><path d="M7 3h4l1 2 1-2h4l-5 9z" fill="#35495e"/></g>
   <g v-else-if="kind==='nuxt'"><path d="M1 19L9 4h4l9 15z" fill="#00dc82"/><path d="M10 19l5-10 7 10z" fill="#087f5b"/><path d="M6 17h12v2H6z" fill="#103326"/></g>
   <g v-else-if="kind==='typescript'"><rect width="22" height="22" x="1" y="1" rx="1" fill="#3178c6"/><path d="M4 7h11v3h-4v9H8v-9H4z" fill="#fff"/><path d="M15 15h4v2h-4zM16 12h3v2h-3z" fill="#fff"/></g>
