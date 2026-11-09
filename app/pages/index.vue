@@ -3,9 +3,11 @@ import type { WindowId } from '~/domain/os'
 const { locale, t } = useI18n()
 const { theme, opened, open, recentlyClosed, restore, emptyTrash } = useDesktop()
 const desktopInitialized = ref(false)
+const mobileWelcome = ref(false)
 onMounted(() => {
-  // Keep the original desktop welcome terminal, but leave mobile unobstructed.
-  if (window.innerWidth <= 800 && opened.value.length === 1 && opened.value[0] === 'terminal') {
+  // A fresh mobile visit opens on the sticky note; desktop keeps its terminal.
+  mobileWelcome.value = window.innerWidth <= 800
+  if (mobileWelcome.value) {
     opened.value = []
   }
   desktopInitialized.value = true
@@ -73,7 +75,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
 </script>
 
 <template>
-  <main class="os-shell" :class="[isNight ? 'theme-night' : 'theme-sunset', { 'os-initialized': desktopInitialized }]">
+  <main class="os-shell" :class="[isNight ? 'theme-night' : 'theme-sunset', { 'os-initialized': desktopInitialized, 'os-mobile-welcome': mobileWelcome && opened.length === 0 }]">
     <div class="crt"><div class="desktop">
       <footer class="menu os-taskbar">
         <button class="brand" type="button" @click="open('terminal')"><RetroIcon name="computer" :size="23" /> <span>Carles Far OS</span></button>
