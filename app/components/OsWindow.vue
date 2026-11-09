@@ -41,7 +41,7 @@ function moveDrag(event:PointerEvent){
   const dx=drag.x+event.clientX-drag.startX-offset.x
   const dy=drag.y+event.clientY-drag.startY-offset.y
   offset.x += Math.max(parent.left+4-rect.left,Math.min(parent.right-4-rect.right,dx))
-  offset.y += Math.max(parent.top+112-rect.top,Math.min(parent.bottom-55-rect.bottom,dy))
+  offset.y += Math.max(parent.top+12-rect.top,Math.min(parent.bottom-55-rect.bottom,dy))
 }
 function stopDrag(event:PointerEvent){
   if (drag.pointer!==event.pointerId) return
