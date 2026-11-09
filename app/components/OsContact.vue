@@ -119,6 +119,5 @@ async function submit() {
       {{ status==='success' ? copy.success : status==='activation' ? copy.activation : copy.error }}
       <small v-if="status!=='success' && failureDetail">{{ copy.technical }} {{ failureDetail }}</small>
     </p>
-    <small>{{ copy.info }} <a :href="directLink">{{ copy.direct }}</a></small>
   </form>
 </template>
