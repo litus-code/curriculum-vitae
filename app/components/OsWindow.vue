@@ -6,7 +6,7 @@ const shown=computed(()=>opened.value.includes(props.id))
 const frame=ref<HTMLElement>()
 const offset=reactive({x:0,y:0})
 const drag=reactive({active:false,pointer:-1,startX:0,startY:0,x:0,y:0})
-const style=computed(()=>({zIndex:opened.value.indexOf(props.id)+2,transform:`translate(${offset.x}px, ${offset.y}px)`}))
+const style=computed(()=>({zIndex:30 + opened.value.indexOf(props.id),transform:`translate(${offset.x}px, ${offset.y}px)`}))
 function startDrag(event:PointerEvent){
   if (!import.meta.client || window.innerWidth<=800 || event.button!==0 || (event.target as HTMLElement).closest('button')) return
   const el=frame.value
