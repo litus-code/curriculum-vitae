@@ -787,3 +787,43 @@ html,body,#__nuxt {height:100%;min-height:100%; }
   .win-cv .cv-os-side {display:none!important;}
   .win-cv .cv-os-main {overflow:visible!important;}
 }
+
+
+/* Window controls: optical and geometric centering shared by all OS windows. */
+.os-shell .window-bar {display:flex;align-items:center;}
+.os-shell .window-bar>button {
+  box-sizing:border-box;
+  display:flex;align-items:center;justify-content:center;
+  flex:0 0 21px;width:21px;height:21px;min-width:21px;
+  margin-left:auto;padding:0 0 2px;
+  border:2px solid #182238;
+  background:#eef1f9;color:#17172b;
+  font:900 21px/1 Arial,sans-serif;
+  text-align:center;
+  border-radius:0;cursor:pointer;
+}
+.os-shell .window-bar>button:hover {background:#c9dafa;color:#14389c;}
+/* The memo remains accessible; a duplicate desktop Services shortcut is unnecessary. */
+.win-trash {left:34%;top:19%;width:min(440px,48%);height:auto;min-height:265px;}
+.win-trash .window-body {height:auto;max-height:min(60dvh,540px);overflow:auto;}
+.os-trash {display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:9px;color:#17243e;font:700 12px/1.5 'Courier New',monospace;}
+.os-trash h2 {font:900 20px/1.2 'Courier New',monospace;margin:0;}
+.os-trash p {margin:0;}
+.os-trash small {font-size:10px;color:#465979;}
+.os-trash-list {display:grid;width:100%;gap:7px;}
+.os-trash-list button {
+  display:flex;align-items:center;gap:10px;
+  padding:8px;border:2px solid #6179ac;border-radius:4px;
+  background:#f2f6ff;color:#162747;text-align:left;font-weight:900;
+}
+.os-trash-list button:hover {border-color:#245bff;background:#dce8ff;}
+.os-trash-list button span:last-child {margin-left:auto;}
+.os-trash-clear {align-self:flex-end;background:#d6e3ff;border:2px solid #245bff;padding:7px 12px;font-weight:900;color:#14264c;}
+.os-trash-empty {padding:16px;background:#e5ebf6;border:1px solid #98aad0;width:100%;}
+/* When a mobile shortcut opens a window, its heading is kept clear of the dock. */
+@media(max-width:800px) {
+ .os-window {scroll-margin-top:12px;scroll-margin-bottom:62px;}
+ .win-trash {width:calc(100% - 78px)!important;min-height:0;}
+ .win-trash .window-body {max-height:none;}
+ .os-shell .window-bar>button {width:24px;height:24px;min-width:24px;font-size:22px;}
+}
