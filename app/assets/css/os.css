@@ -230,3 +230,18 @@
   .win-contact .window-body { overflow:visible; }
   .win-contact .contact-form textarea { min-height:100px; }
 }
+
+
+/* Pixel-art rendering: prevent bilinear interpolation and CRT softening.
+   Note: rendering crispness cannot recover detail discarded in a 384px source. */
+.wallpaper-approved > .wallpaper-image {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  filter: contrast(1.09) saturate(1.05);
+  transform: none;
+  backface-visibility: visible;
+}
+.crt::after { opacity: .075; }
+.wallpaper-approved { filter: none; }
