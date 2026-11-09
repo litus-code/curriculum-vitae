@@ -104,7 +104,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
             <h2>{{ p.name }}</h2>
             <p>{{ t(p.id) }}</p>
             <a v-if="p.url" :href="p.url" target="_blank" rel="noopener noreferrer">{{ t('projects') }} ↗</a>
-            <span v-else>{{ locale === 'en' ? 'In development' : locale === 'ca' ? 'En desenvolupament' : 'En desarrollo' }}</span>
+            <span v-else class="project-construction"><CareerPixelIcon name="construction" :size="23" />{{ locale === 'en' ? 'Under construction' : locale === 'ca' ? 'En construcció' : 'En construcción' }}</span>
           </article>
         </div>
       </OsWindow>
