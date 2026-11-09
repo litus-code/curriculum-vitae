@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       title: 'Carles Far OS | Frontend Developer',
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       meta: [{ name: 'description', content: 'Carles Far, frontend engineer and independent product builder in Barcelona.' }]
     }
   },
