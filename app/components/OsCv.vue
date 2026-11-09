@@ -50,12 +50,12 @@ function printCv(){ if(import.meta.client) window.print() }
           <p><a href="https://www.carlesfar.com" target="_blank" rel="noopener noreferrer">carlesfar.com</a></p>
           <p><a href="https://www.linkedin.com/in/carles-far-pierres-390160139/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></p>
         </section>
-        <section class="cv-os-box"><h3>⌘ {{ t.skills }}</h3><div class="cv-os-chips"><span v-for="tech in stack.slice(0,8)" :key="tech">{{ tech }}</span></div></section>
+        <section class="cv-os-box"><h3>⌘ {{ t.skills }}</h3><div class="cv-os-chips"><span v-for="tech in stack.slice(0,8)" :key="tech"><TechPixelIcon :name="tech" :size="18" />{{ tech }}</span></div></section>
         <section class="cv-os-box"><h3>♫ Hobbies</h3><p>Música · DJ · Arte · Cine de terror · Deporte</p></section>
       </aside>
       <div class="cv-os-content">
         <div class="cv-os-tabs" role="tablist">
-          <button v-for="id in tabs" :key="id" type="button" role="tab" :aria-selected="active===id" :class="{selected:active===id}" @click="active=id">{{ t[id] }}</button>
+          <button v-for="id in tabs" :key="id" type="button" role="tab" :aria-selected="active===id" :class="{selected:active===id}" @click="active=id"><span class="cv-os-tab-symbol" aria-hidden="true">{{ id === 'experience' ? '▣' : id === 'education' ? '◇' : id === 'stack' ? '</>' : '↗' }}</span>{{ t[id] }}</button>
         </div>
         <div class="cv-os-panel" role="tabpanel">
           <template v-if="active==='experience'"><h3>{{ t.history }}</h3>
@@ -67,7 +67,7 @@ function printCv(){ if(import.meta.client) window.print() }
             <div class="cv-os-school"><article v-for="school in schools" :key="school.name"><span>{{ school.years }}</span><h4>{{ school.name }}</h4><p v-if="school.note">{{ school.note }}</p></article></div>
           </template>
           <template v-else-if="active==='stack'"><h3>{{ t.skills }}</h3>
-            <div class="cv-os-stack"><span v-for="tech in stack" :key="tech">{{ tech }}</span></div>
+            <div class="cv-os-stack"><span v-for="tech in stack" :key="tech"><TechPixelIcon :name="tech" :size="23" />{{ tech }}</span></div>
           </template>
           <template v-else><h3>{{ t.built }}</h3>
             <div class="cv-os-school"><article v-for="project in projects" :key="project.name">
