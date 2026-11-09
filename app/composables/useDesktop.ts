@@ -1,3 +1,4 @@
+import { setSelectedService } from '../domain/os'
 import type { ServiceId, Theme, WindowId } from '~/domain/os'
 export function useDesktop() {
   const opened=useState<WindowId[]>('cf-open',()=>['terminal'])
@@ -19,8 +20,11 @@ export function useDesktop() {
   }
   function restore(id:WindowId){open(id)}
   function emptyTrash(){recentlyClosed.value=[]}
-  function toggleService(id:ServiceId){
-    services.value=services.value.includes(id)?services.value.filter(s=>s!==id):[...services.value,id]
+  function setService(id:ServiceId, checked:boolean){
+    services.value=setSelectedService(services.value,id,checked)
   }
-  return {opened,active,recentlyClosed,services,theme,open,close,restore,emptyTrash,toggleService}
+  function toggleService(id:ServiceId){
+    setService(id,!services.value.includes(id))
+  }
+  return {opened,active,recentlyClosed,services,theme,open,close,restore,emptyTrash,toggleService,setService}
 }
