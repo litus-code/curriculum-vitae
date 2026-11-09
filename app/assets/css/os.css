@@ -1106,3 +1106,10 @@ html,body,#__nuxt {height:100%;min-height:100%; }
   .os-shell .desktop-shortcuts {display:none!important;}
   .os-shell .os-window.maximized {position:static!important;inset:auto!important;width:100%!important;}
 }
+
+
+/* Hide the server-rendered welcome terminal until mobile initialization clears
+   it; users can still reopen the terminal normally from the taskbar. */
+@media(max-width:800px) {
+  .os-shell:not(.os-initialized) .win-terminal {display:none!important;}
+}
