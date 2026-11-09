@@ -245,3 +245,15 @@
 }
 .crt::after { opacity: .075; }
 .wallpaper-approved { filter: none; }
+
+
+/* The approved native-resolution artwork is authored at 1536×1024.
+   Preserve its fine dither texture: only the legacy low-res fallback uses nearest-neighbor upscaling. */
+.wallpaper-approved > .wallpaper-image.wallpaper-hd {
+  image-rendering: auto;
+  filter: none;
+}
+.wallpaper-approved > .wallpaper-image:not(.wallpaper-hd) {
+  image-rendering: pixelated;
+  filter: none;
+}
