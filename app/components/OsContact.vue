@@ -7,41 +7,49 @@ const message = ref('')
 const website = ref('')
 const privacyAccepted = ref(false)
 const submitting = ref(false)
-const status = ref<'idle' | 'success' | 'error'>('idle')
+const status = ref<'idle' | 'success' | 'error' | 'activation'>('idle')
+const failureDetail = ref('')
 const chosen = computed(() => services.value.map(id => t(id)).join(', '))
 const recipient = 'contacto@carlesfar.com'
 const endpoint = `https://formsubmit.co/ajax/${recipient}`
 const copy = computed(() => ({
  es: {
   sending:'Enviando...', success:'El servicio ha recibido tu solicitud. La entrega al buzón depende de que el destinatario haya activado el formulario.',
-  error:'No se ha podido enviar. Inténtalo de nuevo o escribe directamente por correo.',
+  error:'El proveedor ha rechazado la solicitud. Puedes escribir directamente por correo.',
+  activation:'Hay que activar este formulario desde contacto@carlesfar.com. Revisa la bandeja y el spam para encontrar el correo de FormSubmit.',
+  technical:'Respuesta del proveedor:',
   info:'El servicio FormSubmit procesará tu nombre, correo y mensaje para enviarme tu consulta.',
   privacy:'Acepto que FormSubmit gestione estos datos para responder a mi consulta.', messageLabel:'Mensaje',
   direct:'Escribir por correo', invalid:'Revisa los campos antes de enviar.'
  },
  ca: {
   sending:'Enviant...',success:'El servei ha rebut la sol·licitud. El lliurament a la bústia depèn de l’activació del formulari pel destinatari.',
-  error:'No s’ha pogut enviar. Torna-ho a provar o escriu directament per correu.',
+  error:'El proveïdor ha rebutjat la sol·licitud. Pots escriure directament per correu.',
+  activation:'Cal activar el formulari des de contacto@carlesfar.com. Revisa la bústia i el correu brossa per trobar el missatge de FormSubmit.',
+  technical:'Resposta del proveïdor:',
   info:'FormSubmit tractarà el nom, el correu i el missatge per enviar-me la consulta.',
   privacy:'Accepto que FormSubmit gestioni aquestes dades per respondre la consulta.', messageLabel:'Missatge',
   direct:'Escriure un correu',invalid:'Revisa els camps abans d’enviar.'
  },
  en: {
   sending:'Sending...',success:'The service accepted your request. Inbox delivery depends on the recipient activating the form.',
-  error:'We could not send your message. Try again or contact me by email.',
+  error:'The provider rejected the request. You can email me directly.',
+  activation:'The form must be activated from contacto@carlesfar.com. Please check the inbox and spam folder for an email from FormSubmit.',
+  technical:'Provider response:',
   info:'FormSubmit processes your name, email and message to forward the enquiry to me.',
   privacy:'I agree to FormSubmit processing these details to handle my request.', messageLabel:'Message',
   direct:'Send an email',invalid:'Please check the form fields.'
  }
 }[locale.value as 'es'|'ca'|'en'] ?? {
  sending:'Enviando...',success:'El servicio ha recibido tu solicitud. La entrega al buzón depende de que el destinatario haya activado el formulario.',
- error:'No se ha podido enviar. Inténtalo de nuevo o escribe directamente por correo.',
+ error:'El proveedor ha rechazado la solicitud.',activation:'Hay que activar FormSubmit desde contacto@carlesfar.com.',technical:'Respuesta del proveedor:',
  info:'FormSubmit procesará los datos para enviarme tu consulta.',privacy:'Acepto el envío de mis datos mediante FormSubmit para responder a mi consulta.',messageLabel:'Mensaje',direct:'Escribir por correo',invalid:'Revisa los campos antes de enviar.'
 }))
 const directLink = computed(() => `mailto:${recipient}?subject=${encodeURIComponent('Carles Far OS · Contacto')}`)
 async function submit() {
  if (submitting.value || !privacyAccepted.value) return
  status.value = 'idle'
+ failureDetail.value=''
  if (website.value.trim()) return
  const cleanName=name.value.trim()
  const cleanEmail=email.value.trim()
@@ -65,13 +73,19 @@ async function submit() {
      })
    })
    const result=await response.json() as {success?:boolean|string;message?:string}
-   if (!response.ok || !(result.success===true || result.success==='true')) throw new Error('FormSubmit rejected request')
+   if (!response.ok || !(result.success===true || result.success==='true')) {
+     const detail = String(result.message ?? `HTTP ${response.status}`).slice(0,220)
+     failureDetail.value=detail
+     status.value=/activat|confirm.*email|check.*inbox/i.test(detail) ? 'activation' : 'error'
+     return
+   }
    status.value='success'
    name.value=''
    email.value=''
    message.value=''
    privacyAccepted.value=false
- } catch {
+ } catch (error) {
+   failureDetail.value=error instanceof TypeError ? 'Network request failed, check browser privacy settings, connectivity or CORS.' : 'Unexpected response from the mail service.'
    status.value='error'
  } finally {
    submitting.value=false
@@ -102,7 +116,8 @@ async function submit() {
       {{ submitting ? copy.sending : t('send') }} <span aria-hidden="true">↵</span>
     </button>
     <p v-if="status!=='idle'" class="contact-feedback" :class="'contact-feedback-'+status" role="status" aria-live="polite">
-      {{ status==='success' ? copy.success : copy.error }}
+      {{ status==='success' ? copy.success : status==='activation' ? copy.activation : copy.error }}
+      <small v-if="status!=='success' && failureDetail">{{ copy.technical }} {{ failureDetail }}</small>
     </p>
     <small>{{ copy.info }} <a :href="directLink">{{ copy.direct }}</a></small>
   </form>
