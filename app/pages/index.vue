@@ -35,8 +35,10 @@ onMounted(() => {
 })
 watch(theme, value => { if (import.meta.client) localStorage.setItem('carlesfar-os-theme', value) })
 watch(locale, value => { if (import.meta.client) localStorage.setItem('carlesfar-os-locale', value) })
-const portraitUrl = useRuntimeConfig().app.baseURL + 'portrait-carles-pixel.png'
+const assetsBase = useRuntimeConfig().app.baseURL
+const portraitUrl = assetsBase + 'portrait-carles-pixel.png'
 const isNight = computed(() => theme.value === 'dark')
+const wallpaperUrl = computed(() => assetsBase + (isNight.value ? 'wallpapers/night.webp' : 'wallpapers/sunset.webp'))
 const toggleTheme = () => { theme.value = isNight.value ? 'light' : 'dark' }
 useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Frontend & Product Creator' }))
 </script>
@@ -59,7 +61,8 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
           <select v-model="locale" :aria-label="t('language')"><option value="ca">CAT</option><option value="es">ES</option><option value="en">EN</option></select>
         </div>
       </header>
-      <div class="wallpaper" aria-hidden="true">
+      <div class="wallpaper wallpaper-approved" aria-hidden="true">
+        <img class="wallpaper-image" :src="wallpaperUrl" alt="" width="1536" height="1024" decoding="async" fetchpriority="high" />
         <div class="pixel-stars"></div><div class="pixel-cloud cloud-a"></div><div class="pixel-cloud cloud-b"></div>
         <div class="celestial"></div><div class="ridge ridge-far"></div><div class="ridge ridge-near"></div>
       </div>
