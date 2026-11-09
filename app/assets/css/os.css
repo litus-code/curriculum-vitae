@@ -1355,3 +1355,13 @@ html,body,#__nuxt {height:100%;min-height:100%; }
     margin-top:0;
   }
 }
+
+
+/* Keep the post-it contact action ink-black on mobile, including Safari. */
+@media(max-width:800px) {
+  .os-shell .sticky-note button {
+    color:#17101d!important;
+    -webkit-text-fill-color:#17101d;
+    opacity:1;
+  }
+}
