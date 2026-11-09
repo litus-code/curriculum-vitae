@@ -108,3 +108,56 @@
  .wallpaper{position:fixed;inset:43px 0 0;pointer-events:none}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+
+/* Visual lockup against the approved 922x616 screenshot. */
+.menu{box-shadow:0 2px 0 #110d22;letter-spacing:-.25px}
+.menu nav{gap:14px}
+.menu nav button{font:700 clamp(12px,1.1vw,17px)/1 'Courier New',monospace;white-space:nowrap}
+.menu .brand{gap:7px}
+.retro-icon{display:block;overflow:visible;flex:none;image-rendering:pixelated;filter:drop-shadow(2px 2px 0 #110c20aa)}
+.desktop-shortcuts{top:6.9%;right:1%;width:8.5%;min-width:63px;gap:4px;display:flex;flex-direction:column}
+.desktop-shortcuts button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;width:100%;min-height:0;padding:2px 0 5px;cursor:pointer}
+.desktop-shortcuts button:hover .retro-icon,.desktop-shortcuts button:focus-visible .retro-icon{filter:drop-shadow(2px 3px 0 #b1fd59)}
+.desktop-shortcuts button[aria-disabled="true"]{opacity:1}
+.desktop-shortcuts button[aria-disabled="true"]>span{opacity:.9}
+.desktop-shortcuts button>span:last-child{display:block;background:#f0d6e3;color:#1d1029;border:1px solid #9d7caa;box-shadow:2px 2px 0 #1c112b;padding:4px 6px;font:700 clamp(10px,1.03vw,14px)/1 'Courier New',monospace;min-width:68px;text-align:center}
+.desktop-shortcuts .retro-icon{width:clamp(36px,4vw,58px);height:clamp(36px,4vw,58px)}
+.project .retro-icon{height:clamp(45px,5vw,70px);width:clamp(45px,5vw,70px);align-self:center;filter:none}
+.project-cue .retro-icon{filter:none}
+.project-friends .retro-icon{filter:drop-shadow(2px 2px 0 #412454)}
+.project-dj .retro-icon{filter:drop-shadow(2px 2px 0 #120a28)}
+.project-grid .project{border:2px solid #bba5cc;box-shadow:2px 2px 0 #201029;display:flex;flex-direction:column;justify-content:space-between}
+.project-grid .project h2{min-height:2.1em}
+.project-grid .project a{border-radius:3px}
+.portrait{object-position:center 26%;height:100%;max-height:100%;image-rendering:pixelated}
+.about-copy{overflow:hidden}
+.about-copy mark{white-space:normal}
+.window-bar{touch-action:none;user-select:none}
+.window-bar button{touch-action:auto}
+.os-shell.theme-night .window-bar{background:repeating-linear-gradient(0deg,#c4b1e9 0 2px,#a58dd1 2px 4px)}
+.os-shell.theme-night .menu{background:#e1d0ed}
+.os-shell.theme-night .desktop-shortcuts button>span:last-child{background:#e8d8ed}
+.os-shell.theme-night .project-dj{background:#22143d}
+.os-shell.theme-night .terminal{box-shadow:inset 0 0 20px #78ff5720}
+@media (max-height:700px) and (min-width:801px){
+ .crt{min-height:0;height:100dvh}
+ .desktop-shortcuts{top:7%;gap:0}
+ .desktop-shortcuts .retro-icon{width:clamp(32px,3.6vw,48px);height:clamp(32px,3.6vw,48px)}
+ .desktop-shortcuts button{padding-bottom:2px}
+ .desktop-shortcuts button>span:last-child{padding:2px 5px;font-size:11px}
+ .about-copy p{margin:5px 0}
+ .about-copy mark{margin-top:2px}
+ .window-body{padding:8px}
+ .project{padding:7px}
+ .project .retro-icon{width:45px;height:45px}
+}
+@media(max-width:800px){
+ .menu{gap:4px}
+ .menu .system{gap:2px}
+ .desktop-shortcuts{top:52px;right:5px;width:63px;min-width:0;gap:5px}
+ .desktop-shortcuts .retro-icon{width:38px;height:38px}
+ .desktop-shortcuts button>span:last-child{font-size:9px;min-width:55px;max-width:65px;padding:2px}
+ .project .retro-icon{height:48px;width:48px}
+ .project-grid .project{align-items:start}
+}
