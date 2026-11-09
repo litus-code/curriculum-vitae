@@ -1,5 +1,5 @@
-import { serviceIds } from '~/domain/os'
 <script setup lang="ts">
+import { serviceIds } from '~/domain/os'
 const { services, toggleService } = useDesktop()
 const { t, locale } = useI18n()
 const name = ref('')
