@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { WindowId } from '~/domain/os'
 const { locale, t } = useI18n()
-const { theme, open } = useDesktop()
+const { theme, open, recentlyClosed, restore, emptyTrash } = useDesktop()
 const projects = [
   { id:'cue', name:'Cuebooker', icon:'wave', url:'https://cuebooker.com' },
   { id:'friends', name:'Friends Invisible', icon:'gift', url:'' },
@@ -9,7 +9,6 @@ const projects = [
 ]
 const desktopIcons = [
   { id:'projects', icon:'computer' },
-  { id:'services', icon:'folder' },
   { id:'about', icon:'paper' },
   { id:'contact', icon:'mail' },
   { id:'cv', icon:'floppy' },
@@ -90,7 +89,7 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
         <div class="celestial"></div><div class="ridge ridge-far"></div><div class="ridge ridge-near"></div>
       </div>
       <aside class="desktop-shortcuts" :aria-label="t('projects')">
-        <button v-for="item in desktopIcons" :key="item.id" type="button" @click="item.id === 'trash' ? undefined : open(item.id as WindowId)" :title="item.id === 'trash' ? 'Próximamente' : t(item.id)" :aria-disabled="item.id === 'trash'">
+        <button v-for="item in desktopIcons" :key="item.id" type="button" @click="open(item.id as WindowId)" :title="t(item.id)">
           <RetroIcon :name="item.icon" :size="53" />
           <span>{{ t(item.id) }}</span>
         </button>
@@ -111,7 +110,25 @@ useHead(() => ({ htmlAttrs:{ lang:locale.value }, title:'Carles Far OS · Fronte
       <div class="note"><OsServices /></div>
       <OsWindow id="cv" :title="locale === 'en' ? 'Curriculum Vitae' : 'Currículum Vitae'"><OsCv /></OsWindow>
       <OsWindow id="contact" :title="t('contact')"><OsContact /></OsWindow>
-      <OsWindow id="services" :title="t('services')"><OsServices /></OsWindow>
+      <OsWindow id="trash" :title="t('trash')">
+        <div class="os-trash">
+          <RetroIcon name="trash" :size="57" />
+          <h2>{{ locale==='ca' ? 'Finestres tancades' : locale==='en' ? 'Recently closed windows' : 'Ventanas cerradas' }}</h2>
+          <p>{{ locale==='ca' ? 'Recupera una finestra tancada des d’aquí.' : locale==='en' ? 'Reopen a window you closed earlier.' : 'Recupera una ventana que hayas cerrado antes.' }}</p>
+          <div v-if="recentlyClosed.length" class="os-trash-list">
+            <button v-for="id in recentlyClosed" :key="id" type="button" @click="restore(id)">
+              <RetroIcon :name="id==='cv' ? 'floppy' : id==='about' ? 'paper' : id==='contact' ? 'mail' : id==='projects' ? 'computer' : id==='audio' ? 'turntable' : 'folder'" :size="29" />
+              <span>{{ id==='terminal' ? 'Terminal' : id==='cv' ? 'CV' : t(id) }}</span>
+              <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <p v-else class="os-trash-empty">{{ locale==='ca' ? 'No hi ha finestres per recuperar.' : locale==='en' ? 'No windows to restore.' : 'No hay ventanas para recuperar.' }}</p>
+          <button v-if="recentlyClosed.length" class="os-trash-clear" type="button" @click="emptyTrash">
+            {{ locale==='ca' ? 'Buidar historial' : locale==='en' ? 'Clear history' : 'Vaciar historial' }}
+          </button>
+          <small>{{ locale==='ca' ? 'No s’eliminen fitxers ni dades.' : locale==='en' ? 'No files or personal data are deleted.' : 'No se eliminan archivos ni datos personales.' }}</small>
+        </div>
+      </OsWindow>
       <OsWindow id="audio" :title="t('audio')">
         <div class="music"><RetroIcon name="turntable" :size="84" />
           <label>{{ t('load') }}<input type="file" accept="audio/*" @change="loadAudio" /></label>
