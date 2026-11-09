@@ -16,27 +16,27 @@ const copy = computed(() => ({
   sending:'Enviando...', success:'El servicio ha recibido tu solicitud. La entrega al buzón depende de que el destinatario haya activado el formulario.',
   error:'No se ha podido enviar. Inténtalo de nuevo o escribe directamente por correo.',
   info:'El servicio FormSubmit procesará tu nombre, correo y mensaje para enviarme tu consulta.',
-  privacy:'He leído la información sobre el tratamiento de mis datos y acepto que se envíen mediante FormSubmit.',
+  privacy:'Acepto que FormSubmit gestione estos datos para responder a mi consulta.', messageLabel:'Mensaje',
   direct:'Escribir por correo', invalid:'Revisa los campos antes de enviar.'
  },
  ca: {
   sending:'Enviant...',success:'El servei ha rebut la sol·licitud. El lliurament a la bústia depèn de l’activació del formulari pel destinatari.',
   error:'No s’ha pogut enviar. Torna-ho a provar o escriu directament per correu.',
   info:'FormSubmit tractarà el nom, el correu i el missatge per enviar-me la consulta.',
-  privacy:'He llegit la informació sobre el tractament de les meves dades i accepto que s’enviïn mitjançant FormSubmit.',
+  privacy:'Accepto que FormSubmit gestioni aquestes dades per respondre la consulta.', messageLabel:'Missatge',
   direct:'Escriure un correu',invalid:'Revisa els camps abans d’enviar.'
  },
  en: {
   sending:'Sending...',success:'The service accepted your request. Inbox delivery depends on the recipient activating the form.',
   error:'We could not send your message. Try again or contact me by email.',
   info:'FormSubmit processes your name, email and message to forward the enquiry to me.',
-  privacy:'I have read the information about my data and agree to submit it via FormSubmit.',
+  privacy:'I agree to FormSubmit processing these details to handle my request.', messageLabel:'Message',
   direct:'Send an email',invalid:'Please check the form fields.'
  }
 }[locale.value as 'es'|'ca'|'en'] ?? {
  sending:'Enviando...',success:'El servicio ha recibido tu solicitud. La entrega al buzón depende de que el destinatario haya activado el formulario.',
  error:'No se ha podido enviar. Inténtalo de nuevo o escribe directamente por correo.',
- info:'FormSubmit procesará los datos para enviarme tu consulta.',privacy:'He leído la información sobre mis datos y acepto enviarlos mediante FormSubmit.',direct:'Escribir por correo',invalid:'Revisa los campos antes de enviar.'
+ info:'FormSubmit procesará los datos para enviarme tu consulta.',privacy:'Acepto el envío de mis datos mediante FormSubmit para responder a mi consulta.',messageLabel:'Mensaje',direct:'Escribir por correo',invalid:'Revisa los campos antes de enviar.'
 }))
 const directLink = computed(() => `mailto:${recipient}?subject=${encodeURIComponent('Carles Far OS · Contacto')}`)
 async function submit() {
@@ -88,13 +88,16 @@ async function submit() {
       <input v-model.trim="email" name="email" required type="email" maxlength="254" autocomplete="email" :disabled="submitting" @input="status='idle'" />
     </label>
     <label>{{ t('select') }}<output>{{ chosen || '—' }}</output></label>
-    <label>{{ t('message') }} *
+    <label>{{ copy.messageLabel }} *
       <textarea v-model.trim="message" name="message" required minlength="10" maxlength="3000" :disabled="submitting" @input="status='idle'" />
     </label>
     <div class="contact-honeypot" aria-hidden="true">
       <label>Website <input v-model="website" type="text" tabindex="-1" autocomplete="off" /></label>
     </div>
-    <label class="contact-privacy-consent"><input v-model="privacyAccepted" type="checkbox" required :disabled="submitting" /> <span>{{ copy.privacy }} <a :href="useRuntimeConfig().app.baseURL + 'privacidad'" target="_blank" rel="noopener noreferrer">{{ locale==='ca' ? 'Privacitat' : locale==='en' ? 'Privacy notice' : 'Información de privacidad' }}</a></span></label>
+    <label class="contact-privacy-consent">
+      <input v-model="privacyAccepted" type="checkbox" name="privacy" required :disabled="submitting" />
+      <span>{{ copy.privacy }} <a :href="useRuntimeConfig().app.baseURL + 'privacidad'" target="_blank" rel="noopener noreferrer">{{ locale==='ca' ? 'Privacitat' : locale==='en' ? 'Privacy notice' : 'Información de privacidad' }}</a></span>
+    </label>
     <button class="retro-btn" type="submit" :disabled="submitting || !privacyAccepted">
       {{ submitting ? copy.sending : t('send') }} <span aria-hidden="true">↵</span>
     </button>
