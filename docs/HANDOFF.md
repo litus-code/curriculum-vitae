@@ -25,3 +25,13 @@ Commits on the same draft PR #1:
 - Nuxt static-asset paths respect `NUXT_APP_BASE_URL=/curriculum-vitae/`.
 
 Validation note: an intermediate commit passed CI after fixing strict sprite typing. The final branch SHA and Pages deployment must be checked separately before declaring this increment verified. Screenshot-diff and mobile/keyboard acceptance remain pending; do not claim exact illustration parity.
+
+## Approved wallpaper assets · 2026-11-09
+
+The user approved two generated 1536x1024 landscape illustrations: Sunset (lime striped setting sun, violet/pink mountains) and Night (moon, cool blue/violet mountains). `app/pages/index.vue` now computes baseURL-aware image paths and renders the appropriate image for the existing theme control. `app/assets/css/os.css` displays image assets beneath the real desktop UI. Failed image loads fall back to the existing CSS landscape.
+
+**Outstanding blocker:** binary WebP assets could not be uploaded through this session's GitHub text-file connector. The intended files, already prepared in a separate ZIP, MUST be committed before this visual change is considered implemented:
+- `public/wallpapers/sunset.webp` (1536x1024)
+- `public/wallpapers/night.webp` (1536x1024)
+
+After upload: verify GitHub Pages assets return HTTP 200, both appearance modes, crop on 922x616 and 390x844, and latest CI. Do not claim that GitHub Pages has the approved art until both files are present in the repository. Do not merge or publish the site yet.
