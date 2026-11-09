@@ -33,7 +33,7 @@ function printCv(){ if(import.meta.client) window.print() }
 <template>
   <div class="cv-os">
     <div class="cv-os-head">
-      <div class="cv-os-avatar"><img :src="useRuntimeConfig().app.baseURL + 'portrait-carles-pixel.png'" alt="Carles Far" width="112" height="112"/></div>
+      <div class="cv-os-avatar"><img :src="useRuntimeConfig().app.baseURL + 'portrait-carles-retro-silver.webp'" alt="Carles Far" width="112" height="112"/></div>
       <div class="cv-os-title">
         <h1>Carles Far</h1>
         <h2>Frontend Lead & Product Builder</h2>
