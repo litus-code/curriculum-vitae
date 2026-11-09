@@ -39,10 +39,12 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          p = Path('.output/public/carles-far-cv.pdf')
+          p = Path('.output/public/carles-far-cv-v2-1.pdf')
           assert p.exists(), "Generated PDF missing in Pages artifact"
           assert p.stat().st_size > 10000, "Generated PDF unexpectedly small"
-          print(f"CV PDF verified in static artifact: {p.stat().st_size} bytes")
+          legacy = Path('.output/public/carles-far-cv.pdf')
+          assert legacy.exists() and legacy.read_bytes() == p.read_bytes(), "Legacy PDF not synchronized"
+          print(f"Both CV PDF paths verified in static artifact: {p.stat().st_size} bytes")
           PY
       - name: Prepare Pages artifact
         run: touch .output/public/.nojekyll
