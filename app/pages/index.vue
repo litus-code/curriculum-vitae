@@ -14,7 +14,7 @@ onMounted(() => {
 })
 const projects = [
   { id:'cue', name:'Cuebooker', icon:'wave', url:'https://cuebooker.com' },
-  { id:'friends', name:'Friends Invisible', icon:'gift', url:'' },
+  { id:'friends', name:'Friends Invisible', icon:'gift', url:'https://friendsinvisible.com' },
   { id:'dj', name:'Cuebooker DJ', icon:'turntable', url:'' }
 ]
 const desktopIcons = [
