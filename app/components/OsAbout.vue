@@ -114,7 +114,7 @@ const schools = computed(() => {
 const tech = ['Vue 3','Nuxt 4','TypeScript','Pinia','Tailwind','Jest','SSR','Git','CI/CD']
 const projects = [
   {name:'Cuebooker',desc:'cue',url:'https://cuebooker.com'},
-  {name:'Friends Invisible',desc:'friends',url:''},
+  {name:'Friends Invisible',desc:'friends',url:'https://friendsinvisible.com'},
   {name:'Cuebooker DJ',desc:'dj',url:''}
 ] as const
 </script>

@@ -48,7 +48,7 @@ const schools = computed(() => {
 const stack = ['Vue 2 / 3','Nuxt 2 / 3 / 4','TypeScript','JavaScript','Pinia / Vuex','SSR','Tailwind','SCSS','HTML / CSS','Jest','Storybook','Git','CI/CD']
 const projects = [
  {name:'Cuebooker',text:'Plataforma de gestión de bookings de DJs y agencias.',url:'https://cuebooker.com'},
- {name:'Friends Invisible',text:'Sorteos de amigo invisible, invitaciones y listas de deseos.',url:''},
+ {name:'Friends Invisible',text:'Sorteos de amigo invisible, invitaciones y listas de deseos.',url:'https://friendsinvisible.com'},
  {name:'Cuebooker DJ',text:'Aplicación DJ con stems y compatibilidad MIDI.',url:''}
 ]
 function printCv(){ if(import.meta.client) window.print() }
